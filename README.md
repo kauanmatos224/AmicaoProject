@@ -3,7 +3,7 @@ Repositório destinado ao versionamento e controle do projeto de conclusão de c
 
 
 
-Avisos de utilização: 
+Avisos de utilização aos Colaboradores: 
 
 1 - Sempre que uma hipótese de implementação for testada, CRIE UMA BRANCH (RAMIFICAÇÃO) do estado atual do projeto. Nunca, jamais dê Commit e Push pela
 árvore Main ou Master. A oficialização da versão do projeto será feita após constar a real funcionalidade sem decorrência de outros problemas. 
