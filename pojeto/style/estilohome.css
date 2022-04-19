@@ -1,0 +1,171 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'Oswald';
+    src: url('fonts/static/Oswald-Bold.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Oswald-Light';
+    src: url('fonts/static/Oswald-Light.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+body{
+    background-image: url(img/back_img.jpeg);
+    background-repeat: repeat;
+}
+
+#grid { font-family: Arial, Helvetica, sans-serif;}
+
+#nav {
+	width: 100%;
+    display: flex;
+    position: fixed;
+    margin: 0;
+    padding: 5px;
+}
+#nav a {
+    padding: 10px 12px;
+    position: absolute;
+    float:left;
+}
+
+#contato {  left:6%;}
+
+#empresa {  left:12%;}
+
+#adm {  right:10%;}
+
+#downloadnav{
+    position:relative;
+    padding: 10px 12px;
+    left: 93%;
+}
+  
+.celular{
+    position: relative;
+    height: 75%;
+    top: 15%;
+    left: 40%;
+}
+
+#div1 {
+    position: absolute;
+    border-style: none;
+    height: 100%;
+    width: 50%;
+    text-align: justify;
+    border-radius: 5%;
+    background-color: #0c0f11ce;
+    padding: 50px;
+    padding-top: 0px;
+}
+
+#div2 {
+    position: absolute;
+    left: 50%;
+    width: 50%;
+    height: 100%;
+    border-style: none;
+}
+
+h3 {
+    padding-top: 25%;
+    font-family: 'Oswald';
+    text-align: center;
+    font-weight: bold;
+    font-size: 45px;
+    text-decoration: underline;
+}
+
+.main {
+    font-family: 'Oswald-Light';
+	font-size: x-large;
+	text-align: left;
+}
+
+.btnDownload {  cursor: pointer;}
+
+@media only screen and (max-width: 700px){
+
+    h3 {
+        padding-top: 25%;
+        font-size: 35px;
+    }
+
+    .main { font-size: medium;}
+    
+    #div1{  
+        width: 100%;
+        border-radius: 0%;
+    }
+
+    #div2{  display: none;}
+
+    #nav {
+        width: 100%;
+        display: flex;
+        position: fixed;
+        margin: 0;
+        padding: 5px;
+    }
+    #nav a {
+        font-size: small;
+        padding: 5px 6px;
+    }
+    
+    #contato {
+        left:25%;
+    }
+    
+    #empresa {
+        left:45%;
+    }
+    
+    #adm {  display: none;}
+    
+    #downloadnav{
+        padding: 5px 6px;
+        left: 76%;
+    }
+}
+
+@media only screen and (min-width: 701px) and (max-width: 1365px){
+    #contato{ left: 13%;}
+    
+    #empresa{   left:25%}
+
+    #adm{   right: 13%;}
+
+    #downloadnav{   left: 90%;}
+
+    .celular{
+        height: 55%;
+        top: 15%;
+        left: 15%;
+    }
+}
+
+@media only screen and (min-width: 1366px) and (max-width: 1600px){
+    #contato{ left:7%}
+
+    #empresa{ left: 14%;}
+
+    #adm{ right: 8%;}
+
+    #downloadnav{left: 94%;}
+}
+
+@media only screen and (min-width:1601px){
+    #contato{ left: 6%;}
+
+    #empresa{   left:11%}
+
+    #adm{   right: 6%;}
+
+    #downloadnav{   left:96%}
+}
