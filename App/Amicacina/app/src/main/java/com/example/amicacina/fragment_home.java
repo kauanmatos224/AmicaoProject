@@ -7,57 +7,61 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.Toast;
+
+import java.util.ArrayList;
 
 public class fragment_home extends Fragment {
 
+    GridView gridviewHome;
 
     public fragment_home() {
         // Required empty public constructor
     }
 
+
     @Override
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        String[] menuItems = {"text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
-                "text 1",
-                "text 2",
-                "text 3",
+        gridviewHome = (GridView) view.findViewById(R.id.GridViewHome);
+        //gridviewHome = findViewById(R.id.GridViewHome);
 
-        };
+        ArrayList<GridModel> courseModelArrayList = new ArrayList<GridModel>();
+        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
+        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
 
-        ListView listView = (ListView) view.findViewById(R.id.listView);
+        GridAdapter adapter = new GridAdapter(getContext(), courseModelArrayList);
+        gridviewHome.setAdapter(adapter);
 
-        ArrayAdapter<String> listViewAdapter = new ArrayAdapter<String>(
-                getActivity(),android.R.layout.simple_list_item_1,
-                menuItems
-        );
+        gridviewHome.setOnItemClickListener(new GridView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+                Toast.makeText(getContext(), "Imagem: "+(position+1), Toast.LENGTH_SHORT).show();
+            }
 
-        listView.setAdapter(listViewAdapter);
-
+        });
         // Inflate the layout for this fragment
         return view;
     }
