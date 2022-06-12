@@ -31,27 +31,27 @@ public class fragment_home extends Fragment {
         gridviewHome = (GridView) view.findViewById(R.id.GridViewHome);
         //gridviewHome = findViewById(R.id.GridViewHome);
 
-        ArrayList<GridModel> courseModelArrayList = new ArrayList<GridModel>();
-        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
-        courseModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
+        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
 
-        GridAdapter adapter = new GridAdapter(getContext(), courseModelArrayList);
+        GridAdapter adapter = new GridAdapter(getContext(), gridModelArrayList);
         gridviewHome.setAdapter(adapter);
 
         gridviewHome.setOnItemClickListener(new GridView.OnItemClickListener(){

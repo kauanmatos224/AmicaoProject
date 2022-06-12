@@ -2,22 +2,22 @@ package com.example.amicacina;
 
 public class GridModel {
 
-    // string course_name for storing course_name
+    // string pet_name for storing pet_name
     // and imgid for storing image id.
-    private String course_name;
+    private String pet_name;
     private int imgid;
 
-    public GridModel(String course_name, int imgid) {
-        this.course_name = course_name;
+    public GridModel(String pet_name, int imgid) {
+        this.pet_name = pet_name;
         this.imgid = imgid;
     }
 
-    public String getCourse_name() {
-        return course_name;
+    public String getpet_name() {
+        return pet_name;
     }
 
-    public void setCourse_name(String course_name) {
-        this.course_name = course_name;
+    public void setpet_name(String pet_name) {
+        this.pet_name = pet_name;
     }
 
     public int getImgid() {
