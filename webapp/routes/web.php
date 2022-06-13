@@ -42,6 +42,17 @@ Route::get('/institucional/pets/cadastrar', function(){
 });
 
 Route::post('/institucional/pets/cadastrar/add', [PetsController::class, 'insertPet']);
+
+Route::get('/contato', function(){
+    return view('contato');
+});
+
+Route::get('/empresa', function(){
+    return view('empresa');
+});
+
+
+
 //END WEBSITE ROUTES-----------------------------------------------------------------
 
 

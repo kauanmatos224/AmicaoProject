@@ -6,7 +6,7 @@
 
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/estiloadm.css"/>
+		<link rel="stylesheet" href="/style/estiloadm.css"/>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 		
@@ -17,11 +17,11 @@
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="home.html">
-						<img src="style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
+						<img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
-					<a href="/adm-manager" class="btn btn-outline-secondary" id="adm">Administração</a>
+					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
 					<button href="https://www.youtube.com/watch?v=rxCs1fGxloI" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>

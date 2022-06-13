@@ -7,7 +7,7 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/contato.css"/>
+		<link rel="stylesheet" href="/style/contato.css"/>
 		<title>Amicão</title>
 	</head>
 	<body id = "grid">
@@ -17,9 +17,9 @@
 					<a class="navbar-brand" href="home.php">
 						<img src="style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
 				  	</a>
-				  	<a href="contato.php" class="btn btn-outline-warning" id="contato">Contato</a>
-					<a href="empresa.php" class="btn btn-outline-warning" id="empresa">Empresa</a>
-					<a href="adm.php" class="btn btn-outline-secondary" id="adm">Administração</a>
+				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
+					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
+					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
 					<button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
