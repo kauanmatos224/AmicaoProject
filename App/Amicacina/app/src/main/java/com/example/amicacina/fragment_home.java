@@ -32,24 +32,18 @@ public class fragment_home extends Fragment {
         //gridviewHome = findViewById(R.id.GridViewHome);
 
         ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
-        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("JAVA", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("C++", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("Python", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("Javascript", R.drawable.placeholder));
-        gridModelArrayList.add(new GridModel("DSA", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("MAX", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("COOPER", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("KOBE", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("OAKLEY", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("OSCAR", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("MAC", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("RUDY", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("REX", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("BAILEY", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("TEDDY", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("CHARLIE", R.drawable.placeholder));
+        gridModelArrayList.add(new GridModel("BEAR", R.drawable.placeholder));
 
         GridAdapter adapter = new GridAdapter(getContext(), gridModelArrayList);
         gridviewHome.setAdapter(adapter);

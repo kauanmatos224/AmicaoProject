@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,9 +26,9 @@ public class GridAdapter extends ArrayAdapter<GridModel> {
             listitemView = LayoutInflater.from(getContext()).inflate(R.layout.card_item, parent, false);
         }
         GridModel gridModel = getItem(position);
-        //TextView nameTV = listitemView.findViewById(R.id.idTVname);
+        TextView nameTV = listitemView.findViewById(R.id.idTVname);
         ImageView petIV = listitemView.findViewById(R.id.GVimg);
-        //nameTV.setText(gridModel.getpet_name());
+        nameTV.setText(gridModel.getpet_name());
         petIV.setImageResource(gridModel.getImgid());
         return listitemView;
     }
