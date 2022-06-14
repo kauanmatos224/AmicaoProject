@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -32,6 +33,31 @@ public class fragment_home extends Fragment {
         //gridviewHome = findViewById(R.id.GridViewHome);
 
         ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
+
+        /*gridModelArrayList.add(new GridModel("THOR", "Golden Retriever",
+                "21/03/2020", "2 anos", "Aguardando adoção",
+                "Macho", "Grande", "Dócil e brincalhão", R.drawable.placeholder));
+
+        gridModelArrayList.add(new GridModel("NINA", "Golden Retriever",
+                "21/03/2020", "2 anos", "Aguardando adoção",
+                "Macho", "Grande", "Dócil e brincalhão", R.drawable.placeholder));
+
+        gridModelArrayList.add(new GridModel("MAX", "Golden Retriever",
+                "21/03/2020", "2 anos", "Aguardando adoção",
+                "Macho", "Grande", "Dócil e brincalhão", R.drawable.placeholder));
+
+        gridModelArrayList.add(new GridModel("FUSQUINHA", "Golden Retriever",
+                "21/03/2020", "2 anos", "Aguardando adoção",
+                "Macho", "Grande", "Dócil e brincalhão", R.drawable.placeholder));
+
+        gridModelArrayList.add(new GridModel("PIPOCA", "Golden Retriever",
+                "21/03/2020", "2 anos", "Aguardando adoção",
+                "Macho", "Grande", "Dócil e brincalhão", R.drawable.placeholder));
+
+        gridModelArrayList.add(new GridModel("LUNA", "Golden Retriever",
+                "21/03/2020", "2 anos", "Aguardando adoção",
+                "Macho", "Grande", "Dócil e brincalhão", R.drawable.placeholder));*/
+
         gridModelArrayList.add(new GridModel("MAX", R.drawable.placeholder));
         gridModelArrayList.add(new GridModel("COOPER", R.drawable.placeholder));
         gridModelArrayList.add(new GridModel("KOBE", R.drawable.placeholder));
@@ -52,7 +78,11 @@ public class fragment_home extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 // TODO Auto-generated method stub
-                Toast.makeText(getContext(), "Imagem: "+(position+1), Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), "Imagem: "+(position+1), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), activity_details.class);
+                getActivity().startActivity(intent);
+
             }
 
         });
