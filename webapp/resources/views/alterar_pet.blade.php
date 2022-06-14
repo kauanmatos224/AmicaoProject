@@ -10,9 +10,15 @@
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
+		<script type="text/javascript">
+			function setDate(){
+				document.getElementById('txtNascimento').value="<?= $pet[0]->nascimento ?>"
+			}
+		</script>
+
 		<title>Amicão - Admin</title>
 	</head>
-	<body>
+	<body onload="setDate()">
 		<header id = cab>
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
 				<div class="container-fluid">
@@ -29,12 +35,15 @@
 
 
 		
-        <form id="frmCad" method="post" action="/institucional/pets/alterar/do">
+        <form id="frmCad" method="post" action="/institucional/pets/alterar/do" enctype="multipart/form-data" >
 			<div id = "div1">
            		<input type="hidden" name="_token" value="{{{ csrf_token() }}}">
 				<input type="hidden" name="txtCod" value="<?= $pet[0]->id ?>">
+				<span class="lFoto">Foto:</span><br><input type="file" id="inpFoto" name="inpFoto" accept="image/*" >
 				<span class="lNome">Nome:</span><br><input class="nome" type=text name=txtNome placeholder="Nome" value="<?= $pet[0]->nome ?>"><br><br>
 				<span class="lIdade">Idade:</span><br><input class="idade" type=text name=txtIdade placeholder="Idade" value="<?= $pet[0]->idade ?>"><br><br>
+				<span class="lNascimento">Nascimento:</span><br><input class="nascimento" type="date" id="txtNascimento" name=txtNascimento><br><br>
+				<span class="lNascimentoAtual">Data registrada: <?= date('d/m/Y', strtotime($pet[0]->nascimento)) ?></span><br><br>
 				<span class="lRaça">Raça:</span><br><input class="raca" type=text name=txtRaca placeholder="Raça" value="<?= $pet[0]->raca ?>"><br><br>
 				<span>Gênero:</span><br>
 				<select class = "genero" name="txtGenero">

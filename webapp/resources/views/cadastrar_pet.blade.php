@@ -34,6 +34,7 @@
 			<span class="lFoto">Foto:</span><br><input type="file" id="inpFoto" name="inpFoto" accept="image/*" >
 			<span class="lNome">Nome:</span><br><input class="nome" type=text name=txtNome placeholder="Nome"><br><br>
 			<span class="lIdade">Idade:</span><br><input class="idade" type=text name=txtIdade placeholder="Idade"><br><br>
+			<span class="lNascimento">Nascimento:</span><br><input class="nascimento" type=date name=txtNascimento placeholder="Data de nascimento"><br><br>
 			<span class="lRaça">Raça:</span><br><input class="raca" type=text name=txtRaca placeholder="Raça"><br><br>
 			<span>Gênero:</span><br>
 			<select class = "genero" name="txtGenero">

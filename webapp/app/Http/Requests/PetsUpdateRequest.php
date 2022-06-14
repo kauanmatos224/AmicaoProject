@@ -31,12 +31,13 @@ class PetsUpdateRequest extends FormRequest
             'txtRaca' => 'required|max:20',
             'txtRacaP' => 'required|max:20',
             'txtRacaM' => 'required|max:20',
-            'txtSaude' => 'required',
+            'txtSaude' => 'nullable|max:500',
             'txtVacinas' => 'required',
             'txtPorte' => 'required|max:20',
             'txtGenero' => 'required',
             'inpFoto' => 'nullable',
-            'txtStatus' => 'required'
+            'txtStatus' => 'required',
+            'txtNascimento' => 'nullable'
         ];
     }
 }

@@ -18,7 +18,7 @@ class PetsController extends Controller
         $pets = DB::select('select * from tb_pets');
 
         //dd($this->info);
-        if($this->info!=null || $this->info!=""){
+        if($this->info!=null && $this->info!=""){
             return view('pets')->with('pets', $pets)->with('info', $this->info);    
         }else{
             return view('pets')->with('pets', $pets);//->with('info', $info);
@@ -29,9 +29,7 @@ class PetsController extends Controller
 
         $id=$request->route('id');
 
-        $pet = DB::select('select * from tb_pets where id=?', array($id));
-
-        
+        $pet = (new PetsController)->select_pet($id);
 
         return view('alterar_pet')->with('pet', $pet);
     }
@@ -71,11 +69,20 @@ class PetsController extends Controller
         $porte = $request->post('txtPorte');
         $genero = $request->post('txtGenero');
         $status = $request->post('txtStatus');
+        $nascimento = $request->post('txtNascimento');
         $foto = $request->file('inpFoto');
         $img_path = "";
 
-        if($foto!=null){
+        
+        if($foto!=null && $foto!=""){
             $img_path = (new PetsController)->getHash($foto);
+        }else{
+            $img_path_from_db = ((new PetsController)->select_pet($id))[0]->img_path;
+            $img_path = $img_path_from_db;
+        }
+
+        if($nascimento==null){
+            $nascimento = ((new PetsController)->select_pet($id))[0]->nascimento;
         }
 
         $update = DB::update('update tb_pets
@@ -89,9 +96,10 @@ class PetsController extends Controller
         porte = ?,
         genero = ?,
         status = ?, 
-        img_path = ?
+        img_path = ?,
+        nascimento = ?
         where id=? ', array($nome, $idade, $raca, $raca_pai, $raca_mae, $saude, $vacinas,
-        $porte, $genero, $status, $img_path, $id));
+        $porte, $genero, $status, $img_path, $nascimento, $id));
 
         $op_status ="";
         if($update){
@@ -118,20 +126,25 @@ class PetsController extends Controller
         $genero = $request->post('txtGenero');
         $foto = $request->file('inpFoto');
         $status = $request->post('txtStatus');
+        $nascimento = $request->post('txtNascimento');
         $img_path = "";
+        
 
         if($foto!=null){
             $img_path = (new PetsController)->getHash($foto);
+        }
+        else{
+            $img_path = 'no-photo.png';
         }
         
             
         
 
         $insert = DB::insert('insert into tb_pets(nome, idade, raca, raca_pai,
-        raca_mae, saude, vacinas_essenciais, porte, genero, img_path, status) values(
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+        raca_mae, saude, vacinas_essenciais, porte, genero, img_path, status, nascimento) values(
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
         )', array($nome, $idade, $raca, $raca_pai, $raca_mae, $saude, $vacinas,
-                $porte, $genero, $img_path, $status
+                $porte, $genero, $img_path, $status, $nascimento
         ));
 
         $info_="";
@@ -190,6 +203,11 @@ class PetsController extends Controller
         
         return $main_img_name;
 
+    }
+
+
+    public function select_pet($id){
+        return DB::select('select * from tb_pets where id=?', array($id));
     }
 
 
