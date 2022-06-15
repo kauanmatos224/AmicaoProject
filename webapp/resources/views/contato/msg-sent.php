@@ -7,8 +7,8 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/empresa.css"/>
-		<title>Amicão</title>
+		<link rel="stylesheet" href="style/estilohome.css"/>
+		<title>Amicão - Home</title>
 	</head>
 	<body id = "grid">
 		<header id = cab>
@@ -20,17 +20,24 @@
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<button class="btn btn-warning" id="downloadnav" href="" ><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>
-        <div id="div1" class="ex1">
-            <div id="div2">
-                <p class="main">Desenvolvedores:<br><br>Kaick Kenithi Nishiya<br>
-                    Kauan Matos<br>Moacir José da Silva Filho<br>Nathan Enrico Romero<br>Pedro Goldoni Magri<br>Victor Rayan Barbieri
-                    <br><br><br><br>Projeto de TCC do ano 2022 do curso de Desenvolvimento de Sistemas da <br>Etec Lauro Gomes
-                </p>
-            </div>
-        </div>
-	</body>
+
+        <?php if(isset($status)): ?>
+            <?php if($status=="sucess"): ?>
+                <div class="alert alert-sucess">
+                    <p>Messagem enviada com sucesso, aguarde até entrarmos em contato</p>
+                </div>
+            <?php else: ?>
+                <div class="alert alert-danger">
+                    <p>Ocorreu um erro ao tentar enviar a sua mensagem, por favor tente mais tarde :(</p>
+                </div>
+            <?php endif ?>
+        <?php endif ?>
+
+
+    </body>
+
 </html>

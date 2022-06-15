@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetsController;
+use App\Http\Controllers\ContatoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,8 @@ Route::get('/contato', function(){
 Route::get('/empresa', function(){
     return view('empresa');
 });
+
+Route::post('/contato/send', [ContatoController::class, 'sendMessage']);
 
 
 
