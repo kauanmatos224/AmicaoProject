@@ -22,6 +22,10 @@ Route::get('/', function(){
     return view('home');
 });
 
+Route::get('/home', function(){
+    return view('home');
+});
+
 Route::get('/institucional', function(){
     return view('institucional');
 });
@@ -53,6 +57,7 @@ Route::get('/empresa', function(){
 });
 
 Route::post('/contato/send', [ContatoController::class, 'sendMessage']);
+
 
 
 
