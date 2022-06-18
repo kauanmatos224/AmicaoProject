@@ -11,6 +11,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static String[] id = new String[7];
+    public static int[] foto = new int[7];
+    public static String[] nome = new String[7];
+    public static String[] raca = new String[7];
+    public static String[] nasc = new String[7];
+    public static String[] idad = new String[7];
+    public static String[] stat = new String[7];
+    public static String[] gene = new String[7];
+    public static String[] port = new String[7];
+    public static String[] comp = new String[7];
+
+    public static int pos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case R.id.social:
-                            selectedFragment = new fragment_social();
+                            selectedFragment = new fragment_search();
                             break;
                     }
 
