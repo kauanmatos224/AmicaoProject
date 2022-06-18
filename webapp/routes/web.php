@@ -30,6 +30,14 @@ Route::get('/dropbox', function(){
     }
 });
 
+Route::get('/dropbox-verify', function(){
+    if(Storage::disk('dropbox')->exists('teste')){
+        dd('The folder / file exists');
+    }else{
+        dd('The folder / file doesnt exists');
+    }
+});
+
 
 Route::get('/', function(){
     return view('home');
