@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetsController;
 use App\Http\Controllers\ContatoController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,8 +16,20 @@ use App\Http\Controllers\ContatoController;
 |
 */
 
-
 //WEBSITE ROUTES:---------------------------------------------------------------------
+
+
+//Dropbox test route
+Route::get('/dropbox', function(){
+
+    if(Storage::disk('dropbox')->makeDirectory('teste')){
+        dd('Created sucessfully');
+    }
+    else{
+        dd('Error during directory creation');
+    }
+});
+
 
 Route::get('/', function(){
     return view('home');
@@ -79,6 +92,5 @@ Route::get('/application_retrieve/pets/inspect/{id}', [PetsController::class, 'i
 
 
 //END APP ROUTES---------------------------------------------------------------------
-
 
 

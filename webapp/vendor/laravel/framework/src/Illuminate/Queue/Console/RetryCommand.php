@@ -7,9 +7,10 @@ use Illuminate\Console\Command;
 use Illuminate\Contracts\Encryption\Encrypter;
 use Illuminate\Queue\Events\JobRetryRequested;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Str;
 use RuntimeException;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'queue:retry')]
 class RetryCommand extends Command
 {
     /**
@@ -21,6 +22,17 @@ class RetryCommand extends Command
                             {id?* : The ID of the failed job or "all" to retry all jobs}
                             {--queue= : Retry all of the failed jobs for the specified queue}
                             {--range=* : Range of job IDs (numeric) to be retried}';
+
+    /**
+     * The name of the console command.
+     *
+     * This name is used to identify the command during lazy loading.
+     *
+     * @var string|null
+     *
+     * @deprecated
+     */
+    protected static $defaultName = 'queue:retry';
 
     /**
      * The console command description.
@@ -164,7 +176,7 @@ class RetryCommand extends Command
             return json_encode($payload);
         }
 
-        if (Str::startsWith($payload['data']['command'], 'O:')) {
+        if (str_starts_with($payload['data']['command'], 'O:')) {
             $instance = unserialize($payload['data']['command']);
         } elseif ($this->laravel->bound(Encrypter::class)) {
             $instance = unserialize($this->laravel->make(Encrypter::class)->decrypt($payload['data']['command']));

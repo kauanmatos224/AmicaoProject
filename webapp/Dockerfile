@@ -1,4 +1,4 @@
-FROM php:8.0.9-fpm-alpine3.14
+FROM php:8.1.0-fpm-alpine3.14
 
 RUN touch ./setup.sql
 RUN echo "DB_NAME varchar := ${DB_DATABASE} SELECT 'CREATE DATABASE DB_NAME' WHERE NOT EXISTS (SELECT FROM pg_database  WHERE datname = DB_NAME)\gexec" > setup.sql

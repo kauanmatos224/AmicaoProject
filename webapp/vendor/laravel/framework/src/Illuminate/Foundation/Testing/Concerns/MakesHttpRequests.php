@@ -5,7 +5,6 @@ namespace Illuminate\Foundation\Testing\Concerns;
 use Illuminate\Contracts\Http\Kernel as HttpKernel;
 use Illuminate\Cookie\CookieValuePrefix;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Testing\LoggedExceptionCollection;
 use Illuminate\Testing\TestResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile as SymfonyUploadedFile;
@@ -433,6 +432,7 @@ trait MakesHttpRequests
     public function options($uri, array $data = [], array $headers = [])
     {
         $server = $this->transformHeadersToServerVars($headers);
+
         $cookies = $this->prepareCookiesForRequest();
 
         return $this->call('OPTIONS', $uri, $data, $cookies, [], $server);
@@ -449,6 +449,22 @@ trait MakesHttpRequests
     public function optionsJson($uri, array $data = [], array $headers = [])
     {
         return $this->json('OPTIONS', $uri, $data, $headers);
+    }
+
+    /**
+     * Visit the given URI with a HEAD request.
+     *
+     * @param  string  $uri
+     * @param  array  $headers
+     * @return \Illuminate\Testing\TestResponse
+     */
+    public function head($uri, array $headers = [])
+    {
+        $server = $this->transformHeadersToServerVars($headers);
+
+        $cookies = $this->prepareCookiesForRequest();
+
+        return $this->call('HEAD', $uri, [], $cookies, [], $server);
     }
 
     /**
@@ -527,7 +543,7 @@ trait MakesHttpRequests
      */
     protected function prepareUrlForRequest($uri)
     {
-        if (Str::startsWith($uri, '/')) {
+        if (str_starts_with($uri, '/')) {
             $uri = substr($uri, 1);
         }
 
@@ -557,7 +573,7 @@ trait MakesHttpRequests
      */
     protected function formatServerHeaderKey($name)
     {
-        if (! Str::startsWith($name, 'HTTP_') && $name !== 'CONTENT_TYPE' && $name !== 'REMOTE_ADDR') {
+        if (! str_starts_with($name, 'HTTP_') && $name !== 'CONTENT_TYPE' && $name !== 'REMOTE_ADDR') {
             return 'HTTP_'.$name;
         }
 

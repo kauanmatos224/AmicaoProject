@@ -3,7 +3,9 @@
 namespace Illuminate\Foundation\Console;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Attribute\AsCommand;
 
+#[AsCommand(name: 'optimize:clear')]
 class OptimizeClearCommand extends Command
 {
     /**
@@ -12,6 +14,17 @@ class OptimizeClearCommand extends Command
      * @var string
      */
     protected $name = 'optimize:clear';
+
+    /**
+     * The name of the console command.
+     *
+     * This name is used to identify the command during lazy loading.
+     *
+     * @var string|null
+     *
+     * @deprecated
+     */
+    protected static $defaultName = 'optimize:clear';
 
     /**
      * The console command description.
@@ -34,6 +47,6 @@ class OptimizeClearCommand extends Command
         $this->call('config:clear');
         $this->call('clear-compiled');
 
-        $this->info('Caches cleared successfully!');
+        $this->info('Caches cleared successfully.');
     }
 }
