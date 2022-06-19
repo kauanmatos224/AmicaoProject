@@ -4,11 +4,11 @@ public class GridModel {
 
     // string pet_name for storing pet_name
     // and imgid for storing image id.
-    private String pet_name, pet_raca, pet_nasc, pet_idad, pet_stat, pet_gene, pet_port, pet_comp;
-    private int imgid, pet_id;
+    private String pet_id, pet_name, pet_raca, pet_nasc, pet_idad, pet_stat, pet_gene, pet_port, pet_comp;
+    private int imgid;
 
 
-    public GridModel(int pet_id, String pet_name, String pet_raca, String pet_nasc, String pet_idad, String pet_stat,
+    public GridModel(String pet_id, String pet_name, String pet_raca, String pet_nasc, String pet_idad, String pet_stat,
                      String pet_gene, String pet_port, String pet_comp, int imgid) {
         this.pet_id = pet_id;
         this.pet_name = pet_name;
@@ -22,11 +22,11 @@ public class GridModel {
         this.imgid = imgid;
     }
 
-    public int getpet_id() {
+    public String getpet_id() {
         return pet_id;
     }
 
-    public void setpet_id(int id) {
+    public void setpet_id(String id) {
         this.pet_id = id;
     }
 

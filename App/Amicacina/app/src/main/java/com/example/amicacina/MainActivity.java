@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static String[] gene = new String[7];
     public static String[] port = new String[7];
     public static String[] comp = new String[7];
+    public static Boolean[] fav = new Boolean[7];
 
     public static int pos;
 
@@ -28,6 +29,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        fav[0] = false;
+        fav[1] = false;
+        fav[2] = false;
+        fav[3] = false;
+        fav[4] = false;
+        fav[5] = false;
+        fav[6] = false;
+
 
         //bottom nav
         BottomNavigationView btnNav = findViewById(R.id.bottomNavigationview);

@@ -3,7 +3,8 @@ package com.example.amicacina;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.GridView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +14,7 @@ public class activity_details extends AppCompatActivity{
     //int id;
     ImageView imgFoto;
     TextView txtId, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
+    Button btnFav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +23,7 @@ public class activity_details extends AppCompatActivity{
 
         //id = GridAdapter.id;
 
-       // txtId  = (TextView) findViewById(R.id.txtId);
+        //txtId  = (TextView) findViewById(R.id.txtId);
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtRaca = (TextView) findViewById(R.id.txtRaca);
@@ -32,6 +34,8 @@ public class activity_details extends AppCompatActivity{
         txtPorte = (TextView) findViewById(R.id.txtPorte);
         txtComportamento= (TextView) findViewById(R.id.txtComportamento);
 
+        //btnFav = (Button)findViewById(R.id.btnFav);
+
         imgFoto.setImageResource(MainActivity.foto[MainActivity.pos]);
         txtNome.setText(MainActivity.nome[MainActivity.pos]);
         txtRaca.setText(MainActivity.raca[MainActivity.pos]);
@@ -41,6 +45,18 @@ public class activity_details extends AppCompatActivity{
         txtGenero.setText(MainActivity.gene[MainActivity.pos]);
         txtPorte.setText(MainActivity.port[MainActivity.pos]);
         txtComportamento.setText(MainActivity.comp[MainActivity.pos]);
+
+
+
+        findViewById(R.id.btnFav).setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                MainActivity.fav[MainActivity.pos] = true;
+                /*fragment_fav.favId.add(MainActivity.id[MainActivity.pos]);
+                fragment_fav.totalFav = fragment_fav.totalFav++;*/
+            }
+        });
 
         /*
         //txtId.setText(GridAdapter.id);
