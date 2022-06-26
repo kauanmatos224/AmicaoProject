@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+//http://amicao.herokuapp.com/application_retrieve/pets
 public class MainActivity extends AppCompatActivity {
 
     public DrawerLayout drawerLayout;

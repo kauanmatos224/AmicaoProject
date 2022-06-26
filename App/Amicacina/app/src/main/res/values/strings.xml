@@ -6,4 +6,17 @@
     of the navigation drawer-->
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+
+
+    <string-array name="porte">
+        <item>Pequeno</item>
+        <item>Médio</item>
+        <item>Grande</item>
+    </string-array>
+
+    <string-array name="genero">
+        <item>Fêmea</item>
+        <item>Macho</item>
+    </string-array>
+
 </resources>
