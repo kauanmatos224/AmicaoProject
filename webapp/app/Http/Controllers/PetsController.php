@@ -8,6 +8,10 @@ use App\Http\Requests\PetsAddRequest;
 use App\Http\Requests\PetsUpdateRequest;
 use File;
 use Carbon\Carbon;
+use VictorRayan\DropboxRayanVrsrb\Dropbox_FileUpload;
+use VictorRayan\DropboxRayanVrsrb\Dropbox_FileDeletion;
+use Illuminate\Support\Facades\Storage;
+use VictorRayan\DropboxRayanVrsrb\Dropbox_AccessFile;
 
 class PetsController extends Controller
 {
@@ -17,6 +21,11 @@ class PetsController extends Controller
             
         $pets = DB::select('select * from tb_pets');
 
+        for($i=0;$i<count($pets);$i++){
+            $img_path = $pets[$i]->img_path;
+            $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
+            $pets[$i]->img_path=$img_link;
+        }
         //dd($this->info);
         if($this->info!=null && $this->info!=""){
             return view('pets')->with('pets', $pets)->with('info', $this->info);    
@@ -42,7 +51,7 @@ class PetsController extends Controller
         $this->info = "";
         if($delete){
 
-            if(File::delete(storage_path('app/public/'.$foto[0]->img_path))){
+            if((new Dropbox_FileDeletion)->delete($foto[0]->img_path)){
                 $this->info="deleted_pet";
             }
             else{
@@ -75,7 +84,18 @@ class PetsController extends Controller
 
         
         if($foto!=null && $foto!=""){
-            $img_path = (new PetsController)->getHash($foto);
+
+            $timestamp = Carbon::now()->timestamp;
+            $filename = hash('sha256', $foto->getClientOriginalName().
+                $foto->getSize().$foto->getClientOriginalExtension().$timestamp."30/07/2003").
+                ".".$foto->getClientOriginalExtension();
+
+            $foto->storeAs('/', $filename);
+            $filepath = storage_path('app/'.$filename);
+            $img_path = (new Dropbox_FileUpload)->upload($filepath, '/');
+            (new Dropbox_FileDeletion)->delete(((new PetsController)->select_pet($id))[0]->img_path);
+            Storage::delete($filepath);
+
         }else{
             $img_path_from_db = ((new PetsController)->select_pet($id))[0]->img_path;
             $img_path = $img_path_from_db;
@@ -131,10 +151,18 @@ class PetsController extends Controller
         
 
         if($foto!=null){
-            $img_path = (new PetsController)->getHash($foto);
+            $timestamp = Carbon::now()->timestamp;
+            $filename = hash('sha256', $foto->getClientOriginalName().
+                $foto->getSize().$foto->getClientOriginalExtension().$timestamp."30/07/2003").
+                ".".$foto->getClientOriginalExtension();
+
+            $foto->storeAs('/', $filename);
+            $filepath = storage_path('app/'.$filename);
+            $img_path = (new Dropbox_FileUpload)->upload($filepath, '/');
+            Storage::delete($filepath);
         }
         else{
-            $img_path = 'no-photo.png';
+            $img_path = '/no-photo.png';
         }
         
             
@@ -160,50 +188,12 @@ class PetsController extends Controller
             ->action([PetsController::class, 'listPets']);
     }
 
-    public function getHash($file){
-        
-        /*
-        $filename=$file->getClientOriginalName();
-        $file->storeAs('/', $filename, 'public');
-        $file->storeAs('tmp', $filename, 'public');
-
-        File::delete('tmp/'.$filename);
+    
 
 
-        */
-        $current_timestamp  = Carbon::now()->timestamp;
-        $filename = hash('sha256', 'tmp'.$file->getClientOriginalName().$file->getClientOriginalExtension().
-        $file->getSize().$current_timestamp).".".$file->getClientOriginalExtension();
-
-        $tmp_dir = hash('sha256', 'tmp'.$file->getClientOriginalName().$file->getClientOriginalExtension().
-        $file->getSize().$current_timestamp.'30/07/2003');
-
-        $file->storeAs($tmp_dir, $filename, 'public');
-
-        $main_img_name = hash_file('sha256', storage_path('app/public/'.$tmp_dir."/".$filename)).".".$file->getClientOriginalExtension();
-
-        $file->storeAs('/', $main_img_name, 'public');
 
 
-        //Alternatives to delete files:
-        
-        /*
-        unlink(realpath(storage_path('app/public/'.$tmp_dir.'/'.$filename)));
-        rmdir(realpath(storage_path('app/public/'.$tmp_dir)));
-        */
 
-
-        /*
-        unlink(storage_path('app/public/'.$tmp_dir.'/'.$filename));
-        */
-
-        File::delete(storage_path('app/public/'.$tmp_dir.'/'.$filename));
-        
-        rmdir(storage_path('app/public/'.$tmp_dir));
-        
-        return $main_img_name;
-
-    }
 
 
     public function select_pet($id){

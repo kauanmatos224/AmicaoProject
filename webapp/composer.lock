@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4f34275ed9e2e0a849873708b7b493ea",
+    "content-hash": "c76f26b5825cfa808d1944bf651b726d",
     "packages": [
         {
             "name": "brick/math",
@@ -5091,6 +5091,44 @@
             "time": "2021-12-08T09:12:39+00:00"
         },
         {
+            "name": "victor-rayan/dropbox-rayan-vrsrb",
+            "version": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VictorRayan/dropbox-rayan.git",
+                "reference": "fc4e4448731fbe2c74e885183bfff5bfad34eaf2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VictorRayan/dropbox-rayan/zipball/fc4e4448731fbe2c74e885183bfff5bfad34eaf2",
+                "reference": "fc4e4448731fbe2c74e885183bfff5bfad34eaf2",
+                "shasum": ""
+            },
+            "default-branch": true,
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "VictorRayan\\DropboxRayanVrsrb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Rayan",
+                    "email": "victorrayansouzaramos@gmail.com"
+                }
+            ],
+            "description": "This is a library intended to provide a easy PHP with Dropbox API Integration, containig HTTP request operations such as, upload, access, and delete files into Dropbox storage cloud.",
+            "support": {
+                "issues": "https://github.com/VictorRayan/dropbox-rayan/issues",
+                "source": "https://github.com/VictorRayan/dropbox-rayan/tree/main"
+            },
+            "time": "2022-06-27T02:33:42+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.4.1",
             "source": {
@@ -7966,7 +8004,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "victor-rayan/dropbox-rayan-vrsrb": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

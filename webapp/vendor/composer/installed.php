@@ -1268,6 +1268,17 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'victor-rayan/dropbox-rayan-vrsrb' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'fc4e4448731fbe2c74e885183bfff5bfad34eaf2',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../victor-rayan/dropbox-rayan-vrsrb',
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => false,
+        ),
         'vlucas/phpdotenv' => array(
             'pretty_version' => 'v5.4.1',
             'version' => '5.4.1.0',

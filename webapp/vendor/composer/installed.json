@@ -8068,6 +8068,47 @@
             "install-path": "../tijsverkoyen/css-to-inline-styles"
         },
         {
+            "name": "victor-rayan/dropbox-rayan-vrsrb",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/VictorRayan/dropbox-rayan.git",
+                "reference": "fc4e4448731fbe2c74e885183bfff5bfad34eaf2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/VictorRayan/dropbox-rayan/zipball/fc4e4448731fbe2c74e885183bfff5bfad34eaf2",
+                "reference": "fc4e4448731fbe2c74e885183bfff5bfad34eaf2",
+                "shasum": ""
+            },
+            "time": "2022-06-27T02:33:42+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "VictorRayan\\DropboxRayanVrsrb\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Victor Rayan",
+                    "email": "victorrayansouzaramos@gmail.com"
+                }
+            ],
+            "description": "This is a library intended to provide a easy PHP with Dropbox API Integration, containig HTTP request operations such as, upload, access, and delete files into Dropbox storage cloud.",
+            "support": {
+                "issues": "https://github.com/VictorRayan/dropbox-rayan/issues",
+                "source": "https://github.com/VictorRayan/dropbox-rayan/tree/main"
+            },
+            "install-path": "../victor-rayan/dropbox-rayan-vrsrb"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.4.1",
             "version_normalized": "5.4.1.0",

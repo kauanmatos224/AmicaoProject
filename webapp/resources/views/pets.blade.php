@@ -39,7 +39,7 @@
                     <form id="frm_csrf_protection" method="post" action="/institucional/pets/excluir/">
                         <table>
                         <tr>
-                            <td><img src="/storage/<?= $pet->img_path ?>"></td>
+                            <td><img src="<?= $pet->img_path ?>"></td>
                             <td>Nome: <?= $pet->nome ?></td>
                             <td>Idade: <?= $pet->idade ?></td>
                             <td>Raca: <?= $pet->raca ?></td>

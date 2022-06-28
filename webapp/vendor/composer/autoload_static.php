@@ -48,6 +48,10 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
             'Whoops\\' => 7,
             'Webmozart\\Assert\\' => 17,
         ),
+        'V' => 
+        array (
+            'VictorRayan\\DropboxRayanVrsrb\\' => 30,
+        ),
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
@@ -191,6 +195,10 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
         'Webmozart\\Assert\\' => 
         array (
             0 => __DIR__ . '/..' . '/webmozart/assert/src',
+        ),
+        'VictorRayan\\DropboxRayanVrsrb\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src',
         ),
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
@@ -522,7 +530,9 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\ContatoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContatoController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\PetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/PetsController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -532,6 +542,9 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\ContatoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ContatoRequest.php',
+        'App\\Http\\Requests\\PetsAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PetsAddRequest.php',
+        'App\\Http\\Requests\\PetsUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PetsUpdateRequest.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -5594,6 +5607,12 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Rule\\Rule' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Rule/Rule.php',
         'UnhandledMatchError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/UnhandledMatchError.php',
         'ValueError' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/ValueError.php',
+        'VictorRayan\\DropboxRayanVrsrb\\Dropbox_AccessFile' => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src/Dropbox_AccessFile.php',
+        'VictorRayan\\DropboxRayanVrsrb\\Dropbox_FileDeletion' => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src/Dropbox_FileDeletion.php',
+        'VictorRayan\\DropboxRayanVrsrb\\Dropbox_FileUpload' => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src/Dropbox_FileUpload.php',
+        'VictorRayan\\DropboxRayanVrsrb\\Dropbox_OAuthAccessToken' => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src/Dropbox_OAuthAccessToken.php',
+        'VictorRayan\\DropboxRayanVrsrb\\getEnvDropboxTokens' => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src/getEnvDropboxTokens.php',
+        'VictorRayan\\DropboxRayanVrsrb\\hello' => __DIR__ . '/..' . '/victor-rayan/dropbox-rayan-vrsrb/src/hello.php',
         'Webmozart\\Assert\\Assert' => __DIR__ . '/..' . '/webmozart/assert/src/Assert.php',
         'Webmozart\\Assert\\InvalidArgumentException' => __DIR__ . '/..' . '/webmozart/assert/src/InvalidArgumentException.php',
         'Webmozart\\Assert\\Mixin' => __DIR__ . '/..' . '/webmozart/assert/src/Mixin.php',
