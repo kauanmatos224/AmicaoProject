@@ -21,11 +21,10 @@ class TbAuthOrg extends Migration
             $table->foreign('id_org')->references('id')->on('tb_org');
             
             $table->string('email');
-            $table->string('username');
             $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
-            $table->string('phone');
+            $table->integer('logged_at')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('user_type');
 
         });
     }

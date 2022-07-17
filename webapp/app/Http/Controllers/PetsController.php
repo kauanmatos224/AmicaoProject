@@ -12,6 +12,7 @@ use VictorRayan\DropboxRayanVrsrb\Dropbox_FileUpload;
 use VictorRayan\DropboxRayanVrsrb\Dropbox_FileDeletion;
 use Illuminate\Support\Facades\Storage;
 use VictorRayan\DropboxRayanVrsrb\Dropbox_AccessFile;
+use App\Http\Controllers\UserAuthController;
 
 class PetsController extends Controller
 {
@@ -188,16 +189,22 @@ class PetsController extends Controller
             ->action([PetsController::class, 'listPets']);
     }
 
-    
-
-
-
-
-
-
 
     public function select_pet($id){
         return DB::select('select * from tb_pets where id=?', array($id));
+    }
+
+
+    public function getView_institucional(){
+        
+        if((new UserAuthController)->checkSession()){
+            return view('institucional')->with('user_type', session('user_type'));
+        }
+        else{
+            session(['required_view'=>'institucional']);
+            return view('login');
+        }
+        
     }
 
 

@@ -20,8 +20,8 @@ class TbOrg extends Migration
             $table->integer('cep');
             $table->string('endereco');
             $table->string('phone');
-            $table->string('email');
             $table->string('country');
+            $table->string('nome_fantasia');
         });
     }
 

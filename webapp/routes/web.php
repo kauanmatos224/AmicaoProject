@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PetsController;
 use App\Http\Controllers\ContatoController;
 use Illuminate\Support\Facades\Storage;
-
+use App\Http\Controllers\UserAuthController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,9 +47,7 @@ Route::get('/home', function(){
     return view('home');
 });
 
-Route::get('/institucional', function(){
-    return view('institucional');
-});
+Route::get('/institucional', [PetsController::class, 'getView_institucional']);
 
 Route::get('/institucional/pets', [PetsController::class, 'listPets']);
 
@@ -80,11 +78,17 @@ Route::get('/empresa', function(){
 Route::post('/contato/send', [ContatoController::class, 'sendMessage']);
 
 
+//AUTHENTICATION ROUTES--------------------------------------------------------------
+Route::get('/login',  function(){
+    return view('login');
+});
 
+Route::post('/login/do_auth', [UserAuthController::class, 'doLogin']);
 
+Route::get('/logout', [UserAuthController::class, 'doLogout']);
+
+//END OF AUTHENTICATION ROUTES-------------------------------------------------------
 //END WEBSITE ROUTES-----------------------------------------------------------------
-
-
 
 
 //APP ROUTES-------------------------------------------------------------------------
