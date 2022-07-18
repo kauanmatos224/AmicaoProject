@@ -19,20 +19,32 @@ class PetsController extends Controller
 
     public $info = null;
     public function listPets(){
-            
-        $pets = DB::select('select * from tb_pets');
+        
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type' == 'inst')){
+                $pets = DB::select('select * from tb_pets where id_org=?', array(session('id_org')));
 
-        for($i=0;$i<count($pets);$i++){
-            $img_path = $pets[$i]->img_path;
-            $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
-            $pets[$i]->img_path=$img_link;
+                for($i=0;$i<count($pets);$i++){
+                    $img_path = $pets[$i]->img_path;
+                    $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
+                    $pets[$i]->img_path=$img_link;
+                }
+                //dd($this->info);
+                if($this->info!=null && $this->info!=""){
+                    return view('pets')->with('pets', $pets)->with('info', $this->info);    
+                }else{
+                    return view('pets')->with('pets', $pets);//->with('info', $info);
+                }
+            }
+            else{
+                return view('error_404');
+            }
         }
-        //dd($this->info);
-        if($this->info!=null && $this->info!=""){
-            return view('pets')->with('pets', $pets)->with('info', $this->info);    
-        }else{
-            return view('pets')->with('pets', $pets);//->with('info', $info);
+        else{
+            session(['required_action' => 'listPets']);
+            return view('login');
         }
+        
     }
 
     public function inspectPet(Request $request){
@@ -201,7 +213,7 @@ class PetsController extends Controller
             return view('institucional')->with('user_type', session('user_type'));
         }
         else{
-            session(['required_view'=>'institucional']);
+            session(['required_route'=>'getView_institucional']);
             return view('login');
         }
         

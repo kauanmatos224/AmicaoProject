@@ -7,6 +7,7 @@ use App\Http\Requests\UserLoginRequest;
 use App\Http\Controllers\UserAuthController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\PetsController;
 
 class UserAuthController extends Controller
 {
@@ -23,9 +24,10 @@ class UserAuthController extends Controller
         if($checkCredentials){
             (new UserAuthController)->createSession($user_email, $user_password);
             
-            if(!empty(session('required_view'))){
-                
-                return view(session('required_view'));
+            if(!empty(session('required_route'))){
+
+                $required_route = session('required_route');
+                return redirect()->action([PetsController::class, "$required_route"]);
             }
             else{
                 return view('home');
@@ -80,6 +82,10 @@ class UserAuthController extends Controller
             'user_session'=>$user_session     
         ]);
 
+        if($userData[0]->user_type =="inst"){
+            session(['id_org'=>$userData[0]->id_org]);
+        }
+
     }
 
     public function doLogout(){
@@ -97,5 +103,11 @@ class UserAuthController extends Controller
             'user_session'=>null     
         ]);
     
+    }
+
+    public function execSessionRequiresDestroy(){
+        session([
+            'required_route'=>null,
+        ]);
     }
 }
