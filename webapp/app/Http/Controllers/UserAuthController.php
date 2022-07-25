@@ -100,7 +100,8 @@ class UserAuthController extends Controller
         session([
             'user_id'=>null,
             'user_type'=>null,
-            'user_session'=>null     
+            'user_session'=>null,
+            'id_org'=>null
         ]);
     
     }

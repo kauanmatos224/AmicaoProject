@@ -51,9 +51,7 @@ Route::get('/institucional', [PetsController::class, 'getView_institucional']);
 
 Route::get('/institucional/pets', [PetsController::class, 'listPets']);
 
-Route::get('/institucional/requisicoes', function(){
-    return view('requisicoes');
-});
+Route::get('/institucional/requisicoes', [PetsController::class, 'getView_requisicoes']);
 
 Route::get('/institucional/pets/alterar/{id}', [PetsController::class, 'inspectPet']);
 
@@ -61,9 +59,7 @@ Route::post('/institucional/pets/excluir/',[PetsController::class, 'deletePet'])
 
 Route::post('/institucional/pets/alterar/do', [PetsController::class, 'updatePet']);
 
-Route::get('/institucional/pets/cadastrar', function(){
-    return view('cadastrar_pet');
-});
+Route::get('/institucional/pets/cadastrar', [PetsController::class, 'getView_cadastra_pet']);
 
 Route::post('/institucional/pets/cadastrar/add', [PetsController::class, 'insertPet']);
 
