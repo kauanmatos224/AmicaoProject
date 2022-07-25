@@ -49,10 +49,10 @@ class PetsController extends Controller
     }
 
     public function inspectPet(Request $request){
-
+        
         $id=$request->route('id');
 
-        session(['required_route'=>'inspectPet']);
+        session(['required_route'=>'listPets']);
         $pet = (new PetsController)->select_pet($id);
 
         if($pet=='not_owned'){
@@ -61,7 +61,7 @@ class PetsController extends Controller
         else if($pet=='not_logged'){
             return view('login');
         }else{
-            return view('alterar_pet')->with('pet', $pet);
+            return view('alterar_pet')->with('pet', $pet);  
         }
         
     }
@@ -204,7 +204,7 @@ class PetsController extends Controller
                 return view('error_404');
             }
         }else{
-            session(['required_route'=>'inspectPet']);
+            session(['required_route'=>'listPets']);
             return view('login');
         }
 
