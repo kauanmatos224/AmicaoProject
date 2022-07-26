@@ -73,6 +73,18 @@ Route::get('/empresa', function(){
 
 Route::post('/contato/send', [ContatoController::class, 'sendMessage']);
 
+//STAFF ROUTES
+
+Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);
+
+Route::get('/staff/inst-analise', [PetsController::class, 'listCadRequests']);
+
+Route::get('/staff/inst-analise/inspect-cad-requests/{id}', [PetsController::class, 'inspectCadRequests']);
+
+
+
+//END STAFF ROUTES
+
 
 //AUTHENTICATION ROUTES--------------------------------------------------------------
 Route::get('/login',  function(){

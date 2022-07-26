@@ -53,6 +53,14 @@ class DatabaseSeeder extends Seeder
                 'amicao123',
                 'staff',
         ));
+
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type) values(?, ?, ?, ?)', 
+            array(
+                3,
+                'staff_test_email@yahoo.com.br',
+                'amicao123',
+                'staff',
+        ));
         
     }
 }

@@ -306,7 +306,7 @@ class PetsController extends Controller
     public function getView_institucional(){
         
         if((new UserAuthController)->checkSession()){
-            if(session('user_type')=='inst'){
+            if(session('user_type')=='inst' || session('user_type')=='staff'){
                 return view('institucional')->with('user_type', session('user_type'));
             }else{
                 return view('error_404');
