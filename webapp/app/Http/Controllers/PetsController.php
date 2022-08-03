@@ -358,7 +358,7 @@ class PetsController extends Controller
     public function listPets_app(){
 
         $pets = DB::select('select * from tb_pets');
-        dd(json_encode($pets));
+        
         return json_encode($pets);
     }
 
@@ -366,7 +366,7 @@ class PetsController extends Controller
         $id=$request->route('id');
         $pet = DB::select('select * from tb_pets where id=?', array($id));
 
-        dd(json_encode($pet));   
+        
         return json_encode($pet);;
     }
     
