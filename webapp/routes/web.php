@@ -80,7 +80,7 @@ Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);
 Route::get('/staff/inst-analise', [PetsController::class, 'listCadRequests']);
 
 Route::get('/staff/inst-analise/inspect-cad-requests/{id}', [PetsController::class, 'inspectCadRequests']);
-
+    
 
 
 //END STAFF ROUTES

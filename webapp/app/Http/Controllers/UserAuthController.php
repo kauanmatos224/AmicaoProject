@@ -8,6 +8,7 @@ use App\Http\Controllers\UserAuthController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PetsController;
+use App\Http\Requests\UserRegister;
 
 class UserAuthController extends Controller
 {
@@ -22,16 +23,26 @@ class UserAuthController extends Controller
         array($user_email, $user_password));
 
         if($checkCredentials){
-            (new UserAuthController)->createSession($user_email, $user_password);
-            
-            if(!empty(session('required_route'))){
 
-                $required_route = session('required_route');
-                return redirect()->action([PetsController::class, "$required_route"]);
+            if($checkCredentials[0]->status=='waiting'){
+                return redirect()->route('/info-cadastro', ['info'=>'waiting']);
             }
-            else{
-                return view('home');
+            else if($checkCredentials[0]->status=='denied'){
+                return redirect()->route('/info-cadastro', ['info'=>'denied']);
             }
+            else if($checkCredentials[0]->status=='approved'){
+                (new UserAuthController)->createSession($user_email, $user_password);
+            
+                if(!empty(session('required_route'))){
+
+                    $required_route = session('required_route');
+                    return redirect()->action([PetsController::class, "$required_route"]);
+                }
+                else{
+                    return redirect('/home');
+                }
+            }
+            
         }
         else{
             return view('login')->with('login_status', 'invalid_credentials');
@@ -110,5 +121,100 @@ class UserAuthController extends Controller
         session([
             'required_route'=>null,
         ]);
+    }
+
+
+
+    public function registerInst(UserRegister $request){
+
+        $nome_fantasia = $request->post('txtFantasyName');
+        $cnpj = $request->post('txtCnpj');
+        $telefone = $request->post('txtPhone');
+        $email = $request->post('txtEmail');
+        $endereco = $request->post('txtAddress');
+        $complemento = $request->post('txtComplement');
+        $country = $request->post('txtCountry');
+        $cep = $request->post('txtCep');
+        $password = $request->post('txtPassword');
+        $password_conf = $request->post('txtConfPassword');
+
+        if($password == $password_conf){
+
+            $checkEquality = DB::select('select from tb_org where phone=? or
+                email=? or (endereco=? and complemento=? and cep=?) or cnpj=?', 
+                array(
+                    $telefone,
+                    $email,
+                    $endereco,
+                    $complemento,
+                    $cep,
+                    $cnpj,
+                )
+            );
+
+            if($checkEquality){
+                if($checkEquality[0]->phone==$telefone){
+                    return view('cadastrar_inst')->with('error', 'matched_phone');
+                }
+                else if($checkEquality[0]->email==$email){
+                    return view('cadastrar_inst')->with('error', 'matched_email');
+                }
+                else if($checkEquality[0]->endereco==$endereco && $checkEquality[0]->complemento==$complemento &&
+                $checkEquality[0]->cep==$cep){
+                    return view('cadastrar_inst')->with('error', 'matched_address');
+                }
+                else if($checkEquality[0]->cnpj==$cnpj){
+                    return view('cadastrar_inst')->with('error', 'matched_cnpj');
+                }
+            }
+            else{
+            
+                DB::insert('insert into tb_org(
+                    nome_fantasia,
+                    cep,
+                    endereco,
+                    complemento,
+                    country,
+                    phone,
+                    cnpj
+
+                )
+                
+                velues(
+                    ?, ?, ?, ?, ?, ?, ?
+                )', array(
+                        $nome_fantasia,
+                        $cep,
+                        $endereco,
+                        $complemento,
+                        $country,
+                        $telefone,
+                        $cnpj
+                    )
+                );
+
+                $select_org = DB::select('select id from tb_org where cnpj=?', array($cnpj));
+                $id_org = $select_org[0]->id;
+
+                DB::insert('insert into tb_auth_org(
+                        id_org,
+                        email,
+                        password
+                    )
+                
+                    values(
+                        ?, ?, ?
+                    )', array($id_org, $email, $password)
+                );
+
+                return view('req_cadastro_enviada');
+
+            }
+
+            
+        }else{
+            return view('cadastrar_inst')->with('error', 'password-confirmation');
+        }
+
     }
 }

@@ -37,29 +37,62 @@ class DatabaseSeeder extends Seeder
                 'Nome Fantasia Teste 1'
         ));
 
+        DB::insert('insert into tb_org (cnpj, cep, endereco, phone, country, nome_fantasia)
+            values(?, ?, ?, ?, ?, ?)',
+            array(
+                '222222222222222222',
+                222222222,
+                'Rua teste 2, n 2',
+                '+55 (00) 22222-2222',
+                'Brazil',
+                'Nome Fantasia Teste 2'
+        ));
+
         
-        DB::insert('insert into tb_auth_org (id_org, email, password, user_type) values(?, ?, ?, ?)', 
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
             array(
                 1,
                 'victorrayansouzaramos@gmail.com',
                 'amicao123',
                 'inst',
+                'approved',
         ));
 
-        DB::insert('insert into tb_auth_org (id_org, email, password, user_type) values(?, ?, ?, ?)', 
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
             array(
                 2,
                 'victorrayansouzaramos@yahoo.com.br',
                 'amicao123',
                 'staff',
+                'approved',
         ));
 
-        DB::insert('insert into tb_auth_org (id_org, email, password, user_type) values(?, ?, ?, ?)', 
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
             array(
                 3,
                 'staff_test_email@yahoo.com.br',
                 'amicao123',
                 'staff',
+                'approved',
+        ));
+
+
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
+            array(
+                3,
+                'inst_test_not_approved@yahoo.com.br',
+                'amicao123',
+                'inst',
+                'denied',
+        ));
+
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
+            array(
+                3,
+                'inst_test_waiting@yahoo.com.br',
+                'amicao123',
+                'inst',
+                'waiting',
         ));
         
     }

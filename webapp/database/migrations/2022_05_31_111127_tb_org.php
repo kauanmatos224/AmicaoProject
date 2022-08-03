@@ -19,6 +19,7 @@ class TbOrg extends Migration
             $table->string('cnpj');
             $table->integer('cep');
             $table->string('endereco');
+            $table->string('complemento')->nullable();
             $table->string('phone');
             $table->string('country');
             $table->string('nome_fantasia');

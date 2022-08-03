@@ -25,6 +25,7 @@ class TbAuthOrg extends Migration
             $table->integer('logged_at')->nullable();
             $table->string('phone')->nullable();
             $table->string('user_type');
+            $table->string('status');
 
         });
     }
