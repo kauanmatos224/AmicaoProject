@@ -32,22 +32,25 @@ body{
 }
 
 #pet{
+    width: 150px;
     font-size: x-large;
-    top: 450px;
+    top: 200px;
     display: inline-block;
     position: relative;
 }
 
 #req{
+    width: 150px;
     font-size: x-large;
-    top: 475px;
+    top: 225px;
     display: inline-block;
     position: relative;
 }
 
 #msg{
+    width: 150px;
     font-size: x-large;
-    top: 500px;
+    top: 250px;
     display: inline-block;
     position: relative;
 }

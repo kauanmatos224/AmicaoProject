@@ -15,7 +15,7 @@
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="/home">
-						<img src="style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
+						<img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>

@@ -19,7 +19,10 @@ body{
     background-repeat: repeat;
 }
 
-#grid { font-family: Arial, Helvetica, sans-serif;}
+#grid { 
+    font-family: Arial, Helvetica, sans-serif;
+    padding-top: 5%;
+}
 
 #nav {
 	width: 100%;
@@ -46,33 +49,34 @@ body{
     left: 93%;
 }
 
-#div1 {
-    position: absolute;
+p{  color: whitesmoke;}
+
+td{ color: whitesmoke;}
+
+tr td { display: block;}
+
+#imgbicho{
+    padding-top: 25px;
+    height: 150px;
+    width: auto;
+}
+
+#addpet{
+    position: relative;
+    left: 1%;
+}
+
+#divtab{
+    position: inherit;
+    margin-bottom: 25px;
     border-style: none;
-    height: 100%;
+    height: 400px;
     width: 50%;
     text-align: justify;
     border-radius: 5%;
     background-color: #0c0f11ce;
     padding: 50px;
     padding-top: 0px;
-}
-
-#div2 {
-    position: absolute;
-    left: 50%;
-    width: 50%;
-    height: 100%;
-    border-style: none;
-}
-
-h3 {
-    padding-top: 25%;
-    font-family: 'Oswald';
-    text-align: center;
-    font-weight: bold;
-    font-size: 45px;
-    text-decoration: underline;
 }
 
 .main {
@@ -85,20 +89,8 @@ h3 {
 
 @media only screen and (max-width: 700px){
 
-    h3 {
-        padding-top: 25%;
-        font-size: 35px;
-    }
-
     .main { font-size: medium;}
     
-    #div1{  
-        width: 100%;
-        border-radius: 0%;
-    }
-
-    #div2{  display: none;}
-
     #nav {
         width: 100%;
         display: flex;

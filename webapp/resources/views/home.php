@@ -7,7 +7,7 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/estilohome.css"/>
+		<link rel="stylesheet" href="/style/estilohome.css"/>
 		<title>Amicão - Home</title>
 	</head>
 	<body id = "grid">
@@ -15,7 +15,7 @@
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="/home">
-						<img src="style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
+						<img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
@@ -28,7 +28,7 @@
             <h3 class="text-warning">Amicão</h3>
             <p style="color:white; padding-bottom: 5%;" class="main">O aplicativo Amicão é uma ponte entre você e os abrigos de animais,
 		te possibilitando entrar em contato com o mesmo para poder requisitar um encontro com seu possível futuro cão, com informações 
-		importantes já descritas, como: Raça do cachorro, peso e comportamento... 
+		importantes já descritas, como: Raça do pet, peso e comportamento... 
 		tudo pra não somente o seu bem mas também do nosso Amicão.<br>
 		O que está esperando? Junte-se a nós: 
 			</p>

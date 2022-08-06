@@ -106,6 +106,10 @@ Route::get('/logout', [UserAuthController::class, 'doLogout']);
 Route::get('/application_retrieve/pets', [PetsController::class, 'listPets_app']);
 Route::get('/application_retrieve/pets/inspect/{id}', [PetsController::class, 'inspectPet_app']);
 
+//Dump returns
+Route::get('/application_retrieve/pets/dump', [PetsController::class, 'listPets_app_dump']);
+Route::get('/application_retrieve/pets/inspect/dump/{id}', [PetsController::class, 'inspectPet_app_dump']);
+
 
 
 

@@ -7,11 +7,11 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="style/estilopets.css"/>
+		<link rel="stylesheet" href="/style/estillopets.css"/>
 		<title>Amicão - home</title>
 	</head>
 	<body id="grid">
-        <a href="/institucional/pets/cadastrar">Adicionar novo pet</a>
+        <a href="/institucional/pets/cadastrar" class="btn btn-warning" id="addpet">Adicionar novo pet</a><br><br>
         <div class="container" id="div_pets">
             
             <?php if(isset($info)): ?>
@@ -34,47 +34,45 @@
             
             <?php else:?>
                 
-                
                 <?php foreach($pets as $pet): ?>
-                    <form id="frm_csrf_protection" method="post" action="/institucional/pets/excluir/">
-                        <table>
-                        <tr>
-                            <td><img src="<?= $pet->img_path ?>"></td>
-                            <td>Nome: <?= $pet->nome ?></td>
-                            <td>Idade: <?= $pet->idade ?></td>
-                            <td>Raca: <?= $pet->raca ?></td>
-                            <td>Porte: <?= $pet->porte ?></td>
-                            <td>Status: <?= $pet->status ?></td>
-                        </tr>
-
-                        <tr>
-                            <td><a href="/institucional/pets/alterar/<?= $pet->id?>">Alterar</a></td>
-
+                
+                    <div id="divtab">
+                        <form id="frm_csrf_protection" method="post" action="/institucional/pets/excluir/">
+                       
+                            <table>
+                            <tr>
+                                <td><img id="imgbicho" src="<?= $pet->img_path ?>" width="200px" height="200px"></td>
+                                <td>Nome: <?= $pet->nome ?></td>
+                                <td>Idade: <?= $pet->idade ?></td>
+                                <td>Raca: <?= $pet->raca ?></td>
+                                <td>Porte: <?= $pet->porte ?></td>
+                                <td>Status: <?= $pet->status ?></td>
+                            </tr>
+                                <td><a id="btnalt" href="/institucional/pets/alterar/<?= $pet->id?>" class="btn btn-warning">Alterar</a></td>
+                                    <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
+                                    <input type="hidden" name="txtId" value="<?= $pet->id?>">
+                                    <td><a id="btnexc" href="#" class="btn btn-secondary" onClick="document.getElementById('frm_csrf_protection').submit()">Excluir</a></td>
+                                
+                                <!--<td><a href="/institucional/pets/excluir/<?= $pet->id ?>">Excluir</a></td> -->
                             
-                                <input type="hidden" name="_token" value="{{{ csrf_token() }}}"><br>
-                                <input type="hidden" name="txtId" value="<?= $pet->id ?>">
-                                <a href="#" onClick="document.getElementById('frm_csrf_protection').submit()">Excluir</a>
-                            
-                            <!--<td><a href="/institucional/pets/excluir/<?= $pet->id ?>">Excluir</a></td> -->
-                        </tr>
-                        </table>
-                    </form>
+                            </table>
+                        </form>
+                    </div>
+
                 <?php endforeach ?>
-                
-                
+   
             <?php endif ?>
         
         </div>
-
         <header id = cab>
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
 				<div class="container-fluid">
 					<a class="navbar-brand" href="/home">
-						<img src="style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
+						<img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
-					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
+					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
 					<button class="btn btn-warning" id="downloadnav" href="" ><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>

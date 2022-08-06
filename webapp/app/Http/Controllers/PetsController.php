@@ -369,5 +369,25 @@ class PetsController extends Controller
         
         return json_encode($pet);;
     }
+
+
+
+    //Dump returns - app requests
+    public function listPets_app_dump(){
+
+        $pets = DB::select('select * from tb_pets');
+        
+        dd($pets);
+    }
+
+    public function inspectPet_app_dump(Request $request){
+        $id=$request->route('id');
+        $pet = DB::select('select * from tb_pets where id=?', array($id));
+
+        dd($pet);
+        
+    }
+
+    
     
 }
