@@ -25,10 +25,12 @@ class UserAuthController extends Controller
         if($checkCredentials){
 
             if($checkCredentials[0]->status=='waiting'){
-                return redirect()->route('/info-cadastro', ['info'=>'waiting']);
+                //return redirect()->route('info-cadastro', ['info'=>'waiting']);
+                return view('info_inst')->with('info', 'waiting');
             }
             else if($checkCredentials[0]->status=='denied'){
-                return redirect()->route('/info-cadastro', ['info'=>'denied']);
+                //return redirect()->route('info-cadastro', ['info'=>'denied']);
+                return view('info_inst')->with('info', 'denied');
             }
             else if($checkCredentials[0]->status=='approved'){
                 (new UserAuthController)->createSession($user_email, $user_password);
@@ -123,9 +125,16 @@ class UserAuthController extends Controller
         ]);
     }
 
+    public function getView_cadastrar_inst(){
+        (new UserAuthController)->execSessionDestroy();
+        (new UserAuthController)->execSessionRequiresDestroy();
 
+        return view('cadastrar_inst');
+    }
 
     public function registerInst(UserRegister $request){
+        (new UserAuthController)->execSessionDestroy();
+        (new UserAuthController)->execSessionRequiresDestroy();
 
         $nome_fantasia = $request->post('txtFantasyName');
         $cnpj = $request->post('txtCnpj');
@@ -140,11 +149,10 @@ class UserAuthController extends Controller
 
         if($password == $password_conf){
 
-            $checkEquality = DB::select('select from tb_org where phone=? or
-                email=? or (endereco=? and complemento=? and cep=?) or cnpj=?', 
+            $checkEquality = DB::select('select * from tb_org where phone=? or
+                (endereco=? and complemento=? and cep=?) or cnpj=?', 
                 array(
                     $telefone,
-                    $email,
                     $endereco,
                     $complemento,
                     $cep,
@@ -156,9 +164,6 @@ class UserAuthController extends Controller
                 if($checkEquality[0]->phone==$telefone){
                     return view('cadastrar_inst')->with('error', 'matched_phone');
                 }
-                else if($checkEquality[0]->email==$email){
-                    return view('cadastrar_inst')->with('error', 'matched_email');
-                }
                 else if($checkEquality[0]->endereco==$endereco && $checkEquality[0]->complemento==$complemento &&
                 $checkEquality[0]->cep==$cep){
                     return view('cadastrar_inst')->with('error', 'matched_address');
@@ -168,47 +173,55 @@ class UserAuthController extends Controller
                 }
             }
             else{
-            
-                DB::insert('insert into tb_org(
-                    nome_fantasia,
-                    cep,
-                    endereco,
-                    complemento,
-                    country,
-                    phone,
-                    cnpj
 
-                )
-                
-                velues(
-                    ?, ?, ?, ?, ?, ?, ?
-                )', array(
-                        $nome_fantasia,
-                        $cep,
-                        $endereco,
-                        $complemento,
-                        $country,
-                        $telefone,
-                        $cnpj
+                $checkEquality = DB::select('select * from tb_auth_org where email=?', array($email));
+                if($checkEquality){
+                    return view('cadastrar_inst')->with('error', 'matched_email');
+                }
+                else{
+                    DB::insert('insert into tb_org(
+                        nome_fantasia,
+                        cep,
+                        endereco,
+                        complemento,
+                        country,
+                        phone,
+                        cnpj
+    
                     )
-                );
-
-                $select_org = DB::select('select id from tb_org where cnpj=?', array($cnpj));
-                $id_org = $select_org[0]->id;
-
-                DB::insert('insert into tb_auth_org(
-                        id_org,
-                        email,
-                        password
-                    )
-                
+                    
                     values(
-                        ?, ?, ?
-                    )', array($id_org, $email, $password)
-                );
-
-                return view('req_cadastro_enviada');
-
+                        ?, ?, ?, ?, ?, ?, ?
+                    )', array(
+                            $nome_fantasia,
+                            $cep,
+                            $endereco,
+                            $complemento,
+                            $country,
+                            $telefone,
+                            $cnpj
+                        )
+                    );
+    
+                    $select_org = DB::select('select id from tb_org where cnpj=?', array($cnpj));
+                    $id_org = $select_org[0]->id;
+    
+                    DB::insert('insert into tb_auth_org(
+                            id_org,
+                            email,
+                            password,
+                            user_type,
+                            status
+                        )
+                    
+                        values(
+                            ?, ?, ?, ?, ?
+                        )', array($id_org, $email, $password, "inst", "waiting")
+                    );
+    
+                    return view('req_cadastro_enviada');
+                }
+            
             }
 
             
@@ -217,4 +230,6 @@ class UserAuthController extends Controller
         }
 
     }
+
+ 
 }

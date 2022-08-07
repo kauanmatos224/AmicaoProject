@@ -72,7 +72,7 @@
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
-					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
+					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
 					<button class="btn btn-warning" id="downloadnav" href="" ><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>

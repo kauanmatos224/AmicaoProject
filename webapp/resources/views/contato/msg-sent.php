@@ -7,7 +7,7 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/style/estilohome.css"/>
+		<link rel="stylesheet" href="/style/estilomsg.css"/>
 		<title>Amicão - Home</title>
 	</head>
 	<body id = "grid">
@@ -25,17 +25,21 @@
 			</nav>
 		</header>
 
-        <?php if(isset($status)): ?>
-            <?php if($status=="sucess"): ?>
-                <div class="alert alert-sucess">
-                    <p>Messagem enviada com sucesso, aguarde até entrarmos em contato</p>
-                </div>
-            <?php else: ?>
-                <div class="alert alert-danger">
-                    <p>Ocorreu um erro ao tentar enviar a sua mensagem, por favor tente mais tarde :(</p>
-                </div>
-            <?php endif ?>
-        <?php endif ?>
+		<div id="div1" class="ex1">
+            <div id="divctt">
+				<?php if(isset($status)): ?>
+					<?php if($status=="sucess"): ?>
+						<div class="alert alert-sucess">
+							<span class="lnome">Messagem enviada com sucesso, aguarde até entrarmos em contato</span>
+						</div>
+					<?php else: ?>
+						<div class="alert alert-danger">
+							<span class="lnome">Ocorreu um erro ao tentar enviar a sua mensagem, por favor tente mais tarde :(</span>
+						</div>
+					<?php endif ?>
+				<?php endif ?>
+			</div>
+		</div>
 
 
     </body>

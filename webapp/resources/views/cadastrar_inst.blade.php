@@ -7,7 +7,7 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/style/contato.css"/>
+		<link rel="stylesheet" />
 		<title>Amicão</title>
 	</head>
 	<body id = "grid">
@@ -26,8 +26,13 @@
 		</header>
 
 
-        <form id="frmCadInst" method="post" action="/institucional/cadastrar">
+        <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
             <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             Nome Fantasia:<input type="text" name="txtFantasyName">
             <br>
             CNPJ:<input type="text" name="txtCnpj">

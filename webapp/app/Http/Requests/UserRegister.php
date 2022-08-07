@@ -30,7 +30,7 @@ class UserRegister extends FormRequest
             'txtAddress' => 'required|max:100',
             'txtCountry' => 'required|max:20',
             'txtEmail' => 'email|required',
-            'txtCep' => 'required|number',
+            'txtCep' => 'required|numeric',
             'txtPassword' => 'required|min:8',
             'txtConfPassword' => 'required|min:8',
             'txtComplement' => 'nullable',

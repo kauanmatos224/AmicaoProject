@@ -73,6 +73,10 @@ Route::get('/empresa', function(){
 
 Route::post('/contato/send', [ContatoController::class, 'sendMessage']);
 
+Route::get('/institucional/cadastrar', [UserAuthController::class, 'getView_cadastrar_inst']);
+
+Route::post('/institucional/cadastrar/send', [UserAuthController::class, 'registerInst']);
+
 //STAFF ROUTES
 
 Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);
@@ -80,7 +84,6 @@ Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);
 Route::get('/staff/inst-analise', [PetsController::class, 'listCadRequests']);
 
 Route::get('/staff/inst-analise/inspect-cad-requests/{id}', [PetsController::class, 'inspectCadRequests']);
-    
 
 
 //END STAFF ROUTES

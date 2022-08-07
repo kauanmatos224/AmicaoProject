@@ -9,13 +9,7 @@
 		<link rel="stylesheet" href="/style/estiloadm.css"/>
 
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-
-		<script type="text/javascript">
-			function setDate(){
-				document.getElementById('txtNascimento').value="<?= $pet[0]->nascimento ?>"
-			}
-		</script>
-
+		
 		<title>Amicão - Admin</title>
 	</head>
 	<body onload="setDate()">
