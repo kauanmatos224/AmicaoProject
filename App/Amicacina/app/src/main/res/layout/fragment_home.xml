@@ -11,6 +11,7 @@
         grid items.-->
     <GridView
         android:id="@+id/GridViewHome"
+        android:paddingTop="6dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:horizontalSpacing="6dp"
