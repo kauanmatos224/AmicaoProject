@@ -547,6 +547,7 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
         'App\\Http\\Requests\\ContatoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ContatoRequest.php',
         'App\\Http\\Requests\\PetsAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PetsAddRequest.php',
         'App\\Http\\Requests\\PetsUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PetsUpdateRequest.php',
+        'App\\Http\\Requests\\RecoveryPassRequest' => __DIR__ . '/../..' . '/app/Http/Requests/RecoveryPassRequest.php',
         'App\\Http\\Requests\\UserLoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserLoginRequest.php',
         'App\\Http\\Requests\\UserRegister' => __DIR__ . '/../..' . '/app/Http/Requests/UserRegister.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',

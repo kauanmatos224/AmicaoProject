@@ -77,6 +77,12 @@ Route::get('/institucional/cadastrar', [UserAuthController::class, 'getView_cada
 
 Route::post('/institucional/cadastrar/send', [UserAuthController::class, 'registerInst']);
 
+Route::get('/institucional/recuperar-senha', function(){
+    return view('recuperar_senha');
+});
+
+Route::post('/institucional/recuperar-senha/send', [UserAuthController::class, 'reoveryPassword']);
+
 //STAFF ROUTES
 
 Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);

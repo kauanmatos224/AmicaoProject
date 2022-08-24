@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Requests\\ContatoRequest' => $baseDir . '/app/Http/Requests/ContatoRequest.php',
     'App\\Http\\Requests\\PetsAddRequest' => $baseDir . '/app/Http/Requests/PetsAddRequest.php',
     'App\\Http\\Requests\\PetsUpdateRequest' => $baseDir . '/app/Http/Requests/PetsUpdateRequest.php',
+    'App\\Http\\Requests\\RecoveryPassRequest' => $baseDir . '/app/Http/Requests/RecoveryPassRequest.php',
     'App\\Http\\Requests\\UserLoginRequest' => $baseDir . '/app/Http/Requests/UserLoginRequest.php',
     'App\\Http\\Requests\\UserRegister' => $baseDir . '/app/Http/Requests/UserRegister.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',

@@ -12,7 +12,7 @@
 				document.getElementById('txtNascimento').value="<?= $pet[0]->nascimento ?>"
 			}
 		</script>
-		<title>Amicão - Admin</title>
+		<title>Amicão - Alterar pet</title>
 	</head>
 	<body onload="setDate()">
 		<header id = cab>

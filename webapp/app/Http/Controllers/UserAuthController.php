@@ -231,5 +231,77 @@ class UserAuthController extends Controller
 
     }
 
+    public function reoveryPassword(RecoveryPassRequest $request){
+
+        $email = $request->post('txtEmail');
+        $checkEmail = DB::select('select * from tb_auth_org where email=?', array($email));
+
+        if($checkEmail){
+            
+            $random = rand(1,10000);
+            $secret = "30/07/2003";
+            $timestamp = Carbon::now()->timestamp;
+            $instData = DB::select('select cnpj,id from tb_org where cnpj=?', array($cnpj));
+            $token = hash('sha256', $checkEmail[0]->email.$instData[0]->cnpj.$random.$secret.$timestamp);
+
+            DB::insert('insert into tb_user_rec_pass (id_org, tmp_token, generated_at)
+                values(?, ?, ?)', array($instData[0]->id, $token, $timestamp));
+            
+            $url = env('APP_URL')."/institucional/rec-password/reset/".$token;
+
+            //Must to send e-mail
+        }
+
+
+    }
+
+    public function getView_set_restet_password(Request $request){
+        $token = $request->route('token');
+        $timestamp = Carbon::now()->timestamp;
+
+        $checkToken = DB::select('select * from tb_user_rec_pass where tmp_token=? and generated_at < ?',
+            array($token, $timestamp));
+        
+        if($checkToken){
+            DB::update('update tb_user_rec_pass set start_reset_at=? where tmp_token=?', 
+                array($timestamp, $token));
+            
+                return view('set_reset_password')->with('tmp_token', $token);
+
+        }
+        else{
+            return view('error_404');
+        }
+
+        
+    }
+
+    public function setNewPassword(setNewPasswordRequest $request){
+        $password = $request->post('txtPassword');
+        $password_conf = $request->post('txtConfPassword');
+        $token = $request->post('tmp_token');
+
+        if($password==$password_conf){
+            if(!$token==null){
+                $related_id = DB::select('select id_org from tb_user_rec_pass where token=?', array($token));
+
+                if($related_id){
+                    DB::update('update tb_auth_org set password=? where id_org=? ', array($password, $related_id[0]->id_org));
+                    DB::delete('delete from tb_user_rec_pass where tmp_token=?', array($token));
+                    return view('info_inst')->with('info', 'changed_password');
+                }
+            }
+
+            return view('info_inst')->with('info', 'forged_csrf');
+            
+        }
+        else{
+            return view('set_reset_password')
+                ->with('tmp_token', $token)
+                ->with('error', 'not_matched_password');
+        }
+    }
+
+
  
 }

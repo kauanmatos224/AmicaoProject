@@ -9,7 +9,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/style/estilomsg.css"/>
-		<title>Amicão</title>
+		<title>Amicão - Aviso</title>
 	</head>
 	<body id = "grid">
 		<header id = cab>
@@ -42,6 +42,12 @@
                                     echo "A oficialização do cadastro da sua instituição foi reprovada.
                                     Cheque a caixa de entrada do e-mail informado no pré-cadastro da instituição para maiores infromações.";
                                     break;
+								case 'changed_password':
+									echo "Sua senha foi alterada com sucesso!";
+									break;
+								case 'forged_csrf':
+									echo 'A sua requisição pode ter perdido dados ou foi forjada [CSRF error]';
+									break;
                             }
                         }
                         

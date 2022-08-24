@@ -8,7 +8,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/style/estilologin.css"/>
-		<title>Amicão</title>
+		<title>Amicão - Login</title>
 	</head>
 	<body id = "grid">
 		<header id = cab>
@@ -33,8 +33,8 @@
                     <br><br>
                     <span class="lmsg">Senha:</span><br><input class="senha" type="password" name=txtPassword>
                     <br><br>
-                    <a href="" class="btn btn-secondary" id="adm">Recuperar Senha</a>
-                    <a href="" class="btn btn-secondary" id="adm">Realizar Cadastro</a><br><br>
+                    <a href="/institucional/recuperar-senha" class="btn btn-secondary" id="adm">Recuperar Senha</a>
+                    <a href="/institucional/cadastrar" class="btn btn-secondary" id="adm">Realizar Cadastro</a><br><br>
                     <input class="btn btn-warning" id="btnenviar" type="submit" value="Entrar" href="">
                 </form>
             </div>
