@@ -20,6 +20,20 @@
             <input type="submit" value="Enviar">
         </form>
 
+        <?php 
+                if(isset($error)){
+                    if($error="not_matched_mail"){
+                        echo <<<END
+
+                            <div class="alert altert-danger">
+                                <span>O e-mail informado não possui nenhum vínculo com a plataforma</span>
+                            </div>
+
+                        END;
+                    }
+                }
+            ?>
+
     </body>
 
 </html>

@@ -13,7 +13,7 @@
 
     <body>
         <h1>Crie uma nova senha:</h1>
-        <form name="frmRecPassword" method="post" action="/institucional/recuperar-senha/send">
+        <form name="frmRecPassword" method="post" action="/institucional/rec-password/set-new">
             <input type="hidden" name="_token" value="{{{csrf_token()}}}">
             <input type="hidden" name="tmp_reset_token" value="<?= $tmp_token ?>">
             Senha:
