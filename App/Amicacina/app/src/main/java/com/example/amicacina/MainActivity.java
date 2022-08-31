@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new fragment_fav();
                             break;
 
-                        case R.id.social:
+                        case R.id.search:
                             selectedFragment = new fragment_search();
                             break;
                     }
