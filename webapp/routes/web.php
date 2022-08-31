@@ -55,7 +55,7 @@ Route::get('/institucional/requisicoes', [PetsController::class, 'getView_requis
 
 Route::get('/institucional/pets/alterar/{id}', [PetsController::class, 'inspectPet']);
 
-Route::post('/institucional/pets/excluir/',[PetsController::class, 'deletePet']);
+Route::get('/institucional/pets/excluir/{csrf_token}/{pet_id}',[PetsController::class, 'deletePet']);
 
 Route::post('/institucional/pets/alterar/do', [PetsController::class, 'updatePet']);
 
