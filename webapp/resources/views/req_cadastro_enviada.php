@@ -27,8 +27,9 @@
 		</header>
         <div id="div1" class="ex1">
             <div id="divctt">
-                <span class="lnome">Os dados de sua instituição foram enviados para análise, 
-            aguarde nosso retorno na caixa de entrada do email em que foi informado no cadastro.</span>
+                <span class="lnome">Os dados de sua instituição foram enviados para análise. 
+					Realiza e confirmação do seu e-mail através do link enviado em sua caixa de entrada, 
+					e em breve enviaremos um e-mail com maiores informações sobre a aprovação do seu cadastro</span>
                 <br><br>
                 <form action="/home"><input class="btn btn-warning" id="btnenviar" type="submit" value="Ok"></form>
             </div>

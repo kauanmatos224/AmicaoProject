@@ -28,6 +28,7 @@ return array(
     'App\\Http\\Requests\\RecoveryPassRequest' => $baseDir . '/app/Http/Requests/RecoveryPassRequest.php',
     'App\\Http\\Requests\\UserLoginRequest' => $baseDir . '/app/Http/Requests/UserLoginRequest.php',
     'App\\Http\\Requests\\UserRegister' => $baseDir . '/app/Http/Requests/UserRegister.php',
+    'App\\Http\\Requests\\setNewPasswordRequest' => $baseDir . '/app/Http/Requests/setNewPasswordRequest.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

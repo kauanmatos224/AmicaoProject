@@ -48,6 +48,13 @@
 								case 'forged_csrf':
 									echo 'A sua requisição pode ter perdido dados ou foi forjada [CSRF error]';
 									break;
+								case 'email_non_verified':
+									echo 'Antes de prosseguir com o acesso a sua conta, é necessário que realize a confirmação do seu e-mail através do e-mail em que enviamos';
+									break;
+
+								case 'verified_email':
+									echo 'Seu e-mail foi verificado com sucesso!';
+									break;
                             }
                         }
                         

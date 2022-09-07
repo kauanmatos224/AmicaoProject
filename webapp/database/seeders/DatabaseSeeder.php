@@ -49,13 +49,14 @@ class DatabaseSeeder extends Seeder
         ));
 
         
-        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status, email_status) values(?, ?, ?, ?, ?, ?)', 
             array(
                 1,
                 'victorrayansouzaramos@gmail.com',
                 'amicao123',
                 'inst',
                 'approved',
+                'verified',
         ));
 
         DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 

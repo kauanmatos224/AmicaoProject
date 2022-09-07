@@ -27,26 +27,33 @@ class UserAuthController extends Controller
 
         if($checkCredentials){
 
-            if($checkCredentials[0]->status=='waiting'){
-                //return redirect()->route('info-cadastro', ['info'=>'waiting']);
-                return view('info_inst')->with('info', 'waiting');
-            }
-            else if($checkCredentials[0]->status=='denied'){
-                //return redirect()->route('info-cadastro', ['info'=>'denied']);
-                return view('info_inst')->with('info', 'denied');
-            }
-            else if($checkCredentials[0]->status=='approved'){
-                (new UserAuthController)->createSession($user_email, $user_password);
-            
-                if(!empty(session('required_route'))){
+            if($checkCredentials[0]->email_status=="verified"){
 
-                    $required_route = session('required_route');
-                    return redirect()->action([PetsController::class, "$required_route"]);
+                if($checkCredentials[0]->status=='waiting'){
+                    //return redirect()->route('info-cadastro', ['info'=>'waiting']);
+                    return view('info_inst')->with('info', 'waiting');
                 }
-                else{
-                    return redirect('/home');
+                else if($checkCredentials[0]->status=='denied'){
+                    //return redirect()->route('info-cadastro', ['info'=>'denied']);
+                    return view('info_inst')->with('info', 'denied');
+                }
+                else if($checkCredentials[0]->status=='approved'){
+                    (new UserAuthController)->createSession($user_email, $user_password);
+                
+                    if(!empty(session('required_route'))){
+
+                        $required_route = session('required_route');
+                        return redirect()->action([PetsController::class, "$required_route"]);
+                    }
+                    else{
+                        return redirect('/home');
+                    }
                 }
             }
+            else{
+                return view('info_inst')->with('info', 'email_non_verified');
+            }
+
             
         }
         else{
@@ -222,7 +229,13 @@ class UserAuthController extends Controller
                         )', array($id_org, $email, $password, "inst", "waiting")
                     );
     
-                    return view('req_cadastro_enviada');
+                    if((new UserAuthController)->createMailConfirmation($id_org)){
+                        return view('req_cadastro_enviada');
+                    }
+                    else{
+                        return view('error_404');
+                    }
+                    
                 }
             
             }
@@ -247,9 +260,7 @@ class UserAuthController extends Controller
             $instData = DB::select('select cnpj,id from tb_org where id=?', array($checkEmail[0]->id_org));
             $token = hash('sha256', $checkEmail[0]->email.$instData[0]->cnpj.$random.$secret.$timestamp);
 
-            /*DB::insert('insert into tb_user_rec_pass (id_org, tmp_token, generated_at)
-                values(?, ?, ?)', array($instData[0]->id, $token, $timestamp));
-            */
+            
             $tryUpdate = DB::update('update tb_user_rec_pass set tmp_token=?, generated_at=? where id_org=?',
                 array($token, $timestamp, $checkEmail[0]->id_org));
             if(!$tryUpdate){
@@ -259,7 +270,7 @@ class UserAuthController extends Controller
             
             $url = env('APP_URL')."/institucional/rec-password/reset/".$token;
 
-            (new UserAuthController)->sendMail($email, 'Restauração de senha', $url);
+            (new UserAuthController)->sendMail($email, 'password_recovery', $url);
             return view('general_info')->with('info', 'reset_password');
 
             //Must to send e-mail
@@ -318,10 +329,85 @@ class UserAuthController extends Controller
     }
 
 
-    public function sendMail($send_to, $subject, $text){
+
+
+
+
+
+
+
+
+
+
+
+
+    public function createMailConfirmation($id_org){
+        $inst = DB::select('select * from tb_auth_org where id_org =?', array($id_org));
+
+
+        if($inst){
+            $server_secret = '30/07/2003';
+            $timestamp = Carbon::now()->timestamp;
+            $random = rand(1, 10000);
+            $token = hash('sha256', $server_secret.$inst[0]->email.$inst[0]->id.$random.$timestamp."email_confirmation");
+            $expiration = $timestamp+604800;
+
+            
+            $update = DB::update('update tb_email_verify set tmp_token=?, expiration_at=? where id_org=?', array($token, $timestamp+604800, $id_org));
+            if(!$update){
+                DB::insert('insert into tb_email_verify (id_org, tmp_token, expiration_at) values(?, ?, ?)',
+                array($id_org, $token, $timestamp+604800));
+            }
+            
+            $url = env('APP_URL')."/account/mail_check/".$token;
+            (new UserAuthController)->sendMail($inst[0]->email, "email_verify", $url);
+
+            return true;
+
+        }
+       
+    }
+
+    public function verifyLinkEmailConfirmation(Request $request){
+        $timestamp = Carbon::now()->timestamp;
+        $token = $request->route('token');
+        $verify = DB::select('select * from tb_email_verify where tmp_token=?', array($token));
+        if($verify){
+
+            if($verify[0]->expiration_at > $timestamp){
+                DB::update('update tb_auth_org set email_status=? where id_org=?', 
+                array('verified', $verify[0]->id_org));
+
+                DB::delete('delete from tb_email_verify where tmp_token=?', array($token));
+
+                return view('info_inst')->with('info', 'verified_email');
+            }
+        }
+
+        return view('error_404');
+    }
+
+
+
+
+
+
+
+
+    public function sendMail($send_to, $subject, $link){
         
-        $msg = "Segue o link de restauração da sua senha:
-        <p><a href='$text'>$text</a></p>";
+        $msg = "";
+        
+        if($subject=='password_recovery'){
+            $subject = "Recuperação de Senha";
+            $msg = "<p>Segue o link de restauração da sua senha:</p>
+            <a href='$link'>$link</a>";
+        }
+        else if($subject=="email_verify"){
+            $subject = "Confirmação de E-mail";
+            $msg = "<p>Segue o link para completar a confirmação do e-mail</p>
+            <a href='$link'>$link</a>";
+        }
 
         Mail::send('mail.default',
             ['msg' => $msg],
