@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreign('id_org')->references('id')->on('tb_org');
             $table->string('tmp_token');
             $table->integer('expiration_at');
+            $table->integer('mails_sent')->default(1);
             
            
         });

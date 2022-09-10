@@ -51,7 +51,7 @@ class UserAuthController extends Controller
                 }
             }
             else{
-                return view('info_inst')->with('info', 'email_non_verified');
+                return view('info_inst')->with('info', 'email_non_verified')->with('email', $checkCredentials[0]->email);
             }
 
             
@@ -351,6 +351,7 @@ class UserAuthController extends Controller
             $random = rand(1, 10000);
             $token = hash('sha256', $server_secret.$inst[0]->email.$inst[0]->id.$random.$timestamp."email_confirmation");
             $expiration = $timestamp+604800;
+            $allowed_time = $timestamp+14400;
 
             
             $update = DB::update('update tb_email_verify set tmp_token=?, expiration_at=? where id_org=?', array($token, $timestamp+604800, $id_org));
@@ -358,7 +359,16 @@ class UserAuthController extends Controller
                 DB::insert('insert into tb_email_verify (id_org, tmp_token, expiration_at) values(?, ?, ?)',
                 array($id_org, $token, $timestamp+604800));
             }
+
+
+            $check_fisrt_sending = DB::select('select * from tb_email_verify where id_org=?', array($id_org));
             
+            if($check_fisrt_sending[0]->mails_sent>3){
+                DB::update('update tb_auth_org set next_mail_sending=? where id_org=?', array($allowed_time, $id_org));
+            }
+
+            DB::update('update tb_email_verify set mails_sent=? where id_org=?', array($check_fisrt_sending[0]->mails_sent+1, $id_org));
+
             $url = env('APP_URL')."/account/mail_check/".$token;
             (new UserAuthController)->sendMail($inst[0]->email, "email_verify", $url);
 
@@ -387,6 +397,25 @@ class UserAuthController extends Controller
         return view('error_404');
     }
 
+    public function resendMailVerification(Request $request){
+        $email = $request->post('txtEmail');
+        $timestamp = Carbon::now()->timestamp;
+        $allowed_time = $timestamp + 14400;
+
+        $check = DB::select('select * from tb_auth_org where email=?', array($email));
+        if($check){
+            if($check[0]->next_mail_sending < $timestamp){
+                (new UserAuthController)->createMailConfirmation($check[0]->id_org);
+
+                return view('info_inst')->with('info', 'resent_confirmation_mail');
+                
+            }
+            else{
+                return view('info_inst')->with('info', 'exceded_confirmation_mail');
+            }
+        }
+
+    }
 
 
 

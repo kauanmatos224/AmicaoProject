@@ -29,6 +29,8 @@
             <div id="divctt">
                 <span class="lnome">
                     <?php 
+
+					$create_mail_element = false;
                         if(isset($info)){
 
                             switch($info){
@@ -50,10 +52,18 @@
 									break;
 								case 'email_non_verified':
 									echo 'Antes de prosseguir com o acesso a sua conta, é necessário que realize a confirmação do seu e-mail através do e-mail em que enviamos';
+									$create_mail_element = true;
 									break;
 
 								case 'verified_email':
 									echo 'Seu e-mail foi verificado com sucesso!';
+									break;
+
+								case 'resent_confirmation_mail':
+									echo 'Uma nova mensagem de verificação foi enviada para o seu e-mail';
+									break;
+								case 'exceded_confirmation_mail':
+									echo 'A quantidade de envios foi excedida, você deve aguardar pelo menos 4 horas. Tente novamente mais tarde';
 									break;
                             }
                         }
@@ -61,6 +71,15 @@
                     ?>
                 </span>
                 <br><br>
+
+				<?php if($create_mail_element==true): ?>
+				<form action="/account/resend_mail_check" method="post" id="frm_mail_resend">
+					<input type="hidden" name="_token" value="{{{csrf_token()}}}">
+					<input type="hidden" name="txtEmail" value="<?= $email ?>">
+					<input class="btn btn-warning" type="submit" value="Não recebeu? Reenviar e-mail de verificação">
+				</form>
+				<?endif;?>
+				<br>
                 <form action="/home"><input class="btn btn-warning" id="btnenviar" type="submit" value="Ok"></form>
             </div>
         </div>
