@@ -3,7 +3,7 @@ Repositório destinado ao versionamento e controle do projeto de conclusão de c
 
 
 ***Instrução de Refatoração do Histórico do Repositório em caso de adição de arquivos sensíveis. Pois toda vez que um arquivo sensível é commitado, ele pode
-ser acessado via Checkout pelo hash do histórico, então não adianta fazer outro Commit com o dado senível removido!
+ser acessado via Checkout pelo hash do histórico, então não adianta fazer outro Commit com o dado sensível removido!
 Segue a instrução:
 
 1 - Instale o "git-filter-repo" na sua máquina. Ex: Arch Linux: yay -S git-filter-repo
