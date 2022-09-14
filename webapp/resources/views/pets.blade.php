@@ -37,8 +37,6 @@
                 <?php foreach($pets as $pet): ?>
                 
                     <div id="divtab">
-                        <form id="frm_csrf_protection" method="post" action="/institucional/pets/excluir/">
-                       
                             <table>
                             <tr>
                                 <td><img id="imgbicho" src="<?= $pet->img_path ?>" width="200px" height="200px"></td>
@@ -51,12 +49,11 @@
                                 <td><a id="btnalt" href="/institucional/pets/alterar/<?= $pet->id?>" class="btn btn-warning">Alterar</a></td>
                                     <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
                                     <input type="hidden" name="txtId" value="<?= $pet->id?>">
-                                    <td><a id="btnexc" href="#" class="btn btn-secondary" onClick="document.getElementById('frm_csrf_protection').submit()">Excluir</a></td>
+                                    <td><a id="btnexc" href="/institucional/pets/excluir/<?= $csrf_tk ?>/<?= $pet->id?>">Excluir</a></td>
                                 
                                 <!--<td><a href="/institucional/pets/excluir/<?= $pet->id ?>">Excluir</a></td> -->
                             
                             </table>
-                        </form>
                     </div>
 
                 <?php endforeach ?>

@@ -26,6 +26,9 @@ class TbAuthOrg extends Migration
             $table->string('phone')->nullable();
             $table->string('user_type');
             $table->string('status');
+            $table->string('email_status')->nullable();
+            $table->integer('next_mail_sending')->default('0');
+            
 
         });
     }

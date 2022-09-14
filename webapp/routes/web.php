@@ -55,7 +55,7 @@ Route::get('/institucional/requisicoes', [PetsController::class, 'getView_requis
 
 Route::get('/institucional/pets/alterar/{id}', [PetsController::class, 'inspectPet']);
 
-Route::post('/institucional/pets/excluir/',[PetsController::class, 'deletePet']);
+Route::get('/institucional/pets/excluir/{csrf_token}/{pet_id}',[PetsController::class, 'deletePet']);
 
 Route::post('/institucional/pets/alterar/do', [PetsController::class, 'updatePet']);
 
@@ -84,6 +84,8 @@ Route::get('/institucional/recuperar-senha', function(){
 Route::post('/institucional/recuperar-senha/send', [UserAuthController::class, 'reoveryPassword']);
 Route::get('/institucional/rec-password/reset/{token}', [UserAuthController::class, 'getView_set_restet_password']);
 Route::post('/institucional/rec-password/set-new', [UserAuthController::class, 'setNewPassword']);
+Route::get('/account/mail_check/{token}', [UserAuthController::class, 'verifyLinkEmailConfirmation']);
+Route::post('/account/resend_mail_check', [UserAuthController::class, 'resendMailVerification']);
 
 //STAFF ROUTES
 

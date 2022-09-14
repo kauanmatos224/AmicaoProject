@@ -31,10 +31,13 @@ class PetsController extends Controller
                     $pets[$i]->img_path=$img_link;
                 }
                 //dd($this->info);
+
+                $csrf_tk = (new PetsController)->csrf_gen_deletPetPage_gen();
                 if($this->info!=null && $this->info!=""){
-                    return view('pets')->with('pets', $pets)->with('info', $this->info);    
+                    
+                    return view('pets')->with('pets', $pets)->with('info', $this->info)->with('csrf_tk', $csrf_tk);    
                 }else{
-                    return view('pets')->with('pets', $pets);//->with('info', $info);
+                    return view('pets')->with('pets', $pets)->with('csrf_tk', $csrf_tk);    //->with('info', $info);
                 }
             }
             else{
@@ -70,39 +73,74 @@ class PetsController extends Controller
 
         if((new UserAuthController)->checkSession()){
             
-            
-            $id = $request->post('txtId');
-            $foto = DB::select('select img_path from tb_pets where id=? and id_org=?',
-                array($id, session('id_org')));
-            
-            if($foto){
-            
-                $delete = DB::delete('delete from tb_pets where id=?', array($id));
+            $csrf_token = $request->route('csrf_token');
+            $timestamp = Carbon::now()->timestamp;
+            $server_csrf_token = DB::select('select * from tb_csrf_forms where token = ?', array($csrf_token));
 
-                $this->info = "";
-                if($delete){
+            if($server_csrf_token){
 
-                    if((new Dropbox_FileDeletion)->delete($foto[0]->img_path)){
-                        $this->info="deleted_pet";
-                    }
-                    else{
-                        $this->info="error_delete_pet";    
-                    }
-                }
-                else{
-                    $this->info="error_delete_pet";
-                }
+                DB::delete('delete from tb_csrf_forms where expiration_at<? or expiration_at=?', array($timestamp, $timestamp));
+                
 
-                return redirect()->action([PetsController::class, 'listPets']);
-            }else{
-                return view('error_404');
+                        $select_token_data = DB::select('select * from tb_csrf_forms where token=?', array($csrf_token));
+                       
+                        if($select_token_data[0]->expiration_at > $timestamp){
+
+                            $id = $request->route('pet_id');
+                            $foto = DB::select('select img_path from tb_pets where id=? and id_org=?',
+                            array($id, session('id_org')));
+                            
+                    
+                            if($foto){
+                    
+                                $delete = DB::delete('delete from tb_pets where id=?', array($id));
+            
+                                $this->info = "";
+                                if($delete){
+            
+                                    if(!$foto[0]->img_path == "no-photo.png"){
+                                        if((new Dropbox_FileDeletion)->delete($foto[0]->img_path)){
+                                            $this->info="deleted_pet";
+                                        }
+                                        else{
+                                            $this->info="error_delete_pet";    
+                                        }
+                                    }
+                                    
+                                }
+                                else{
+                                    $this->info="error_delete_pet";
+                                }
+            
+                                return redirect()->action([PetsController::class, 'listPets']);
+                            }else{
+                                return view('error_404');
+                            }
+
+
+                        
+                        }
+                        else{
+                            return view('error_404');
+                        }
+
+                    
+
+
+                
+                
+                
+
             }
+            
         }
         else{
             session(['required_route'=> 'listPets']);
             return view('login');
         }
     }
+
+
 
     public function updatePet(PetsUpdateRequest $request){
 
@@ -351,7 +389,28 @@ class PetsController extends Controller
     }
 
 
-    
+    public function csrf_gen_deletPetPage_gen(){
+        $timestamp = Carbon::now()->timestamp;
+        $expiration = $timestamp + 3600;
+        $pageSecret = 'deleteamicao30072003'.session('id_org');
+        
+        $token = hash('sha256', $pageSecret);
+
+        $insert = DB::insert('insert into tb_csrf_forms(token, expiration_at) values(?, ?)', array($token, $expiration));
+
+        if($insert){
+            return $token;
+        }
+        else{
+            return view('error_404');
+        }
+
+    }
+
+
+
+
+
 
 
     //Operations to app (ajax) and webserver requests:
