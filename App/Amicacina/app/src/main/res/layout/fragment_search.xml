@@ -113,6 +113,6 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search" />
+        app:srcCompat="@drawable/search_white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
