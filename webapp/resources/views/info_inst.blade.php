@@ -31,6 +31,7 @@
                     <?php 
 
 					$create_mail_element = false;
+					$request_account_reactivation = false;
                         if(isset($info)){
 
                             switch($info){
@@ -65,7 +66,15 @@
 								case 'exceded_confirmation_mail':
 									echo 'A quantidade de envios foi excedida, você deve aguardar pelo menos 4 horas. Tente novamente mais tarde';
 									break;
-                            }
+
+								case 'deleted_account_trying_access':
+									echo 'Essa conta não pode ser mais acessada, pois foi movida para o processo de deleção que se concluirá 30 dias após a operação.
+									Se você deseja recuperar o acesso a sua conta, entre em contato com a nossa Plataforma requisitando a reativação.
+									
+									*Quando concluido o processo de deleção, não será mais possível efetuar o processo de autenticação da conta.';
+									$request_account_reactivation = true;
+									break;
+                            }		
                         }
                         
                     ?>
@@ -79,6 +88,17 @@
 					<input class="btn btn-warning" type="submit" value="Não recebeu? Reenviar e-mail de verificação">
 				</form>
 				<?endif;?>
+
+
+				<?php if($request_account_reactivation==true): ?>
+				<form action="/contato/send-account-activation-request" method="post" id="frm_contact_account_activation_request">
+					<input type="hidden" name="_token" value="{{{csrf_token()}}}">
+					<input type="hidden" name="txtEmail" value="<?= $email ?>">
+					<input class="btn btn-warning" type="submit" value="Requisitar a reativação da conta">
+				</form>
+				<?endif;?>
+
+
 				<br>
                 <form action="/home"><input class="btn btn-warning" id="btnenviar" type="submit" value="Ok"></form>
             </div>

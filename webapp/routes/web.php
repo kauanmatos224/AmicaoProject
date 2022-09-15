@@ -5,6 +5,7 @@ use App\Http\Controllers\PetsController;
 use App\Http\Controllers\ContatoController;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\StaffController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -73,6 +74,8 @@ Route::get('/empresa', function(){
 
 Route::post('/contato/send', [ContatoController::class, 'sendMessage']);
 
+Route::post('/contato/send-account-activation-request', [ContatoController::class, 'getViewContato_account_activation']);
+
 Route::get('/institucional/cadastrar', [UserAuthController::class, 'getView_cadastrar_inst']);
 
 Route::post('/institucional/cadastrar/send', [UserAuthController::class, 'registerInst']);
@@ -91,9 +94,15 @@ Route::post('/account/resend_mail_check', [UserAuthController::class, 'resendMai
 
 Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);
 
-Route::get('/staff/inst-analise', [PetsController::class, 'listCadRequests']);
+Route::get('/staff/inst-analise', [StaffController::class, 'getView_RegistrationAnalisys']);
 
-Route::get('/staff/inst-analise/inspect-cad-requests/{id}', [PetsController::class, 'inspectCadRequests']);
+Route::get('/staff/inst-analise/more/{id}', [StaffController::class, 'getView_inspectInst']);
+
+Route::post('/staff/inst-analise/approve', [StaffController::class, '']);
+
+Route::post('/staff/inst-analise/delete', [StaffController::class, 'deleteInst']);
+
+Route::get('/system/clear-database/complete-account-deletion/{key}', [AutomatedTasks::class, 'completeAccountDeletion']);
 
 
 //END STAFF ROUTES

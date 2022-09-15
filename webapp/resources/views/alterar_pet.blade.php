@@ -13,6 +13,7 @@
 			}
 		</script>
 		<title>Amicão - Alterar pet</title>
+		
 	</head>
 	<body onload="setDate()">
 		<header id = cab>

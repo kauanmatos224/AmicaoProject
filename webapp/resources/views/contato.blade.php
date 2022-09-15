@@ -25,18 +25,34 @@
 			</nav>
 		</header>
 
+		<?php $message=null;
+			  $send_account_activation_request=false;
+			if(isset($info)){
+				if($info=='account_activation_request'){
+					$message = "Olá, estou entrando em contato para requisitar a reativação da minha conta, cuja do seguinte e-mail: $email";
+					$send_account_activation_request=true;
+				}
+			}
+
+
+
+		?>
+
         <div id="div1" class="ex1">
             <div id="divctt">
 				<form id="frmContato" method="post" action="/contato/send">
 					<input type="hidden" name="_token" value="{{{ csrf_token()}}}">
                 	<span class="lnome">Nome completo:</span><br><input class="nome" type=text name=txtnome placeholder="Seu nome e sobrenomes">
                 	<br><br>
-                	<span class="lemail">Email para contato:</span><br><input class="email" type=text name=txtemail placeholder="email@domínio.com">
+                	<span class="lemail">Email para contato:</span><br><input class="email" type=email name=txtemail placeholder="email@domínio.com" value="<?= $send_account_activation_request==true? $email : null?>">
                 	<br><br>
-                	<span class="lmsg">Digite sua mensagem:</span><br><textarea rows="5" class="msg" type=text name=txtmsg placeholder="Mensagem..."></textarea>
+                	<span class="lmsg">Digite sua mensagem:</span><br><textarea rows="5" class="msg" type=text name=txtmsg placeholder="Mensagem..."><?= $send_account_activation_request==true? $message : ''?>
+					</textarea>
                 	<br><br>
             	    <input class="btn btn-warning" id="btnenviar" type="submit" value="Enviar">
 				</form>
+
+				<p>* Após o envio desta mensagem, em breve você receberá uma mensagem no e-mail da conta, pedindo sua confirmação para completar a ativação da conta.</p>
             </div>
         </div>
 	</body>

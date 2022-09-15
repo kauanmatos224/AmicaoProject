@@ -31,4 +31,10 @@ class ContatoController extends Controller
 
         return view('contato.msg-sent')->with('status', $status);
     }
+
+    public function getViewContato_account_activation(Request $request){
+        $email = $request->post('txtEmail');
+
+        return view('contato')->with('info', 'account_activation_request')->with('email', $email);
+    }
 }

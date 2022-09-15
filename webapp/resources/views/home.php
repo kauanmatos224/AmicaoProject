@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/style/estilohome.css"/>
 		<title>Amicão - Home</title>
+		<?php include 'user_routesNavigation.php'; ?>
 	</head>
 	<body id = "grid">
 		<header id = cab>

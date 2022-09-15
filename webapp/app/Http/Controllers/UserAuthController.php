@@ -8,6 +8,7 @@ use App\Http\Controllers\UserAuthController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\PetsController;
+use App\Http\Controllers\StaffController;
 use App\Http\Requests\UserRegister;
 use App\Http\Requests\RecoveryPassRequest;
 use App\Http\Requests\setNewPasswordRequest;
@@ -24,7 +25,7 @@ class UserAuthController extends Controller
         
         $checkCredentials = DB::select('select * from tb_auth_org where email=? and password=?',
         array($user_email, $user_password));
-
+        
         if($checkCredentials){
 
             if($checkCredentials[0]->email_status=="verified"){
@@ -37,18 +38,30 @@ class UserAuthController extends Controller
                     //return redirect()->route('info-cadastro', ['info'=>'denied']);
                     return view('info_inst')->with('info', 'denied');
                 }
+                else if($checkCredentials[0]->status=='deleted'){
+                    return view('info_inst')->with('info', 'deleted_account_trying_access')->with('email', $user_email);
+                }
                 else if($checkCredentials[0]->status=='approved'){
+                    
                     (new UserAuthController)->createSession($user_email, $user_password);
-                
+                    
                     if(!empty(session('required_route'))){
-
                         $required_route = session('required_route');
-                        return redirect()->action([PetsController::class, "$required_route"]);
+
+                        if(!empty(session('router_owner')) && session('router_owner')==$checkCredentials[0]->user_type){
+                            return redirect()->action([StaffController::class, "$required_route"]);
+                        }
+                        else{
+                            
+                            return redirect()->action([PetsController::class, "$required_route"]);
+                        }
+                        
                     }
                     else{
                         return redirect('/home');
                     }
                 }
+                
             }
             else{
                 return view('info_inst')->with('info', 'email_non_verified')->with('email', $checkCredentials[0]->email);
@@ -132,6 +145,7 @@ class UserAuthController extends Controller
     public function execSessionRequiresDestroy(){
         session([
             'required_route'=>null,
+            'router_owner'=>null,
         ]);
     }
 
@@ -447,7 +461,6 @@ class UserAuthController extends Controller
         );
 
     }
-
 
  
 }

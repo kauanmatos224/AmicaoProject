@@ -59,13 +59,14 @@ class DatabaseSeeder extends Seeder
                 'verified',
         ));
 
-        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status, email_status) values(?, ?, ?, ?, ?, ?)', 
             array(
                 2,
                 'victorrayansouzaramos@yahoo.com.br',
                 'amicao123',
                 'staff',
                 'approved',
+                'verified',
         ));
 
         DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
@@ -78,7 +79,7 @@ class DatabaseSeeder extends Seeder
         ));
 
 
-        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
+        /*DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
             array(
                 3,
                 'inst_test_not_approved@yahoo.com.br',
@@ -95,6 +96,7 @@ class DatabaseSeeder extends Seeder
                 'inst',
                 'waiting',
         ));
+        */
         
     }
 }
