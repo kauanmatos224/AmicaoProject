@@ -29,6 +29,7 @@ class TbAuthOrg extends Migration
             $table->string('email_status')->nullable();
             $table->integer('next_mail_sending')->default('0');
             $table->integer('deletion_date')->nullable();
+            $table->string('previously_status')->nullable();
             
 
         });

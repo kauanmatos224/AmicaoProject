@@ -12,8 +12,13 @@
                         case 'deleted_register':
                             echo '<p>Cadastro movido para processo de deleção com sucesso.
                             A exclusão do cadastro será efetuada por completo automaticamente após 1 mês</p>';
-                            session(['info_register_analisys'=>'deleted_register']);
-                        break;
+                            //session(['info_register_analisys'=>'deleted_register']);
+                            break;
+
+                        case 'approved_register':
+                            echo '<p>O cadastro foi aprovado com sucesso</p>';
+                            break;
+                        
                     }
                 }
             ?>
@@ -30,7 +35,25 @@
                                         <tr>
                                             <td>Nome Fantasia: <?= $inst->nome_fantasia ?></td>
                                             <td>CNPJ: <?= $inst->cnpj ?></td>
-                                            <td>Status: <?= $status[$inst->id][0]->status == 'approved'? 'Aprovado' : 'Reprovado' ?></td>
+                                            <td>Status: 
+                                                <?php
+                                                    switch($status[$inst->id][0]->status){
+                                                        case 'approved':
+                                                            echo 'Aprovado';
+                                                            break;
+                                                        case 'deleted':
+                                                            echo 'Em processo de deleção';
+                                                            break;
+                                                        case 'waiting':
+                                                            echo 'Aguardando análise';
+                                                            break;
+                                                        case 'reproved':
+                                                            echo 'Reprovado';
+                                                            break;
+                                                    }
+                                                
+                                                ?>
+                                            </td>
                                             
                                             
                                             <!--

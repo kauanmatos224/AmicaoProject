@@ -42,27 +42,21 @@
                 </form>
             <?php break;
                 case 'denied':?>
-                <form method="post" action="" id="frm_approve">
+                <form method="post" action="/staff/inst-analise/approve" id="frm_approve">
                     <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                     <input type="hidden" name="_id" value="<?= $data_org->id ?>">
                     <input type="submit" value="Aprovar Conta">
                 </form>
             <?php break;
                 case 'waiting':?>
-                    <form method="post" action="" id="frm_aprove">
+                    <form method="post" action="/staff/inst-analise/approve" id="frm_aprove">
                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                         <input type="hidden" name="_id" value="<?= $data_org->id ?>">
                         <input type="submit" value="Aprovar">
                     </form>
-
-                    <form method="post" action="" id="frm_reprove">
-                        <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                        <input type="hidden" name="_id" value="<?= $data_org->id ?>">
-                        <input type="submit" value="Reprovar">
-                    </form>
             <?php break;
                 case 'deleted':?>
-                    <form method="post" action="" id="frm_restore">
+                    <form method="post" action="/staff/inst-analise/restore" id="frm_restore">
                         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                         <input type="hidden" name="_id" value="<?= $data_org->id ?>">
                         <input type="submit" value="Restaurar conta">

@@ -19,7 +19,7 @@ class StaffController extends Controller
                 //dd($data[1]);
                 if($data!=null){
                     if(!empty(session('info_register_analisys'))){
-                        return view('registration_analisys')->with('data', $data[0])->with('status', $data[1])->with('info', session('info_register_analisys'));
+                        return view('registration_analisys')->with('data', $data[0])->with('status', $data[1])->with('info', session('info_register_analisys'))->with('user_type', $data[1]);
                     }
                     else{
                         return view('registration_analisys')->with('data', $data[0])->with('status', $data[1])->with('user_type', $data[1]);
@@ -110,10 +110,60 @@ class StaffController extends Controller
         /*if($id==null || empty($id)){
             return view('error_404');
         }*/
+        $inst_data = DB::select('select * from tb_auth_org where id_org=?', array($id));
 
-        DB::update('update tb_auth_org set status=?, deletion_date=? where id_org=?', array('deleted', $deletion_date, $id));
+        DB::update('update tb_auth_org set status=?, deletion_date=?, previously_status=? where id_org=?', array('deleted', $deletion_date, $inst_data[0]->status, $id));
         session(['info_register_analisys'=>'deleted_register']);
 
         return redirect('/staff/inst-analise');
     }
+
+    public function approveInst(Request $request){
+        $id = $request->post('_id');
+        
+        $account_data = DB::select('select * from tb_auth_org where id_org=?', array($id));
+        
+        
+        if((new UserAuthController)->checkSession()){
+            if($account_data){
+                DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('approved', $account_data[0]->status, $id));
+                
+                session(['info_register_analisys'=>'approved_register']);
+
+                return redirect('/staff/inst-analise');
+                
+            }
+            
+        }
+
+        return view('error_404');
+        
+        
+    }
+
+    public function restoreInst(Request $request){
+        $id=$request->post('_id');
+        $inst_data = DB::select('select * from tb_auth_org where id_org=?', array($id));
+
+        $previously_status = null;
+
+        if($inst_data[0]->previously_status==null){
+            $previously_status = 'waiting';
+        }
+        else{
+            $previously_status = $inst_data[0]->previously_status;
+        }
+
+
+        DB::update('update tb_auth_org set status=?, deletion_date=?, previously_status=? where id_org=?', 
+            array($previously_status, null, $inst_data[0]->status, $id));
+        session(['info_register_analisys'=>'restored_register']);
+
+        return redirect('/staff/inst-analise');
+
+
+
+    }
 }
+
+

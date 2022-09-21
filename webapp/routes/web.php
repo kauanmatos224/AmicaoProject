@@ -102,6 +102,10 @@ Route::post('/staff/inst-analise/approve', [StaffController::class, '']);
 
 Route::post('/staff/inst-analise/delete', [StaffController::class, 'deleteInst']);
 
+Route::post('/staff/inst-analise/approve', [StaffController::class, 'approveInst']);
+
+Route::post('/staff/inst-analise/restore', [StaffController::class, 'restoreInst']);
+
 Route::get('/system/clear-database/complete-account-deletion/{key}', [AutomatedTasks::class, 'completeAccountDeletion']);
 
 
