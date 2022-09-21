@@ -98,17 +98,30 @@ Route::get('/staff/inst-analise', [StaffController::class, 'getView_Registration
 
 Route::get('/staff/inst-analise/more/{id}', [StaffController::class, 'getView_inspectInst']);
 
-Route::post('/staff/inst-analise/approve', [StaffController::class, '']);
 
-Route::post('/staff/inst-analise/delete', [StaffController::class, 'deleteInst']);
 
-Route::post('/staff/inst-analise/approve', [StaffController::class, 'approveInst']);
+Route::post('/staff/inst-analise/delete', [StaffController::class, 'getView_justifyDeleteInst']);
 
-Route::post('/staff/inst-analise/restore', [StaffController::class, 'restoreInst']);
+Route::post('/staff/inst-analise/approve', [StaffController::class, 'getView_justifyApproveInst']);
+
+Route::post('/staff/inst-analise/restore', [StaffController::class, 'getView_justifyRestoreInst']);
+
+Route::post('/staff/inst-analise/deny', [StaffController::class, 'getView_justifyDenyInst']);
+
+
+Route::post('/staff/inst-analise/delete/do', [StaffController::class, 'deleteInst']);
+
+Route::post('/staff/inst-analise/approve/do', [StaffController::class, 'approveInst']);
+
+Route::post('/staff/inst-analise/restore/do', [StaffController::class, 'restoreInst']);
+
+Route::post('/staff/inst-analise/deny/do', [StaffController::class, 'denyInst']);
+
 
 Route::get('/system/clear-database/complete-account-deletion/{key}', [AutomatedTasks::class, 'completeAccountDeletion']);
 
-Route::post('/staff/inst-analise/deny', [StaffController::class, 'denyInst']);
+
+
 
 
 //END STAFF ROUTES

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\ApproveAccountRequest;
+use Mail;
 
 class StaffController extends Controller
 {
@@ -103,8 +103,11 @@ class StaffController extends Controller
         return null;
     }
 
-    public function deleteInst(ApproveAccountRequest $request){
+
+
+    public function deleteInst(Request $request){
         $id = $request->post('_id');
+        $justify = $request->post('txtJustify');
         $timestamp = Carbon::now()->timestamp;
         $deletion_date = $timestamp + 2592000; //a month to complete exclusion
         /*if($id==null || empty($id)){
@@ -113,13 +116,19 @@ class StaffController extends Controller
 
         if((new UserAuthController)->checkSession()){
             if(session('user_type')=='staff'){
-                $inst_data = DB::select('select * from tb_auth_org where ((id_org=? and status=?) or (id_org=? and status=?) or (id_org=? and status=?))', array($id, 'waiting', $id, 'approved', $id, 'reproved'));
+                if($justify!=null || $justify!=""){    
+                    $inst_data = DB::select('select * from tb_auth_org where ((id_org=? and status=?) or (id_org=? and status=?) or (id_org=? and status=?))', array($id, 'waiting', $id, 'approved', $id, 'denied'));
 
-                if($inst_data){
-                    DB::update('update tb_auth_org set status=?, deletion_date=?, previously_status=? where id_org=?', array('deleted', $deletion_date, $inst_data[0]->status, $id));
-                    session(['info_register_analisys'=>'deleted_register']);
+                    if($inst_data){
+                        DB::update('update tb_auth_org set status=?, deletion_date=?, previously_status=? where id_org=?', array('deleted', $deletion_date, $inst_data[0]->status, $id));
+                        session(['info_register_analisys'=>'deleted_register']);
 
-                    return redirect('/staff/inst-analise');
+                        (new StaffController)->sendMail($inst_data[0]->email, 'deleted_inst', $justify);
+                        
+                        return redirect('/staff/inst-analise');
+                    }
+                }else{
+                    return view('collect_justify')->with('id', $id)->with('operation_type', 'deleteInst')->with('info', 'wrong_justify');
                 }
                 
             }
@@ -130,21 +139,28 @@ class StaffController extends Controller
 
     public function approveInst(Request $request){
         $id = $request->post('_id');
+        $justify = $request->post('txtJustify');
         
         if((new UserAuthController)->checkSession()){
             if(session('user_type')=='staff'){
 
-                $account_data = DB::select('select * from tb_auth_org where ((id_org=? and status=?) or (id_org=? and status=?))', array($id, 'denied', $id, 'waiting'));
-            
-                if($account_data){
-                    DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('approved', $account_data[0]->status, $id));
-                    
-                    session(['info_register_analisys'=>'approved_register']);
-
-                    return redirect('/staff/inst-analise');
-                    
-                }
+                if($justify!=null || $justify!=""){
+                    $account_data = DB::select('select * from tb_auth_org where ((id_org=? and status=?) or (id_org=? and status=?))', array($id, 'denied', $id, 'waiting'));
                 
+                    if($account_data){
+                        DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('approved', $account_data[0]->status, $id));
+                        
+                        session(['info_register_analisys'=>'approved_register']);
+
+                        (new StaffController)->sendMail($account_data[0]->email, 'approved_inst', $justify);
+
+                        return redirect('/staff/inst-analise');
+                        
+                    }
+                }else{
+                    return view('collect_justify')->with('id', $id)->with('operation_type', 'approveInst')->with('info', 'wrong_justify');
+                }
+                    
             }        
         }
 
@@ -153,30 +169,37 @@ class StaffController extends Controller
 
     public function restoreInst(Request $request){
         $id=$request->post('_id');
+        $justify = $request->post('txtJustify');
         $inst_data = DB::select('select * from tb_auth_org where (id_org=? and status=?)', array($id, 'deleted'));
-
+        $justify = $request->post('txtJustify');
 
 
         if((new UserAuthController)->checkSession()){
             if(session('user_type')=='staff'){
-                if($inst_data){
+                if($justify!=null || $justify!=""){
+                    if($inst_data){
 
-                    $previously_status = null;
+                        $previously_status = null;
 
-                    if($inst_data[0]->previously_status==null){
-                        $previously_status = 'waiting';
+                        if($inst_data[0]->previously_status==null){
+                            $previously_status = 'waiting';
+                        }
+                        else{
+                            $previously_status = $inst_data[0]->previously_status;
+                        }
+
+
+                        DB::update('update tb_auth_org set status=?, deletion_date=?, previously_status=? where id_org=?', 
+                            array($previously_status, null, $inst_data[0]->status, $id));
+                        session(['info_register_analisys'=>'restored_register']);
+
+                        (new StaffController)->sendMail($inst_data[0]->email, 'restored_inst', $justify);
+
+                        return redirect('/staff/inst-analise');
+
                     }
-                    else{
-                        $previously_status = $inst_data[0]->previously_status;
-                    }
-
-
-                    DB::update('update tb_auth_org set status=?, deletion_date=?, previously_status=? where id_org=?', 
-                        array($previously_status, null, $inst_data[0]->status, $id));
-                    session(['info_register_analisys'=>'restored_register']);
-
-                    return redirect('/staff/inst-analise');
-
+                }else{
+                    return view('collect_justify')->with('id', $id)->with('operation_type', 'restoreInst')->with('info', 'wrong_justify');
                 }
             }
         }
@@ -186,50 +209,98 @@ class StaffController extends Controller
     }
 
     public function denyInst(Request $request){
+
         $id=$request->post('_id');
+        $justify = $request->post('txtJustify');
 
         $inst_data = DB::select('select * from tb_auth_org where ((id_org=? and status=?) or (id_org=? and status=?))', array($id, 'waiting', $id, 'approved'));
 
 
-        if($inst_data){
-            DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('approved', $inst_data[0]->status, $id));
-            
-            session(['info_register_analisys'=>'reproved_register']);
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='staff'){
+                
+                if($justify!=null || $justify!=""){
+                    
+                    if($inst_data){
+                        DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('denied', $inst_data[0]->status, $id));
+                        
+                        session(['info_register_analisys'=>'reproved_register']);
 
-            return redirect('/staff/inst-analise');
-            
+                        (new StaffController)->sendMail($inst_data[0]->email, 'reproved_inst', $justify);
+
+                        return redirect('/staff/inst-analise');
+                        
+                    }
+                }else{
+                    return view('collect_justify')->with('id', $id)->with('operation_type', 'denyInst')->with('info', 'wrong_justify');
+                }
+        
+            }
         }
-        else{
-            return view('error_404');
-        }
+        return view('error_404');
+        
 
     }
 
 
 
 
-    public function justifyRestoreInst(Request $request){
+    public function getView_justifyRestoreInst(Request $request){
         $id=$request->post('_id');
 
         return view('collect_justify')->with('id', $id)->with('operation_type', 'restoreInst');
     }
 
-    public function justifyDeleteInst(Request $request){
+    public function getView_justifyDeleteInst(Request $request){
         $id=$request->post('_id');
 
         return view('collect_justify')->with('id', $id)->with('operation_type', 'deleteInst');
     }
 
-    public function justifyApproveInst(Request $request){
+    public function getView_justifyApproveInst(Request $request){
         $id=$request->post('_id');
 
         return view('collect_justify')->with('id', $id)->with('operation_type', 'approveInst');
     }
 
-    public function justifyDenyInst(Request $request){
+    public function getView_justifyDenyInst(Request $request){
         $id=$request->post('_id');
 
         return view('collect_justify')->with('id', $id)->with('operation_type', 'denyInst');
+    }
+
+
+
+    public function sendMail($send_to, $subject, $justify){
+        
+        $msg = "";
+        
+        if($subject=='approved_inst'){
+            $subject = "Resultado da análise do seu cadastro de instituição.";
+            $msg = "<p>O cadastro da sua instituição foi aprovado, você já pode usar a nossa plataforma para gerenciar sua organização, segue o feedback da nossa plataforma: \" $justify \" !</p>";
+        }
+        else if($subject=="reproved_inst"){
+            $subject = "Resultado da análise do seu cadastro de instituição.";
+            $msg = "<p>O cadastro da sua instituição foi reprovado, segue o feedback da nossa plataforma: \" $justify \" </p>";
+        }
+        else if($subject=="deleted_inst"){
+            $subject = "Exclusão da sua conta institucional.";
+            $msg = "<p>A sua conta foi movida para exclusão, segundo o motivo: \" $justify \"</p>";
+        }
+        else if($subject=="restored_inst"){
+            $subject = "Restauração do cadastro da sua instituição.";
+            $msg = "<p>A sua conta foi restaurada, segue o motivo: \" $justify \"</p>";
+        }
+        
+    
+        Mail::send('mail.default',
+            ['msg' => $msg],
+            function($message) use ($send_to, $subject) {
+                $message->to(array($send_to))
+                ->subject($subject);
+            }
+        );
+    
     }
 
 }
