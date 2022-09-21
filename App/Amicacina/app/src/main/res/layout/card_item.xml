@@ -23,7 +23,7 @@
             android:layout_height="180dp"
             android:layout_gravity="center"
             android:src="@mipmap/ic_launcher" />
-w
+
          <TextView
              android:id="@+id/idTVname"
              android:layout_width="match_parent"

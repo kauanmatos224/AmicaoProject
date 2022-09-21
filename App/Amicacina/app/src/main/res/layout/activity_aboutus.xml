@@ -4,6 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1e2327"
     tools:context=".activity_aboutus">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="32dp"
+        android:text="Sobre nós"
+        android:textColor="@color/white"
+        android:textSize="30sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="370dp"
+        android:layout_height="197dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="Desenvolvedores:\n\nKaick Kenithi Nishiya\nKauan Matos\nMoacir José da Silva Filho\nNathan Enrico Romero\nPedro Goldoni Magri\nVictor Rayan Barbieri "
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="340dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="48dp"
+        android:textAlignment="center"
+        android:text="Projeto de TCC do ano 2022 do curso de Desenvolvimento de Sistemas da
+Etec Lauro Gomes "
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView13" />
 </androidx.constraintlayout.widget.ConstraintLayout>

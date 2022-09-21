@@ -77,23 +77,23 @@ public class MainActivity extends AppCompatActivity {
             selectItem(position);
         }
 
+    }
 
-        private void selectItem(int position) {
+    private void selectItem(int position) {
 
-            Fragment fragment = null;
+        switch (position) {
+            case 0:
+                Intent intent = new Intent(this, activity_aboutus.class);
+                startActivity(intent);
+                break;
+            case 1:
+                //fragment = new FixturesFragment();
+                break;
 
-            switch (position) {
-                case 0:
-                    Intent intent = new Intent(this, .class);
-                    startActivity(intent);
-                    break;
-                case 1:
-                    fragment = new FixturesFragment();
-                    break;
-
-                default:
-                    break;
-            }
+            default:
+                break;
+        }
+    }
 
     //listener nav bar
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new fragment_fav();
                             break;
 
-                        case R.id.social:
+                        case R.id.search:
                             selectedFragment = new fragment_search();
                             break;
                     }
