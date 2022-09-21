@@ -191,8 +191,8 @@ class StaffController extends Controller
         $inst_data = DB::select('select * from tb_auth_org where ((id_org=? and status=?) or (id_org=? and status=?))', array($id, 'waiting', $id, 'approved'));
 
 
-        if($account_data){
-            DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('approved', $account_data[0]->status, $id));
+        if($inst_data){
+            DB::update('update tb_auth_org set status=?, previously_status=? where id_org=?', array('approved', $inst_data[0]->status, $id));
             
             session(['info_register_analisys'=>'reproved_register']);
 
