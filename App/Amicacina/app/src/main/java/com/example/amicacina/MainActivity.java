@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 //http://amicao.herokuapp.com/application_retrieve/pets
@@ -66,6 +70,31 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            selectItem(position);
+        }
+
+
+        private void selectItem(int position) {
+
+            Fragment fragment = null;
+
+            switch (position) {
+                case 0:
+                    Intent intent = new Intent(this, .class);
+                    startActivity(intent);
+                    break;
+                case 1:
+                    fragment = new FixturesFragment();
+                    break;
+
+                default:
+                    break;
+            }
+
     //listener nav bar
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -81,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new fragment_fav();
                             break;
 
-                        case R.id.search:
+                        case R.id.social:
                             selectedFragment = new fragment_search();
                             break;
                     }

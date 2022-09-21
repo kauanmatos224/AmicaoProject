@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable-v24/ic_baseline_favorite_border_24.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/ic_baseline_people_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_fav.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/selector_search.xml" value="0.1255" />
         <entry key="app/src/main/res/drawable/selector_social.xml" value="0.1255" />

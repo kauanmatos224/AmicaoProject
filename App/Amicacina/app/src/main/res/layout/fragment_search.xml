@@ -96,7 +96,7 @@
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="253dp"
+        android:layout_width="246dp"
         android:layout_height="28dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="20dp"
@@ -113,6 +113,6 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/search_white" />
+        app:srcCompat="@drawable/search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
