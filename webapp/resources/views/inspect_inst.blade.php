@@ -54,6 +54,13 @@
                         <input type="hidden" name="_id" value="<?= $data_org->id ?>">
                         <input type="submit" value="Aprovar">
                     </form>
+
+
+                    <form method="post" action="/staff/inst-analise/deny" id="frm_aprove">
+                        <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+                        <input type="hidden" name="_id" value="<?= $data_org->id ?>">
+                        <input type="submit" value="Reprovar">
+                    </form>
             <?php break;
                 case 'deleted':?>
                     <form method="post" action="/staff/inst-analise/restore" id="frm_restore">

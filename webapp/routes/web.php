@@ -108,6 +108,8 @@ Route::post('/staff/inst-analise/restore', [StaffController::class, 'restoreInst
 
 Route::get('/system/clear-database/complete-account-deletion/{key}', [AutomatedTasks::class, 'completeAccountDeletion']);
 
+Route::get('/staff/inst-analise/deny', [StaffController::class, 'denyInst']);
+
 
 //END STAFF ROUTES
 

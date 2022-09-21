@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\AutomatedTasks' => $baseDir . '/app/Http/Controllers/AutomatedTasks.php',
     'App\\Http\\Controllers\\ContatoController' => $baseDir . '/app/Http/Controllers/ContatoController.php',
     'App\\Http\\Controllers\\Controller' => $baseDir . '/app/Http/Controllers/Controller.php',
     'App\\Http\\Controllers\\PetsController' => $baseDir . '/app/Http/Controllers/PetsController.php',
@@ -22,6 +23,7 @@ return array(
     'App\\Http\\Middleware\\TrustHosts' => $baseDir . '/app/Http/Middleware/TrustHosts.php',
     'App\\Http\\Middleware\\TrustProxies' => $baseDir . '/app/Http/Middleware/TrustProxies.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Http\\Requests\\ApproveAccountRequest' => $baseDir . '/app/Http/Requests/ApproveAccountRequest.php',
     'App\\Http\\Requests\\ContatoRequest' => $baseDir . '/app/Http/Requests/ContatoRequest.php',
     'App\\Http\\Requests\\PetsAddRequest' => $baseDir . '/app/Http/Requests/PetsAddRequest.php',
     'App\\Http\\Requests\\PetsUpdateRequest' => $baseDir . '/app/Http/Requests/PetsUpdateRequest.php',

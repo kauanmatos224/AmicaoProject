@@ -530,6 +530,7 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
+        'App\\Http\\Controllers\\AutomatedTasks' => __DIR__ . '/../..' . '/app/Http/Controllers/AutomatedTasks.php',
         'App\\Http\\Controllers\\ContatoController' => __DIR__ . '/../..' . '/app/Http/Controllers/ContatoController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\PetsController' => __DIR__ . '/../..' . '/app/Http/Controllers/PetsController.php',
@@ -544,6 +545,7 @@ class ComposerStaticInita2b014f7805cdf72a2c86424aa2395a7
         'App\\Http\\Middleware\\TrustHosts' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustHosts.php',
         'App\\Http\\Middleware\\TrustProxies' => __DIR__ . '/../..' . '/app/Http/Middleware/TrustProxies.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Http\\Requests\\ApproveAccountRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ApproveAccountRequest.php',
         'App\\Http\\Requests\\ContatoRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ContatoRequest.php',
         'App\\Http\\Requests\\PetsAddRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PetsAddRequest.php',
         'App\\Http\\Requests\\PetsUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PetsUpdateRequest.php',
