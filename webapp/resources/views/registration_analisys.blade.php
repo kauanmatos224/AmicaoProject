@@ -28,49 +28,49 @@
             
             <?php else:?>
 
-                            <table>
+                <table>
 
-                                <?php foreach($data as $inst): ?>
-                                    <?php if(session('user_id')!=$inst->id && $user_type[$inst->id][0]->user_type!='staff'): ?>
-                                        <tr>
-                                            <td>Nome Fantasia: <?= $inst->nome_fantasia ?></td>
-                                            <td>CNPJ: <?= $inst->cnpj ?></td>
-                                            <td>Status: 
-                                                <?php
-                                                    switch($status[$inst->id][0]->status){
-                                                        case 'approved':
-                                                            echo 'Aprovado';
-                                                            break;
-                                                        case 'deleted':
-                                                            echo 'Em processo de deleção';
-                                                            break;
-                                                        case 'waiting':
-                                                            echo 'Aguardando análise';
-                                                            break;
-                                                        case 'reproved':
-                                                            echo 'Reprovado';
-                                                            break;
-                                                    }
-                                                
-                                                ?>
-                                            </td>
-                                            
-                                            
-                                            <!--
-                                            <td>Endereço: <?= $inst->endereco ?></td>
-                                            <td>Complemento: <?= $inst->complemento ?></td>
-                                            <td>Código Postal: <?= $inst->cep ?></td>
-                                            <td>País: <?= $inst->country ?></td>
-                                            <td>Telefone: <?= $inst->phone ?></td>
-                                            -->
-                                            <td><a href="/staff/inst-analise/more/<?= $inst->id?>">ver mais</a></td>
-                                        </tr>
-                                    <?php endif ?>
-                                <?php endforeach ?>
-                            </table>
-                        
+                    <?php foreach($data as $inst): ?>
+                        <?php if(session('user_id')!=$inst->id && $user_type[$inst->id][0]->user_type!='staff'): ?>
+                            <tr>
+                                <td>Nome Fantasia: <?= $inst->nome_fantasia ?></td>
+                                <td>CNPJ: <?= $inst->cnpj ?></td>
+                                <td>Status: 
+                                    <?php
+                                        switch($status[$inst->id][0]->status){
+                                            case 'approved':
+                                                echo 'Aprovado';
+                                                break;
+                                            case 'deleted':
+                                                echo 'Em processo de deleção';
+                                                break;
+                                            case 'waiting':
+                                                echo 'Aguardando análise';
+                                                break;
+                                            case 'reproved':
+                                                echo 'Reprovado';
+                                                break;
+                                        }
+                                    
+                                    ?>
+                                </td>
+                                
+                                
+                                <!--
+                                <td>Endereço: <?= $inst->endereco ?></td>
+                                <td>Complemento: <?= $inst->complemento ?></td>
+                                <td>Código Postal: <?= $inst->cep ?></td>
+                                <td>País: <?= $inst->country ?></td>
+                                <td>Telefone: <?= $inst->phone ?></td>
+                                -->
+                                <td><a href="/staff/inst-analise/more/<?= $inst->id?>">ver mais</a></td>
+                            </tr>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                </table>
+            
 
-                
+    
    
             <?php endif ?>
         

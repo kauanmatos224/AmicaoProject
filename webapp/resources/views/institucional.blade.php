@@ -51,7 +51,7 @@
 		<?php if(isset($user_type)):
 			if($user_type=="staff"):?>
 				<div id="div3" class="ex3">
-					<a href="/staff/mensagens" class="btn btn-warning" id="msg">Mensagens</a>
+					<a href="/staff/messages" class="btn btn-warning" id="msg">Mensagens</a>
 				</div>  
 
 				<div id="div3" class="ex3">

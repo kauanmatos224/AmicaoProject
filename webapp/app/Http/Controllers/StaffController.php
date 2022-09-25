@@ -270,6 +270,110 @@ class StaffController extends Controller
     }
 
 
+    public function getView_Messages(){
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='staff'){
+
+                $messages = DB::select('select * from tb_users_faq');
+                if($messages){
+                    return view('messages_faq')->with('dataset', $messages);
+                }   
+                else{
+                    return view('messages_faq')->with('info', 'none_messages');
+                }
+
+            }
+
+        }
+
+        return view('error_404');
+
+
+    }
+
+
+
+
+    public function getView_inspectMessage(Request $request){
+        $id = $request->route('id');
+
+
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='staff'){
+                $data = DB::select('select * from tb_users_faq where id=?', array($id));
+
+                if($data){
+                    return view('inspect_message')->with('data', $data);
+                }
+            }
+        }
+
+        return view('error_404');
+    }
+
+    public function deleteMessage(Request $request){
+        $id = $request->post('_id');
+
+
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='staff'){
+                $delete = DB::delete('delete from tb_users_faq where id=?', array($id));
+                if($delete){
+                    session(['info_message_op' => 'deleted_message']);
+                    return redirect('/staff/messages');
+                }
+            }
+        }
+
+        return view('error_404');
+
+        
+    }
+
+    public function getView_fixSolicitation(Request $request){
+        $id = $request->route('id');
+
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='staff'){
+                return view('fix_message')->with('id', $id);
+            }
+        }
+        return view('error_404');
+    }
+
+    public function fixSendAnswer(Request $request){
+        $timestamp = Carbon::now()->timestamp;
+        $id = $request->post('_id');
+        $status = $request->post('txtStatus');
+        $answer = $request->post('txtAnswer');
+
+
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='staff'){
+                if($status=='solved' || $status=='solving'){
+
+                    if($answer=="" || $answer==null){
+                        return view('fix_message')->with('id', $id)->with('error', 'wrong_answer');
+                    }
+                    else{
+                        $update = DB::update('update tb_users_faq set last_answer=?, solicitation_status=? where id=?', array($timestamp, $status, $id));
+
+                        if($update){
+                            session(['info_message_op'=>"answered_message"]);
+                            $data = DB::select('select email from tb_users_faq where id=?', array($id));
+                            $email = $data[0]->email;
+                            (new StaffController)->sendMail($email, "solicitation_message-$status", $answer);
+                            return redirect('/staff/messages');
+                        }
+
+                    }
+                    
+                }
+            }
+        }
+
+        return view('error_404');
+    }
 
     public function sendMail($send_to, $subject, $justify){
         
@@ -290,6 +394,18 @@ class StaffController extends Controller
         else if($subject=="restored_inst"){
             $subject = "Restauração do cadastro da sua instituição.";
             $msg = "<p>A sua conta foi restaurada, segue o motivo: \" $justify \"</p>";
+        }
+        else if($subject=='solicitation_message-solved'){
+            $subject = "Resposta sobre a mensagem que você nos enviou.";
+            $msg = "<p>Primeiramente agradecemos o seu contato! 
+             Segue a resposta da nossa Plataforma:</p> \" $justify \"
+
+             ***Sua mensagem foi avaliada e marcada como uma <strong>solicitação resolvida</strong>, porque sua solicitação pode já ter sido reolvida ou foi categorizada como uma <strong>avaliação de usuário</strong>.";
+        }
+        else if($subject=='solicitation_message-solving'){
+            $subject = "Resposta sobre a mensagem que você nos enviou.";
+            $msg = "<p>Primeiramente agradecemos o seu contato! 
+            Segue a resposta da nossa Plataforma:</p> \" $justify \"";
         }
         
     

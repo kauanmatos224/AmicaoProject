@@ -92,7 +92,11 @@ Route::post('/account/resend_mail_check', [UserAuthController::class, 'resendMai
 
 //STAFF ROUTES
 
-Route::get('/staff/mensagens', [PetsController::class, 'listMessages']);
+Route::get('/staff/messages', [StaffController::class, 'getView_Messages']);
+Route::get('/staff/messages/more/{id}', [StaffController::class, 'getView_inspectMessage']);
+Route::post('/staff/messages/delete/do', [StaffController::class, 'deleteMessage']);
+Route::post('/staff/messages/fix/do/{id}', [StaffController::class, 'getView_fixSolicitation']);
+Route::post('/staff/message/fix_send_answer', [StaffController::class, 'fixSendAnswer']);
 
 Route::get('/staff/inst-analise', [StaffController::class, 'getView_RegistrationAnalisys']);
 

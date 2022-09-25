@@ -26,7 +26,7 @@
                 case 'deleted':
                     echo 'Em processo de exclusão.';
 
-                    echo "<p>Essa conta será excluida por completo em: <?= date('d/m/y    H:i', $data_auth_org->deletion_date)?></p>";
+                    echo "<p>Essa conta será excluida por completo em: ".date('d/m/y    H:i', $data_auth_org->deletion_date)."</p>";
                     break;
             }
         ?>

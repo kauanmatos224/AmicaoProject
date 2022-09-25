@@ -20,7 +20,7 @@ class TbUsersFaq extends Migration
             $table->string('email');
             $table->string('message');
             $table->string('solicitation_status');
-
+            $table->integer('last_answer')->nullable();
         });
     }
 
