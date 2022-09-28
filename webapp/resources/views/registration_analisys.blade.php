@@ -30,8 +30,10 @@
 
                 <table>
 
-                    <?php foreach($data as $inst): ?>
-                        <?php if(session('user_id')!=$inst->id && $user_type[$inst->id][0]->user_type!='staff'): ?>
+                    <?php foreach($data as $inst):?>
+                        
+                        <?php if($user_type[$inst->id][0]->user_type!='staff'):?>
+                        
                             <tr>
                                 <td>Nome Fantasia: <?= $inst->nome_fantasia ?></td>
                                 <td>CNPJ: <?= $inst->cnpj ?></td>

@@ -48,6 +48,17 @@ class DatabaseSeeder extends Seeder
                 'Nome Fantasia Teste 2'
         ));
 
+        DB::insert('insert into tb_org (cnpj, cep, endereco, phone, country, nome_fantasia)
+            values(?, ?, ?, ?, ?, ?)',
+            array(
+                '1111111111111111',
+                111111,
+                'Rua teste 3, n 3',
+                '+55 (00) 33333-3333',
+                'Brazil',
+                'Nome Fantasia Teste 3'
+        ));
+
         
         DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status, email_status) values(?, ?, ?, ?, ?, ?)', 
             array(
@@ -73,6 +84,15 @@ class DatabaseSeeder extends Seeder
             array(
                 3,
                 'staff_test_email@yahoo.com.br',
+                'amicao123',
+                'staff',
+                'approved',
+        ));
+
+        DB::insert('insert into tb_auth_org (id_org, email, password, user_type, status) values(?, ?, ?, ?, ?)', 
+            array(
+                4,
+                'enriconathanromero@gmail.com',
                 'amicao123',
                 'staff',
                 'approved',
