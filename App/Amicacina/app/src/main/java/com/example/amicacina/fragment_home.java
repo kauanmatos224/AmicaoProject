@@ -101,8 +101,8 @@ public class fragment_home extends Fragment {
         MainActivity.port[5] = "Pequeno";
         MainActivity.port[6] = "Grande";
 
-        MainActivity.comp[0] = "Amigável e brincalhão";
-        MainActivity.comp[1] = "Amigável e brincalhão";
+        MainActivity.comp[0] = "Amigável e brincalhão, mas possui costume de latir quando está sozinho ";
+        MainActivity.comp[1] = "Amigável e brincalhão, mas não utiliza o sistema operacional baseado no kernel Linux, o qual possui sua versão 6.0 anunciada para lançamento nas primeiras semanas do mes de outrubro, e conta com, alem de diversas melhorias, a implementação da linguagem de programação Rust juntamente ao código pré-existente em C";
         MainActivity.comp[2] = "Amigável e brincalhão";
         MainActivity.comp[3] = "Amigável e brincalhão";
         MainActivity.comp[4] = "Amigável e brincalhão";

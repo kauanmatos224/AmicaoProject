@@ -1,7 +1,11 @@
 package com.example.amicacina;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +18,7 @@ public class activity_details extends AppCompatActivity{
     //int id;
     ImageView imgFoto;
     TextView txtId, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
-    Button btnFav;
+    Button btnFav, btnAdotar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +26,19 @@ public class activity_details extends AppCompatActivity{
         setContentView(R.layout.activity_details);
 
         //id = GridAdapter.id;
+
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+        // Define ColorDrawable object and parse color
+        // using parseColor method
+        // with color hash code as its parameter
+        ColorDrawable colorDrawable
+                = new ColorDrawable(Color.parseColor("#e0854e"));
+
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         //txtId  = (TextView) findViewById(R.id.txtId);
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
@@ -55,6 +72,14 @@ public class activity_details extends AppCompatActivity{
                 MainActivity.fav[MainActivity.pos] = true;
                 /*fragment_fav.favId.add(MainActivity.id[MainActivity.pos]);
                 fragment_fav.totalFav = fragment_fav.totalFav++;*/
+            }
+        });
+
+        findViewById(R.id.btnAdotar).setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
+                startActivity(new Intent(activity_details.this, activity_info.class));
             }
         });
 
