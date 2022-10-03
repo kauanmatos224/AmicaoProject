@@ -165,8 +165,8 @@ Route::get('/application_retrieve/pets/inspect/{id}', [PetsController::class, 'i
 Route::get('/application_retrieve/pets/dump', [PetsController::class, 'listPets_app_dump']);
 Route::get('/application_retrieve/pets/inspect/dump/{id}', [PetsController::class, 'inspectPet_app_dump']);
 
-
-
+Route::get('/application_send/dump_requests', [PetsController::class, 'dumpPOST_body']);
+Route::get('/application_send/send_request', [PetsController::class, 'registerRequest']);
 
 
 

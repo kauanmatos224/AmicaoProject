@@ -45,6 +45,7 @@
                                 <td>Raca: <?= $pet->raca ?></td>
                                 <td>Porte: <?= $pet->porte ?></td>
                                 <td>Status: <?= $pet->status ?></td>
+                                <td>ID: <?= $pet->id ?></td>
                             </tr>
                                 <td><a id="btnalt" href="/institucional/pets/alterar/<?= $pet->id?>" class="btn btn-warning">Alterar</a></td>
                                     <input type="hidden" name="_token" value="{{{ csrf_token() }}}">

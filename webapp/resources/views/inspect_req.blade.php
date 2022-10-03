@@ -25,6 +25,8 @@
 
         Observações: <?= $data->obs ?>
 
+        Id do Pet: <?= $data->id_pet ?>
+
         <?php 
         
         $frm_req_change = false;

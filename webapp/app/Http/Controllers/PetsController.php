@@ -594,15 +594,37 @@ class PetsController extends Controller
     }
 
 
-
-
-
-
-
-
-
-
     //Operations to app (ajax) and webserver requests:
+
+    public function requestRegister(Request $request){
+        $nome = $request->post('nome');
+        $email = $request->post('email');
+        $datetime_timestamp = $request->post('datetime');
+        $request_type = $request->post('request_type');
+        $phone = $request->post('phone');
+        $pet_id = $request->post('pet_id');
+        $obs = $request->post('req_obs');
+
+        $status='not_seen';
+
+        $insert = DB::insert('insert into tb_reqs(nome, email, phone, status, date, req_type, id_pet, obs) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+            $nome, $email, $phone, $status, $datetime_timestamp, $request_type, $pet_id, $obs
+        ));
+
+        if($insert){
+            $response = "{\"op_status\":\"sucess\"}";
+            return json_encode($response);
+        }
+
+        $response = "{\"op_status\":\"error\"}";
+        return json_encode($response);
+
+    }
+
+
+
+
+
     public function listPets_app(){
 
         $pets = DB::select('select * from tb_pets');
@@ -634,6 +656,14 @@ class PetsController extends Controller
 
         dd($pet);
         
+    }
+
+    public function dumpPOST_body(){
+        dd("Dump de corpo da requisição POST para envio de agendamentos dos usuário para a aplicação pela API de link: /application_send/send_request"."\n".
+            "Parametros de corpo:"."\n"."[nome]"."\n"."[email]"."\n"."[datetime]"."\n"."[request_type]"."\n"."[phone]"
+            ."\n"."[pet_id]"."\n"."[req_obs]"."\n"."***Ignorar as quebras de linha \"\\n\"");
+
+
     }
 
     

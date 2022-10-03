@@ -64,6 +64,7 @@
                         ?></td> 
                     <td>Agendamento para: <?= date('d/m/Y H:i:s', $data->date) ?></td>
                     <td><a href="/institucional/requisicoes/inspec/<?= $data->id ?>">ver mais</a>
+                    <td>ID do Pet: <?= $data->id_pet ?> </td>
 
                 </tr>
                 <?php endforeach ?>
