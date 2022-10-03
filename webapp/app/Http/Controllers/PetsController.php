@@ -13,6 +13,8 @@ use VictorRayan\DropboxRayanVrsrb\Dropbox_FileDeletion;
 use Illuminate\Support\Facades\Storage;
 use VictorRayan\DropboxRayanVrsrb\Dropbox_AccessFile;
 use App\Http\Controllers\UserAuthController;
+use DateTime;
+use Mail;
 
 class PetsController extends Controller
 {
@@ -92,13 +94,14 @@ class PetsController extends Controller
                             
                     
                             if($foto){
-                    
+
+                                $delete = DB::delete('delete from tb_reqs where id_pet=?', array($id));
                                 $delete = DB::delete('delete from tb_pets where id=?', array($id));
             
                                 $this->info = "";
                                 if($delete){
             
-                                    if(!$foto[0]->img_path == "no-photo.png"){
+                                    if(!$foto[0]->img_path == "/no-photo.png"){
                                         if((new Dropbox_FileDeletion)->delete($foto[0]->img_path)){
                                             $this->info="deleted_pet";
                                         }
@@ -360,7 +363,16 @@ class PetsController extends Controller
     public function getView_requisicoes(){
         if((new UserAuthController)->checkSession()){
             if(session('user_type')=='inst'){
-                return view('requisicoes')->with('user_type', session('user_type'));
+                
+                $data = DB::select('select * from tb_reqs');
+                if($data){
+                    return view('requisicoes')->with('data', $data);
+                }
+                else {
+                    session(['request_info' => 'no_requests']);
+                    return view('requisicoes');
+                }
+                
             }
             else{
                 return view('error_404');
@@ -406,6 +418,154 @@ class PetsController extends Controller
         }
 
     }
+
+    public function getView_inspectRequest(Request $request){
+        $id = $request->route('id');
+
+        $data = DB::select('select * from tb_reqs where id=?', array($id));
+
+        if($data){
+            return view('inspect_req')->with('data', $data[0]);
+        }
+
+        return view('error_404');
+
+    }
+
+    public function reqAction(Request $request){
+        $id = $request->post('_id');
+        $action = $request->post('op_type');
+
+
+        if($id!=null && $action!=null && ($action=='change' || $action=='repprove' || $action=='approve')){
+            if($action=='approve'){
+                $approve = DB::update('update tb_reqs set status=? where id=?', array('acceptted', $id));
+                if($approve){
+                    $data = DB::select('select email, date from tb_reqs where id=?', array($id));
+                    (new PetsController)->sendMail($data[0]->email, 'approved_req','',date('d/m/Y H:i:s', $data[0]->date));
+                    session(['request_info'=>'approved']);
+                    return redirect('/institucional/requisicoes');
+                }
+            }else{
+                $datetime = DB::select('select date from tb_reqs where id=?', array($id));
+                return view('collect_req_justify')->with('id', $id)->with('op_type', $action)->with('datetime', $datetime[0]->date);
+            }
+        }
+
+        return view('error_404');
+
+    }
+
+    public function doAction(Request $request){
+        $id = $request->post('_id');
+        $action = $request->post('op_type');
+        $date_status = $request->post('txtDate_info_obj');
+        $justify = $request->post('txtJustify');
+        $datetimestamp = $request->post('txtTimestamp');
+        $datetime = $request->post('txtDatetime');
+        $should_delete = $request->post('txtShouldDelete');
+        $validate_date = date('d/m/Y H:i:s', strtotime($datetime));
+    
+        if($justify!=null && $justify!=""){
+
+            $data = DB::select('select * from tb_reqs where id=?', array($id));
+            if($action=='change'){
+                if($date_status=='changed'){
+                    if($validate_date=='01/01/1970 00:00:00'){
+                        return view('collect_req_justify')->with('info', 'wrong_date')->with('op_type', $action)
+                        ->with('datetime', $datetimestamp)->with('id', $id);
+                    }else{
+                        $date_to_database = strtotime($datetime);
+                        $update = DB::update('update tb_reqs set status=?, date=? where id=?', array('acceptted', $date_to_database, $id));
+
+                        if($update){
+                            (new PetsController)->sendMail($data[0]->email, 'changed_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
+                            session(['request_info' => 'changed']);
+                            return redirect('/institucional/requisicoes');
+                        }
+                    }
+                }
+                else if($date_status=='resetted'){
+                    return view('collect_req_justify')->with('info', 'wrong_none_date_set')->with('op_type', $action)
+                    ->with('datetime', $datetimestamp)->with('id', $id);
+                }else{
+                    return view('error_404');
+                }
+                
+                
+            }
+            else if($action=='repprove'){
+                if($should_delete=='yes'){
+                    $delete = DB::delete('delete from tb_reqs where id=?', array($id));
+                    if($delete){
+                        (new PetsController)->sendMail($data[0]->email, 'deleted_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
+                        session(['request_info'=>'deleted']);
+                        return redirect('/institucional/requisicoes');
+                    }
+                }else if($should_delete!='yes'){
+                    $update = DB::update('update tb_reqs set status=? where id=?', array('refused', $id));
+                    if($update){
+                        (new PetsController)->sendMail($data[0]->email, 'refused_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
+                        session(['request_info'=>'denied']);
+                        return redirect('/institucional/requisicoes');
+                    }
+                }
+                
+            }       
+
+        }else{
+            return view('collect_req_justify')->with('info', 'wrong_justify')->with('op_type', $action)
+            ->with('datetime', $datetimestamp)->with('id', $id);
+        }
+
+        return view('error_404');
+    }
+
+    public function sendMail($send_to, $subject, $justify, $req_time){
+        
+        $msg = "";
+        
+        if($subject=='approved_req'){
+            $subject = "Agendamento aprovado.";
+            $msg = "<p>Seu agendamento realizado para $req_time, foi aprovado pela instituição.
+
+
+            Em caso de cancelamento ou alteração, entre em contato por este e-mail ou por telefone. </p>";
+        }
+        else if($subject=="refused_req"){
+            $subject = "Agendamento recusado.";
+            $msg = "<p>Seu agendamento realizado para $req_time, foi reprovado pela instituição.
+            Pelo seguinte motivo: \" $justify \"
+            
+            Em caso de solicitação de revisão ou alteração do agendamento, entre em contato por este e-mail ou por telefone.</p>";
+        }
+        else if($subject=="deleted_req"){
+            $subject = "Agendamento recusado e excluído.";
+            $msg = "<p>Seu agendamento realizado para $req_time, foi excluído e reprovado pela instituição.
+            Pelo seguinte motivo: \" $justify \"
+            
+            Em caso de solicitação de revisão ou alteração do agendamento, entre em contato por este e-mail ou por telefone.</p>";
+        }
+        else if($subject=='changed_req'){
+            $subject = "Agendamento alterado e aprovado.";
+            $msg = "<p>Seu agendamento realizado para $req_time, foi aprovado, porém alterado pela instituição.
+            Com o seguinte motivo: \" $justify \"
+            
+            Em caso de solicitação de revisão ou alteração do agendamento, entre em contato por este e-mail ou por telefone.</p>";
+        }
+
+        Mail::send('mail.default',
+            ['msg' => $msg],
+            function($message) use ($send_to, $subject) {
+                $message->to(array($send_to))
+                ->subject($subject);
+            }
+        );
+
+    }
+
+
+
 
 
 

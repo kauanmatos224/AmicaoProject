@@ -54,6 +54,16 @@ Route::get('/institucional/pets', [PetsController::class, 'listPets']);
 
 Route::get('/institucional/requisicoes', [PetsController::class, 'getView_requisicoes']);
 
+Route::get('/institucional/requisicoes/inspec/{id}', [PetsController::class, 'getView_inspectRequest']);
+
+Route::post('/institucional/requisicoes/action', [PetsController::class, 'reqAction']);
+
+Route::post('/institucional/requisicoes/doAction', [PetsController::class, 'doAction']);
+
+
+
+
+
 Route::get('/institucional/pets/alterar/{id}', [PetsController::class, 'inspectPet']);
 
 Route::get('/institucional/pets/excluir/{csrf_token}/{pet_id}',[PetsController::class, 'deletePet']);

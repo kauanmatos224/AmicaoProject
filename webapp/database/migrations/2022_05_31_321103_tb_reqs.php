@@ -23,15 +23,12 @@ class TbReqs extends Migration
             //
 
             $table->string('nome');
-            $table->integer('doc_num');
             $table->string('phone');
             $table->string('email');
-            $table->string('endereco');
-            $table->string('cep');
-            $table->string('country');
             $table->string('obs');
             $table->string('status');
             $table->string('req_type');
+            $table->integer('date');
         });
     }
 

@@ -12,68 +12,63 @@
                     echo '<p>Ainda não há requisições de usuários.</p>';
                     break;
                 case 'changed':
-                    echo '<p>Requisição alterada com sucesso.';
+                    echo '<p>Requisição alterada com sucesso.</p>';
                     break;
                 case 'denied':
-                    echo '<p>Requisição negada com sucesso.</p>';
+                    echo '<p>Requisição reprovada com sucesso.</p>';
                     break;
                 case 'approved':
-                    echo '<p>A requisição foi aprovada com sucesso./p>';
+                    echo '<p>A requisição foi aprovada com sucesso.</p>';
                     break;
+                case 'deleted':
+                    echo '<p>Requisição reprovada e deletada com sucesso.</p>';
             }
+            session(['request_info' => '']);
         }
 
     ?>
 
-    <?php isset($data):?>
+    <?php if(isset($data)):?>
+        <table>
+
         <?php foreach($data as $data):?>
-            <table>
-
-
-            $table->string('nome');
-            $table->integer('doc_num');
-            $table->string('phone');
-            $table->string('email');
-            $table->string('endereco');
-            $table->string('cep');
-            $table->string('country');
-            $table->string('obs');
-            $table->string('status');
-            $table->string('req_type');
-        });
-
-
-
-
-
-
                 <tr>
                     <td>Requisição de <?php
-                    switch($data->req_type){
-                        case 'em_adocao':
-                            echo 'Adoção';
-                        break;
-                        case 'apadrinhado':
-                            echo 'Apadrinhado';
-                            break;
-                        case 'dispoinvel':
-                            echo 'Disponível';
-                            break;
+                    if($data->req_type=='adocao'){
+                            echo 'adoção';
+                    }else if($data->req_type=='apadrinhamento'){
+                            echo 'apadrinhamento';
                     }
-                    <td>Nome: <?= $data->nome ?></td>
-                    <td>Documento de Identificação: <?= $data->doc_num ?></td>
-                    <td>Telefone: <?php $data->phone ?></td>
-                    <td>E-mail: <?php $data->email ?></td>
-                    <td>Status da requisição: <?php $data->status ?><td> 
-                    <td>Data agendada: <?php $data->date ?></td>
+                    else if($data->req_type=='visita'){
+                            echo 'visita';
+                    }
                     
+                    
+                    ?>
+                    <td>Nome: <?= $data->nome ?></td>
+                    <td>Telefone: <?= $data->phone ?></td>
+                    <td>E-mail: <?= $data->email ?></td>
+                    <td>Status da requisição: <?php
+                        
+                        
+                        if($data->status=='not_seen'){
+                            echo 'não avaliada';
+                        }
+                        else if($data->status=='refused'){
+                            echo 'negada';
+                        }
+                        else if($data->status=='acceptted'){
+                            echo 'aceita';
+                        }
+
+                        ?></td> 
+                    <td>Agendamento para: <?= date('d/m/Y H:i:s', $data->date) ?></td>
+                    <td><a href="/institucional/requisicoes/inspec/<?= $data->id ?>">ver mais</a>
 
                 </tr>
+                <?php endforeach ?>
             </table>
-
-
-
-
+            <?php endif ?>
     </body>
 
 </html>
