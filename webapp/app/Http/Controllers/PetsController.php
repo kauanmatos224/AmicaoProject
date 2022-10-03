@@ -422,10 +422,20 @@ class PetsController extends Controller
     public function getView_inspectRequest(Request $request){
         $id = $request->route('id');
 
-        $data = DB::select('select * from tb_reqs where id=?', array($id));
 
-        if($data){
-            return view('inspect_req')->with('data', $data[0]);
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='inst'){
+
+                $data = DB::select('select * from tb_reqs where id=?', array($id));
+
+                if($data){
+                    return view('inspect_req')->with('data', $data[0]);
+                }
+            }
+        }
+        else{
+            session(['required_route'=>'getView_requisicoes']);
+            return view('login');
         }
 
         return view('error_404');
@@ -436,21 +446,30 @@ class PetsController extends Controller
         $id = $request->post('_id');
         $action = $request->post('op_type');
 
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='inst'){
 
-        if($id!=null && $action!=null && ($action=='change' || $action=='repprove' || $action=='approve')){
-            if($action=='approve'){
-                $approve = DB::update('update tb_reqs set status=? where id=?', array('acceptted', $id));
-                if($approve){
-                    $data = DB::select('select email, date from tb_reqs where id=?', array($id));
-                    (new PetsController)->sendMail($data[0]->email, 'approved_req','',date('d/m/Y H:i:s', $data[0]->date));
-                    session(['request_info'=>'approved']);
-                    return redirect('/institucional/requisicoes');
+                if($id!=null && $action!=null && ($action=='change' || $action=='repprove' || $action=='approve')){
+                    if($action=='approve'){
+                        $data = DB::select('select req_type, email, date from tb_reqs where id=?', array($id));
+                        $approve = DB::update('update tb_reqs set status=? where (id=? and status=?) or (id=? and status=?)', array('acceptted', $id, 'not_seen', $id, 'refused'));
+                        if($approve){
+                            (new PetsController)->sendMail($data[0]->email, 'approved_req','',date('d/m/Y H:i:s', $data[0]->date));
+                            session(['request_info'=>'approved']);
+                            return redirect('/institucional/requisicoes');
+                        }
+                    }else{
+                        $datetime = DB::select('select date from tb_reqs where id=?', array($id));
+                        return view('collect_req_justify')->with('id', $id)->with('op_type', $action)->with('datetime', $datetime[0]->date);
+                    }
                 }
-            }else{
-                $datetime = DB::select('select date from tb_reqs where id=?', array($id));
-                return view('collect_req_justify')->with('id', $id)->with('op_type', $action)->with('datetime', $datetime[0]->date);
             }
         }
+        else{
+            session(['required_route'=>'getView_requisicoes']);
+            return view('login');
+        }
+
 
         return view('error_404');
 
@@ -465,58 +484,68 @@ class PetsController extends Controller
         $datetime = $request->post('txtDatetime');
         $should_delete = $request->post('txtShouldDelete');
         $validate_date = date('d/m/Y H:i:s', strtotime($datetime));
+
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='inst'){
     
-        if($justify!=null && $justify!=""){
+                if($justify!=null && $justify!=""){
 
-            $data = DB::select('select * from tb_reqs where id=?', array($id));
-            if($action=='change'){
-                if($date_status=='changed'){
-                    if($validate_date=='01/01/1970 00:00:00'){
-                        return view('collect_req_justify')->with('info', 'wrong_date')->with('op_type', $action)
-                        ->with('datetime', $datetimestamp)->with('id', $id);
-                    }else{
-                        $date_to_database = strtotime($datetime);
-                        $update = DB::update('update tb_reqs set status=?, date=? where id=?', array('acceptted', $date_to_database, $id));
+                    $data = DB::select('select * from tb_reqs where id=?', array($id));
+                    if($action=='change'){
+                        if($date_status=='changed'){
+                            if($validate_date=='01/01/1970 00:00:00'){
+                                return view('collect_req_justify')->with('info', 'wrong_date')->with('op_type', $action)
+                                ->with('datetime', $datetimestamp)->with('id', $id);
+                            }else{
+                                $date_to_database = strtotime($datetime);
+                                $update = DB::update('update tb_reqs set status=?, date=? where (id=? and status=?) or (id=? and status=?)', array('acceptted', $date_to_database, $id, 'refused', $id, 'not_seen'));
 
-                        if($update){
-                            (new PetsController)->sendMail($data[0]->email, 'changed_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
-                            session(['request_info' => 'changed']);
-                            return redirect('/institucional/requisicoes');
+                                if($update){
+                                    (new PetsController)->sendMail($data[0]->email, 'changed_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
+                                    session(['request_info' => 'changed']);
+                                    return redirect('/institucional/requisicoes');
+                                }
+                            }
                         }
+                        else if($date_status=='resetted'){
+                            return view('collect_req_justify')->with('info', 'wrong_none_date_set')->with('op_type', $action)
+                            ->with('datetime', $datetimestamp)->with('id', $id);
+                        }else{
+                            return view('error_404');
+                        }
+                        
+                        
                     }
-                }
-                else if($date_status=='resetted'){
-                    return view('collect_req_justify')->with('info', 'wrong_none_date_set')->with('op_type', $action)
-                    ->with('datetime', $datetimestamp)->with('id', $id);
-                }else{
-                    return view('error_404');
-                }
-                
-                
-            }
-            else if($action=='repprove'){
-                if($should_delete=='yes'){
-                    $delete = DB::delete('delete from tb_reqs where id=?', array($id));
-                    if($delete){
-                        (new PetsController)->sendMail($data[0]->email, 'deleted_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
-                        session(['request_info'=>'deleted']);
-                        return redirect('/institucional/requisicoes');
-                    }
-                }else if($should_delete!='yes'){
-                    $update = DB::update('update tb_reqs set status=? where id=?', array('refused', $id));
-                    if($update){
-                        (new PetsController)->sendMail($data[0]->email, 'refused_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
-                        session(['request_info'=>'denied']);
-                        return redirect('/institucional/requisicoes');
-                    }
-                }
-                
-            }       
+                    else if($action=='repprove'){
+                        if($should_delete=='yes'){
+                            $delete = DB::delete('delete from tb_reqs where id=?', array($id));
+                            if($delete){
+                                (new PetsController)->sendMail($data[0]->email, 'deleted_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
+                                session(['request_info'=>'deleted']);
+                                return redirect('/institucional/requisicoes');
+                            }
+                        }else if($should_delete!='yes'){
+                            $update = DB::update('update tb_reqs set status=? where (id=? and status!=?)', array('refused', $id, 'refused'));
+                            if($update){
+                                (new PetsController)->sendMail($data[0]->email, 'refused_req', $justify, date('d/m/Y H:i:s', $data[0]->date));
+                                session(['request_info'=>'denied']);
+                                return redirect('/institucional/requisicoes');
+                            }
+                        }
+                        
+                    }       
 
-        }else{
-            return view('collect_req_justify')->with('info', 'wrong_justify')->with('op_type', $action)
-            ->with('datetime', $datetimestamp)->with('id', $id);
+                }else{
+                    return view('collect_req_justify')->with('info', 'wrong_justify')->with('op_type', $action)
+                    ->with('datetime', $datetimestamp)->with('id', $id);
+                }
+            }
         }
+        else{
+            session(['required_route'=>'getView_requisicoes']);
+            return view('login');
+        }
+
 
         return view('error_404');
     }
