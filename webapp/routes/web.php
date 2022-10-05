@@ -99,8 +99,9 @@ Route::get('/institucional/rec-password/reset/{token}', [UserAuthController::cla
 Route::post('/institucional/rec-password/set-new', [UserAuthController::class, 'setNewPassword']);
 Route::get('/account/mail_check/{token}', [UserAuthController::class, 'verifyLinkEmailConfirmation']);
 Route::post('/account/resend_mail_check', [UserAuthController::class, 'resendMailVerification']);
-Route::get('/institucional/myaccount/', [UserAuthController::class, 'getView_myAccount']);
 
+
+Route::get('/institucional/myaccount/', [UserAuthController::class, 'getView_myAccount']);
 Route::get('/institucional/change-password/', [UserAuthController::class, 'getViewNewPassword_logged']);
 Route::post('/institucional/change-password/set-new', [UserAuthController::class, 'setNewPassword_logged']);
 
@@ -168,9 +169,11 @@ Route::get('/application_retrieve/pets/inspect/{id}', [PetsController::class, 'i
 //Dump returns
 Route::get('/application_retrieve/pets/dump', [PetsController::class, 'listPets_app_dump']);
 Route::get('/application_retrieve/pets/inspect/dump/{id}', [PetsController::class, 'inspectPet_app_dump']);
+Route::get('/application_retrieve/pets/count/dump', [PetsController::class, 'count_pets_data_dump']);
 
 Route::get('/application_send/dump_requests', [PetsController::class, 'dumpPOST_body']);
 Route::get('/application_send/send_request', [PetsController::class, 'registerRequest']);
+Route::get('/application_retrieve/pets/count/', [PetsController::class, 'count_pets_data']);
 
 
 

@@ -614,9 +614,11 @@ class PetsController extends Controller
         if($insert){
             $response = "{\"op_status\":\"sucess\"}";
             return json_encode($response);
+        }else{
+            $response = "{\"op_status\":\"error\"}";
         }
 
-        $response = "{\"op_status\":\"error\"}";
+        
         return json_encode($response);
 
     }
@@ -636,7 +638,7 @@ class PetsController extends Controller
 
     }
 
-    
+
     public function inspectPet_app(Request $request){
         $id=$request->route('id');
         $pet = DB::select('select * from tb_pets where id=?', array($id));
@@ -651,15 +653,21 @@ class PetsController extends Controller
     public function listPets_app_dump(){
 
         $pets = DB::select('select * from tb_pets');
-        
-        dd($pets);
+
+        for($i=0;$i<count($pets);$i++){
+            $img_path = $pets[$i]->img_path;
+            $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
+            $pets[$i]->img_path=$img_link;
+        }
+
+        dd(json_encode($pets));
     }
 
     public function inspectPet_app_dump(Request $request){
         $id=$request->route('id');
         $pet = DB::select('select * from tb_pets where id=?', array($id));
 
-        dd($pet);
+        dd(json_encode($pet));
         
     }
 
@@ -668,6 +676,16 @@ class PetsController extends Controller
             "Parametros de corpo:"."\n"."[nome]"."\n"."[email]"."\n"."[datetime]"."\n"."[request_type]"."\n"."[phone]"
             ."\n"."[pet_id]"."\n"."[req_obs]"."\n"."***Ignorar as quebras de linha \"\\n\"");
 
+    }
+
+    public function count_pets_data(){
+        $select = DB::select('select count(*) from tb_pets');
+        return json_encode($select[0]);
+    }
+
+    public function count_pets_data_dump(){
+        $select = DB::select('select count(*) from tb_pets');
+        dd(json_encode($select[0]));
 
     }
 
