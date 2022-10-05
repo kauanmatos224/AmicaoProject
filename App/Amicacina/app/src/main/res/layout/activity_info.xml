@@ -22,8 +22,11 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
         android:text="Para realizar esse processo, preencha as informações abaixo e clique em Enviar"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
@@ -146,9 +149,7 @@
         app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
         android:ems="13"
         android:inputType="textMultiLine"
-
-        tools:layout_editor_absoluteX="104dp"
-        tools:layout_editor_absoluteY="328dp" />
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
