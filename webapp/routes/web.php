@@ -99,6 +99,10 @@ Route::get('/institucional/rec-password/reset/{token}', [UserAuthController::cla
 Route::post('/institucional/rec-password/set-new', [UserAuthController::class, 'setNewPassword']);
 Route::get('/account/mail_check/{token}', [UserAuthController::class, 'verifyLinkEmailConfirmation']);
 Route::post('/account/resend_mail_check', [UserAuthController::class, 'resendMailVerification']);
+Route::get('/institucional/myaccount/', [UserAuthController::class, 'getView_myAccount']);
+
+Route::get('/institucional/change-password/', [UserAuthController::class, 'getViewNewPassword_logged']);
+Route::post('/institucional/change-password/set-new', [UserAuthController::class, 'setNewPassword_logged']);
 
 //STAFF ROUTES
 

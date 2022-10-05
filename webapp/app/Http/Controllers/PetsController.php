@@ -622,16 +622,21 @@ class PetsController extends Controller
     }
 
 
-
-
-
     public function listPets_app(){
-
+    
         $pets = DB::select('select * from tb_pets');
+
+        for($i=0;$i<count($pets);$i++){
+            $img_path = $pets[$i]->img_path;
+            $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
+            $pets[$i]->img_path=$img_link;
+        }
         
         return json_encode($pets);
+
     }
 
+    
     public function inspectPet_app(Request $request){
         $id=$request->route('id');
         $pet = DB::select('select * from tb_pets where id=?', array($id));

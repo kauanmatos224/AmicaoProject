@@ -432,9 +432,36 @@ class UserAuthController extends Controller
     }
 
 
+    public function getViewNewPassword_logged(){
+        $id = session('user_id');
+        $data = DB::select('select email from tb_auth_org where id=?', array($id));
 
+        if($data){
+            $email = $data[0]->email;
+            return view('change-password');
+        }
 
+        return view('error_404');
+    }
+    public function setNewPassword_logged(Request $request){
+        $password = $request->post('txtPassword');
+        $password_conf = $request->post('txtPasswordConfirmation');
+        $email = $request->post('_email');
+        $id = session('user_id');
 
+        if($password == $password_conf){
+            $update_password = DB::update('update tb_auth_org set password=? where id=? and email=?', array($password, $id, $email));
+            if($update_password){
+                session(['user_account'=>'changed_password']);
+                return redirect('/institucional/myaccount/');
+            }
+        }
+        else{
+            return redirect('/institucional/change-password/');
+        }
+     
+        return view('error_404');
+    }
 
 
     public function sendMail($send_to, $subject, $link){
