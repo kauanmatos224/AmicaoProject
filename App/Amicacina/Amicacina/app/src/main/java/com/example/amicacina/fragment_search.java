@@ -7,9 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 public class fragment_search extends Fragment {
 
+    Spinner spnPort, spnGen;
     public fragment_search() {
         // Required empty public constructor
     }
@@ -17,7 +19,14 @@ public class fragment_search extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_search, container, false);
+        spnPort = (Spinner)view.findViewById(R.id.spnPorte);
+        String text = spnPort.getSelectedItem().toString();
+
+        spnGen = (Spinner)view.findViewById(R.id.spnGenero);
+        String text2 = spnGen.getSelectedItem().toString();
+
+        return view;
     }
 }
