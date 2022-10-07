@@ -24,6 +24,13 @@
 			</nav>
 		</header>
 		<div id = "div1">
+
+		<?php if(isset($errors)){
+			foreach($errors->all() as $error){
+				echo "<p>$error</p>";
+			}
+		} ?>
+
         <form id="frmCad" method="post" action="/institucional/pets/cadastrar/add" enctype="multipart/form-data">
             <input type="hidden" name="_token" value="{{{ csrf_token() }}}">
 			<span class="lFoto">Foto:</span><br><div id="divft"><input type="file" id="inpFoto" name="inpFoto" accept="image/*" ></div><br>
@@ -61,5 +68,7 @@
 			<input type="submit" class="btn btn-warning" id="cadastrar" value="Cadastrar">
             </form>
         </div>
+
+		
 	</body>
 </html>
