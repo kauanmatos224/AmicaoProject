@@ -42,7 +42,7 @@
     <br>
 
 
-    <h2>Alteraçãod de E-mail:</h2>
+    <h2>Alteração de E-mail:</h2>
     <form method="post" action="/institucional/change-mail/set-new">
         <input type="hidden" name="_token" value="{{{csrf_token()}}}">
         Email: <input type="email" name="txtEmail">
