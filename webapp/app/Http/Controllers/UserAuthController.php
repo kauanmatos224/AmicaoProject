@@ -397,10 +397,29 @@ class UserAuthController extends Controller
         $token = $request->route('token');
         $verify = DB::select('select * from tb_email_verify where tmp_token=?', array($token));
         if($verify){
+            
+            if($verify[0]->expiration_at > $timestamp){
+                DB::update('update tb_auth_org set email_status=?, email=? where id_org=?', 
+                array('verified', $verify[0]->new_email, $verify[0]->id_org));
+
+                DB::delete('delete from tb_email_verify where tmp_token=?', array($token));
+
+                return view('info_inst')->with('info', 'verified_email');
+            }
+        }
+
+        return view('error_404');
+    }
+
+    public function verifyLinkEmailConfirmation_changing(){
+        $timestamp = Carbon::now()->timestamp;
+        $token = $request->route('token');
+        $verify = DB::select('select * from tb_email_verify where tmp_token=?', array($token));
+        if($verify){
 
             if($verify[0]->expiration_at > $timestamp){
-                DB::update('update tb_auth_org set email_status=? where id_org=?', 
-                array('verified', $verify[0]->id_org));
+                DB::update('update tb_auth_org set email_status=?, email=? where id_org=?', 
+                array('verified', $verify[0]->new_email, $verify[0]->id_org));
 
                 DB::delete('delete from tb_email_verify where tmp_token=?', array($token));
 
@@ -431,35 +450,105 @@ class UserAuthController extends Controller
 
     }
 
-
-    public function getViewNewPassword_logged(){
+    public function getView_myAccount(){
         $id = session('user_id');
-        $data = DB::select('select email from tb_auth_org where id=?', array($id));
 
-        if($data){
-            $email = $data[0]->email;
-            return view('change-password');
+        if((new UserAuthController)->checkSession()){
+
+            $checkOwner = DB::select('select * from tb_auth_org where id=?', array($id));
+            if($checkOwner){
+                return view('myaccount');   
+            }
         }
 
         return view('error_404');
+        
     }
+
     public function setNewPassword_logged(Request $request){
         $password = $request->post('txtPassword');
         $password_conf = $request->post('txtPasswordConfirmation');
-        $email = $request->post('_email');
         $id = session('user_id');
+        
+        if((new UserAuthController)->checkSession()){
 
-        if($password == $password_conf){
-            $update_password = DB::update('update tb_auth_org set password=? where id=? and email=?', array($password, $id, $email));
-            if($update_password){
-                session(['user_account'=>'changed_password']);
+            if($password == $password_conf){
+                $update_password = DB::update('update tb_auth_org set password=? where id=?', array($password, $id));
+                if($update_password){
+                    session(['user_account'=>'changed_password']);
+                    return redirect('/institucional/myaccount/');
+                }
+            }
+            else{
+                session(['user_account'=>'wrong_conf_password']);
                 return redirect('/institucional/myaccount/');
             }
         }
-        else{
-            return redirect('/institucional/change-password/');
+        return view('error_404');
+    }
+
+    public function setNewEmail(Request $request){
+        $email = $request->post('txtEmail');
+        $id = session('user_id');
+        if((new UserAuthController)->checkSession()){
+
+            $checkEmail = DB::select('select * from tb_auth_org where email=?', array($email));
+            if($checkEmail){
+
+                if($checkEmail[0]->id == $id){
+                    session(['user_account'=>'used_mail_by_user']);
+                    return redirect('/institucional/myaccount/');
+                }
+
+                session(['user_account'=>'used_mail_by_other']);
+                return redirect('/institucional/myaccount/');
+                
+            }
+            else{
+
+                $inst = DB::select('select * from tb_auth_org where id_org =?', array($id));
+                if($inst){
+
+                    $id_org = $inst[0]->id_org;
+
+                    if($inst){
+                        $server_secret = '30/07/2003';
+                        $timestamp = Carbon::now()->timestamp;
+                        $random = rand(1, 10000);
+                        $token = hash('sha256', $server_secret.$inst[0]->email.$inst[0]->id.$random.$timestamp."email_confirmation");
+                        $expiration = $timestamp+604800;
+                        $allowed_time = $timestamp+14400;
+
+                        
+                        $update = DB::update('update tb_email_verify set tmp_token=?, expiration_at=?, new_email=? where id_org=?', array($token, $timestamp+604800, $email, $id_org));
+                        if(!$update){
+                            DB::insert('insert into tb_email_verify (id_org, tmp_token, expiration_at, new_email) values(?, ?, ?, ?)',
+                            array($id_org, $token, $timestamp+604800, $email));
+                        }
+
+
+                        $check_fisrt_sending = DB::select('select * from tb_email_verify where id_org=?', array($id_org));
+                        
+                        if($check_fisrt_sending[0]->mails_sent>3){
+                            DB::update('update tb_auth_org set next_mail_sending=? where id_org=?', array($allowed_time, $id_org));
+                        }
+
+                        DB::update('update tb_email_verify set mails_sent=? where id_org=?', array($check_fisrt_sending[0]->mails_sent+1, $id_org));
+
+                        $url = env('APP_URL')."/account/new-mail_check/".$token;
+                        (new UserAuthController)->sendMail($email, "email_verify", $url);
+
+                        session(['user_account'=>'sent_mail_conf_changing']);
+                        return redirect('/institucional/myaccount/');
+
+                    }
+                
+
+                }
+            }
         }
-     
+
+
         return view('error_404');
     }
 

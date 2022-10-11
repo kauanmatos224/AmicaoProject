@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('tmp_token');
             $table->integer('expiration_at');
             $table->integer('mails_sent')->default(1);
+            $table->string('new_email')->nullable();
             
            
         });

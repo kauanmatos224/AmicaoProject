@@ -102,8 +102,9 @@ Route::post('/account/resend_mail_check', [UserAuthController::class, 'resendMai
 
 
 Route::get('/institucional/myaccount/', [UserAuthController::class, 'getView_myAccount']);
-Route::get('/institucional/change-password/', [UserAuthController::class, 'getViewNewPassword_logged']);
 Route::post('/institucional/change-password/set-new', [UserAuthController::class, 'setNewPassword_logged']);
+Route::post('/institucional/change-mail/set-new', [UserAuthController::class, 'setNewEmail']);
+Route::get('/account/new-mail_check/{token}', [UserAuthController::class, 'verifyLinkEmailConfirmation']);
 
 //STAFF ROUTES
 
