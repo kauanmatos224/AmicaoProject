@@ -7,7 +7,7 @@
 			  rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/style/estillopets.css"/>
+		<link rel="stylesheet" href="/style/estiloRP.css"/>
 		<title>Amicão - Nova senha</title>
 	</head>
 
@@ -17,10 +17,10 @@
             <input type="hidden" name="_token" value="{{{csrf_token()}}}">
             <input type="hidden" name="tmp_reset_token" value="<?= $tmp_token ?>">
             Senha:
-            <input type="password" name="txtPassword">
+            <input class="lSenha" type="password" name="txtPassword">
             <br>
             Confirme a senha:
-            <input type="password" name="txtConfPassword">
+            <input class="lConf" type="password" name="txtConfPassword">
             <br>
             <?php 
                 if(isset($error)){

@@ -19,10 +19,10 @@ class StaffController extends Controller
                 //dd($data[1]);
                 if($data!=null){
                     if(!empty(session('info_register_analisys'))){
-                        return view('registration_analisys')->with('data', $data[0])->with('status', $data[1])->with('info', session('info_register_analisys'))->with('user_type', $data[1]);
+                        return view('registration_analisys')->with('data', $data)->with('info', session('info_register_analisys'));
                     }
                     else{
-                        return view('registration_analisys')->with('data', $data[0])->with('status', $data[1])->with('user_type', $data[1]);
+                        return view('registration_analisys')->with('data', $data);
                     }
                     
                 }
@@ -44,19 +44,11 @@ class StaffController extends Controller
 
     public function getRegistrationData(){
         
-        $data = DB::select('select * from tb_org');
- 
-        if($data){
+        $data = DB::select('select * from tb_org inner join tb_auth_org on tb_auth_org.id_org =
+        tb_org.id and tb_auth_org.user_type=?', array('inst'));
 
-            $auth_data = array();
-            
-            for($i=0; $i<count($data); $i++){
-                $id_org = $data[$i]->id;
-                $auth_data[$id_org] = DB::select('select status, user_type from tb_auth_org where id_org=?', array($id_org));
-                
-            }
-            
-            return array($data, $auth_data);
+        if($data){
+            return $data;
         }
         else{
             return null;

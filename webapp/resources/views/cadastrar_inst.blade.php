@@ -3,13 +3,13 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
-			  rel="stylesheet">
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" />
+		<link rel="stylesheet" href="/style/estiloC.css" />
 		<title>Amicão - Cadastro instituição</title>
 	</head>
+
 	<body id = "grid">
 		<header id = cab>
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
@@ -25,42 +25,26 @@
 			</nav>
 		</header>
 
-
-        <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
-            <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            Nome Fantasia:<input type="text" name="txtFantasyName">
-            <br>
-            CNPJ:<input type="text" name="txtCnpj">
-            <br>
-            Endereço:<input type="text" name="txtAddress" placeholder="Rua / Avenida, N°, Cidade - Estado">
-            <br>
-            Complemento (se houver):<input type="text" name="txtComplement">
-            <br>
-            CEP:<input type="text" name="txtCep">
-            <br>
-            País:<input type="text" name="txtCountry">
-            <br>
-            Telefone:<input type="text" name="txtPhone">
-            <br>
-            E-mail:<input type="email" name="txtEmail">
-            <br>
-            Senha:<input type="password" name="txtPassword">
-            <br>
-            Confirmar senha:<input type="password" name="txtConfPassword">
-            <br>
-            <input type="submit" id="btnSend" value="Requisitar Cadastro">
-            
-        </form>
-
-
-
-
-
-
+        <div id="whole-page-without-menu">
+        <div id="div1">
+            <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
+                <input type="hidden" name="_token" value="{{{csrf_token()}}}">
+                <span class="lNomeF">Nome Fantasia:</span><br><input class="nomef" type=text name=txtFantasyName placeholder="Nome Fantasia"><br><br>
+                <span class="lCnpj">CNPJ:</span><br><input class="cnpj" type=text name=txtCnpj placeholder="CNPJ"><br><br>
+                <span class="lEndereco">Endereço:</span><br><input class="endereco" type=text name=txtAddress placeholder="Rua / Avenida, N°, Cidade - Estado"><br><br>
+                <span class="lComplemento">Complemento (se houver):</span><br><input class="complemento" type=text name=txtComplement placeholder="Complemento (se houver)"><br><br>
+                <span class="lCep">CEP:</span><br><input class="cep" type=text name=txtCep placeholder="CEP"><br><br>
+                <span class="lpais">País:</span><br><input class="pais" type=text name=txtCountry placeholder="País"><br><br>
+        </div>
+            <div id="div2">
+                <span class="lTel">Telefone:</span><br><input class="tel" type=text name=txtPhone placeholder="Telefone"><br><br>
+                <span class="lEmail">E-mail:</span><br><input class="email" type=text name=txtEmail placeholder="E-mail"><br><br>
+                <span class="lSenha">Senha:</span><br><input class="senha" type=password name=txtPassword placeholder="Senha"><br><br>
+                <span class="lConSenha">Confirmar senha:</span><br><input class="csenha" type=password name=txtConfPassword placeholder="Confirmar senha"><br><br>
+                <input type="submit" id="btnSend" value="Requisitar Cadastro">
+                <!--<a href="" class="btn btn-outline-warning" id="cadastrar">Cadastrar</a> -->
+            </form>
+        </div>
+        </div>  
     </body>
 </html>

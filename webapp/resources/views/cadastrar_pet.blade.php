@@ -2,14 +2,15 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/style/estilocadastrar.css"/>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-		<title>Amicão - Cadastro pet</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="/style/estiloC.css" />
+		<title>Amicão - Cadastro instituição</title>
 	</head>
-	<body>
+
+	<body id = "grid">
 		<header id = cab>
 			<nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
 				<div class="container-fluid">
@@ -18,8 +19,8 @@
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
-					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button href="https://www.youtube.com/watch?v=rxCs1fGxloI" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
+					<button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>
