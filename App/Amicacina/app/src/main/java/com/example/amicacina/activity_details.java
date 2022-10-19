@@ -12,8 +12,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 public class activity_details extends AppCompatActivity{
     /*String Nome, Raca, Nascimento, Idade, Status, Genero, Porte, Comportamento;
     int Foto;*/
@@ -55,8 +53,7 @@ public class activity_details extends AppCompatActivity{
 
         //btnFav = (Button)findViewById(R.id.btnFav);
 
-        Picasso.get().load(MainActivity.foto[MainActivity.pos]).into(imgFoto);
-        //imgFoto.setImageResource(MainActivity.foto[MainActivity.pos]);
+        imgFoto.setImageResource(MainActivity.foto[MainActivity.pos]);
         txtNome.setText(MainActivity.nome[MainActivity.pos]);
         txtRaca.setText(MainActivity.raca[MainActivity.pos]);
         txtNascimento.setText(MainActivity.nasc[MainActivity.pos]);

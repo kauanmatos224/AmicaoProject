@@ -10,9 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 public class GridAdapter extends ArrayAdapter<GridModel> {
@@ -56,12 +53,7 @@ public class GridAdapter extends ArrayAdapter<GridModel> {
         geneTV.setText(gridModel.getPet_gene());
         portTV.setText(gridModel.getPet_port());
         compTV.setText(gridModel.getPet_comp());
-
-
-        Picasso.get().load(gridModel.getImgid()).into(petIV);
-        //petIV.setImageResource(gridModel.getImgid());
-
-
+        petIV.setImageResource(gridModel.getImgid());
 
 /*
         nameTV.setText(MainActivity.nome[MainActivity.pos]);

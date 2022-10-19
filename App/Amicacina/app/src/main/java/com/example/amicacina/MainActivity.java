@@ -25,19 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public static String[] id = new String[100];
-    public static String[] foto = new String[100];
-    public static String[] nome = new String[100];
-    public static String[] raca = new String[100];
-    public static String[] nasc = new String[100];
-    public static String[] idad = new String[100];
-    public static String[] stat = new String[100];
-    public static String[] gene = new String[100];
-    public static String[] port = new String[100];
-    public static String[] comp = new String[100];
-    public static Boolean[] fav = new Boolean[100];
-
-    public static int qnt_res;
+    public static String[] id = new String[7];
+    public static int[] foto = new int[7];
+    public static String[] nome = new String[7];
+    public static String[] raca = new String[7];
+    public static String[] nasc = new String[7];
+    public static String[] idad = new String[7];
+    public static String[] stat = new String[7];
+    public static String[] gene = new String[7];
+    public static String[] port = new String[7];
+    public static String[] comp = new String[7];
+    public static Boolean[] fav = new Boolean[7];
 
     public static int pos;
 
@@ -46,9 +44,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        for (int i=0; i<fav.length;i++){
-            fav[i]=false;
-        }
+        fav[0] = false;
+        fav[1] = false;
+        fav[2] = false;
+        fav[3] = false;
+        fav[4] = false;
+        fav[5] = false;
+        fav[6] = false;
 
         // Define ActionBar object
         ActionBar actionBar;
