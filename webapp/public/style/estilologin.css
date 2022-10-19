@@ -84,6 +84,7 @@ body{
 	border: 2px solid #6c757d;
 	transition: 0.5s;
 	outline: none;
+    border-radius: 8px;
 }
 .email:focus{
 	border: 2px solid #ffc107;
@@ -92,19 +93,24 @@ body{
 .senha{
 	font-family: sans-serif;
 	height: 35px;
-	width: 50%;
+	width: 100%;
 	border-radius: 3px;
 	border: 2px solid #6c757d;
 	transition: 0.5s;
 	outline: none;
 	resize: none;
+    border-radius: 8px;
 }
 .senha:focus{
 	border: 2px solid #ffc107;
 }
 
 #btnenviar{
+    width: 30%;
   	cursor: pointer;
+    border-radius: 8px;
+    position: relative;
+    left: 240px;
 }
 
 ::-webkit-input-placeholder {
@@ -149,7 +155,9 @@ body{
         left:45%;
     }
     
-    #adm {  display: none;}
+    #adm {
+        display: none;
+    }
     
     #downloadnav{
         padding: 5px 6px;
@@ -193,4 +201,16 @@ body{
     #adm{   right: 6%;}
 
     #downloadnav{   left:96%}
+}
+
+#btnRecSenha {
+    border-radius: 8px;
+    position: relative;
+    left: 150px;
+}
+
+#btnCadastrar {
+    border-radius: 8px;
+    position: relative;
+    left: 250px;
 }

@@ -31,10 +31,11 @@
                     <input type="hidden" name="_token" value="{{{ csrf_token()}}}">
                     <span class="lemail">Email:</span><br><input class="email" type="text" name=txtEmail placeholder="email@domínio.com">
                     <br><br>
-                    <span class="lmsg">Senha:</span><br><input class="senha" type="password" name=txtPassword>
+                    <span class="lmsg">Senha:</span><br><input class="senha" type="password" name=txtPassword placeholder="senha">
                     <br><br>
-                    <a href="/institucional/recuperar-senha" class="btn btn-secondary" id="adm">Recuperar Senha</a>
-                    <a href="/institucional/cadastrar" class="btn btn-secondary" id="adm">Realizar Cadastro</a><br><br>
+                    <a href="/institucional/recuperar-senha" class="btn btn-secondary" id="btnRecSenha">Recuperar Senha</a>
+                    <a href="/institucional/cadastrar" class="btn btn-secondary" id="btnCadastrar">Realizar Cadastro</a>
+					<br><br>
                     <input class="btn btn-warning" id="btnenviar" type="submit" value="Entrar" href="">
                 </form>
             </div>

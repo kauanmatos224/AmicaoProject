@@ -31,6 +31,14 @@ body{
     text-align: center;
 }
 
+#div4 {
+    text-align: center;
+}
+
+#div5 {
+    text-align: center;
+}
+
 #pet{
     width: 150px;
     font-size: x-large;
@@ -43,6 +51,22 @@ body{
     width: 150px;
     font-size: x-large;
     top: 225px;
+    display: inline-block;
+    position: relative;
+}
+
+#logout {
+    width: 150px;
+    font-size: x-large;
+    top: 245px;
+    display: inline-block;
+    position: relative;
+}
+
+#conta {
+    width: 150px;
+    font-size: x-large;
+    top: 265px;
     display: inline-block;
     position: relative;
 }

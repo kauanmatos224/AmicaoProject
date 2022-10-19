@@ -38,10 +38,18 @@
 					<div id="div1" class="ex1">
 						<a href="/institucional/pets" class="btn btn-secondary" id="pet">Pets</a>
 					</div>
-					
+
 					<div id="div2" class="ex2">
 						<a href="/institucional/requisicoes" class="btn btn-secondary" id="req">Requisicoes</a>
-					</div>  
+					</div>
+					
+					<div id="div4" class="ex4">
+						<a href="" class="btn btn-secondary" id="logout">Logout</a>
+					</div>
+
+					<div id="div5" class="ex5">
+						<a href="/institucional/myaccount" class="btn btn-secondary" id="conta">Conta</a>
+					</div>
 
 		<?php endif;
 			endif;
