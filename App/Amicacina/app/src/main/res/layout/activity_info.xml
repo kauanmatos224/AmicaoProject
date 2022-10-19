@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:textColor="@color/white"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
         android:text="Adotar / Apadrinhar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,7 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
         android:paddingStart="15dp"
@@ -38,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:textColor="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Nome:"
         app:layout_constraintEnd_toStartOf="@id/alignment2"
         app:layout_constraintTop_toBottomOf="@+id/textView16" />
@@ -48,7 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="E-mail:"
         android:textColor="@color/white"
         app:layout_constraintEnd_toStartOf="@id/alignment2"
@@ -60,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
         android:textColor="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:text="Telefone:"
         app:layout_constraintEnd_toStartOf="@id/alignment2"
         app:layout_constraintTop_toBottomOf="@+id/txtUemail" />
@@ -69,7 +70,7 @@
         android:id="@+id/txtUnome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:textColor="@color/black"
         android:layout_marginStart="10dp"
@@ -84,7 +85,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:textColor="@color/black"
         android:ems="13"
@@ -98,7 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:background="@color/white"
         android:ems="13"
         android:inputType="textPersonName"
@@ -122,8 +123,9 @@
         android:layout_marginTop="20dp"
         android:text="enviar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtUmensagem" />
+        app:layout_constraintTop_toBottomOf="@id/timeButton" />
 
     <TextView
         android:id="@+id/textView22"
@@ -131,7 +133,7 @@
         android:layout_height="wrap_content"
         android:text="Mensagem:"
         app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toStartOf="@id/alignment2"
         android:textColor="@color/white" />
 
@@ -141,15 +143,63 @@
         android:layout_height="wrap_content"
         android:textColor="@color/black"
         android:background="@color/white"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginStart="10dp"
-        android:maxLines="5"
-        android:lines="5"
         app:layout_constraintStart_toEndOf="@id/textView22"
         app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
         android:ems="13"
         android:inputType="textMultiLine"
         />
 
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Data:"
+        app:layout_constraintTop_toBottomOf="@id/txtUmensagem"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@id/alignment2"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:onClick="openDatePicker"
+        android:text="01 Jan 1990"
+        android:textColor="@color/black"
+        app:backgroundTint="@null"
+        android:layout_marginTop="20dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@id/textView23"
+        app:layout_constraintTop_toBottomOf="@+id/txtUmensagem" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Horário:"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toStartOf="@id/alignment2"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/timeButton"
+        android:onClick="popTimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        app:backgroundTint="@null"
+        android:background="@color/white"
+        android:width="200dp"
+        android:height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintLeft_toRightOf="@id/textView24"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton"
+        app:layout_constraintVertical_bias="0.1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
