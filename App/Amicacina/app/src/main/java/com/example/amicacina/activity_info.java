@@ -89,7 +89,7 @@ public class activity_info extends AppCompatActivity {
 
     }
 
-    private String makeDateString( int month, int day, int year)
+    private String makeDateString( int day, int month, int year)
     {
         return  day +  " " + getMonthFormat(month) + " " + year;
     }
