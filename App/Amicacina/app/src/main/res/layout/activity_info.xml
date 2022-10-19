@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="140dp"
         android:textColor="@color/white"
-        android:layout_marginTop="52dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
         android:text="Adotar / Apadrinhar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,7 +23,7 @@
         android:id="@+id/textView16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         android:textAlignment="center"
         android:paddingStart="15dp"
@@ -119,9 +120,10 @@
         android:id="@+id/btnEnviar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="188dp"
         android:text="enviar"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtUmensagem" />
 
@@ -143,13 +145,42 @@
         android:background="@color/white"
         android:layout_marginTop="30dp"
         android:layout_marginStart="10dp"
-        android:maxLines="5"
-        android:lines="5"
         app:layout_constraintStart_toEndOf="@id/textView22"
         app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
         android:ems="13"
         android:inputType="textMultiLine"
         />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        app:backgroundTint="@null"
+        android:onClick="openDatePicker"
+        android:text="Clique aqui para selecionar a data do agendamento"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0.664"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUmensagem" />
+
+    <Button
+        android:id="@+id/timeButton"
+        android:onClick="popTimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Time"
+        android:width="200dp"
+        android:height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton"
+        app:layout_constraintVertical_bias="0.1" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
