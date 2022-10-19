@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1e2327"
+    tools:context=".activity_info">
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:text="Adotar / Apadrinhar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAlignment="center"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:text="Para realizar esse processo, preencha as informações abaixo e clique em Enviar"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:text="Nome:"
+        app:layout_constraintEnd_toStartOf="@id/alignment2"
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
+        android:text="E-mail:"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toStartOf="@id/alignment2"
+        app:layout_constraintTop_toBottomOf="@+id/txtUnome" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:textColor="@color/white"
+        android:layout_marginTop="30dp"
+        android:text="Telefone:"
+        app:layout_constraintEnd_toStartOf="@id/alignment2"
+        app:layout_constraintTop_toBottomOf="@+id/txtUemail" />
+
+    <EditText
+        android:id="@+id/txtUnome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:ems="13"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView17"
+
+        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+    <EditText
+        android:id="@+id/txtUemail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:ems="13"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView18"
+        app:layout_constraintTop_toBottomOf="@+id/txtUnome" />
+
+    <EditText
+        android:id="@+id/txtUtelefone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        android:background="@color/white"
+        android:ems="13"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toEndOf="@+id/textView19"
+        app:layout_constraintTop_toBottomOf="@+id/txtUemail" />
+
+    <TextView
+        android:id="@+id/alignment2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="90dp"
+        android:layout_marginTop="160dp"
+        />
+
+    <Button
+        android:id="@+id/btnEnviar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="188dp"
+        android:text="enviar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.593"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtUmensagem" />
+
+    <TextView
+        android:id="@+id/textView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mensagem:"
+        app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
+        android:layout_marginTop="30dp"
+        app:layout_constraintEnd_toStartOf="@id/alignment2"
+        android:textColor="@color/white" />
+
+    <EditText
+        android:id="@+id/txtUmensagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintStart_toEndOf="@id/textView22"
+        app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
+        android:ems="13"
+        android:inputType="textMultiLine"
+        />
+
+    <Button
+        android:id="@+id/datePickerButton"
+        style="?android:spinnerStyle"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        app:backgroundTint="@null"
+        android:onClick="openDatePicker"
+        android:text="Clique aqui para selecionar a data do agendamento"
+        android:textColor="@color/black"
+        app:layout_constraintHorizontal_bias="0.664"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtUmensagem" />
+
+    <Button
+        android:id="@+id/timeButton"
+        android:onClick="popTimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Time"
+        android:width="200dp"
+        android:height="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePickerButton"
+        app:layout_constraintVertical_bias="0.1" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
