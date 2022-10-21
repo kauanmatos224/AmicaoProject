@@ -44,7 +44,7 @@
 					</div>
 					
 					<div id="div4" class="ex4">
-						<a href="" class="btn btn-secondary" id="logout">Logout</a>
+						<a href="/logout" class="btn btn-secondary" id="logout">Logout</a>
 					</div>
 
 					<div id="div5" class="ex5">
