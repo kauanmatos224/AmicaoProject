@@ -149,6 +149,13 @@ class UserAuthController extends Controller
         ]);
     }
 
+    public static function execSessionRequiresDestroy_fromView(){
+        session([
+            'required_route'=>null,
+            'router_owner'=>null,
+        ]);
+    }
+
     public function getView_cadastrar_inst(){
         (new UserAuthController)->execSessionDestroy();
         (new UserAuthController)->execSessionRequiresDestroy();

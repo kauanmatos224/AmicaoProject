@@ -13,6 +13,7 @@
 			}
 		</script>
 		<title>Amicão - Alterar pet</title>
+		@include("./user_routesNavigation")
 		
 	</head>
 	<body onload="setDate()">
