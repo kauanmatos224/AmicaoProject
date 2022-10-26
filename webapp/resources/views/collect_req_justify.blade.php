@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="pt-BR">
-    <head><title>Justificativa - Requisição</title></head>
+    <head><title>Justificativa - Requisição</title>
+    @include("./user_routesNavigation")</head>
     <body onload="onloadPage()">
 
         <form id="frm_collect_justify" method="post" action="/institucional/requisicoes/doAction">

@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-    <head><title>Mensages - FAQ</title>
+    <head><title>Amicão - Mensages|FAQ</title>
+    @include("./user_routesNavigation")
     </head>
 
     <body>

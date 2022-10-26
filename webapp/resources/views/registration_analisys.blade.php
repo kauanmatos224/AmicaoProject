@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Análise de Cadastros</title>
+        <title>Amicão - Análise de cadastros</title>
+        @include("./user_routesNavigation")
     </head>
     <body>  
 

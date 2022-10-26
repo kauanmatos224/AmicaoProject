@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
-    <head><title></title>
+    <head><title>Amicão - Detalhes da instituição</title>
+    @include("./user_routesNavigation")
     </head>
     <body>
 

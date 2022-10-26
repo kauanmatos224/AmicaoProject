@@ -1,6 +1,8 @@
 <!doctype html>
 <html>
-    <head><title>Justificativa de Operação</title></head>
+    <head><title>Justificativa de Operação</title>
+    @include("./user_routesNavigation")
+    </head>
     <body>
     
         <?php if(isset($info)){

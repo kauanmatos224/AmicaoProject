@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/style/estiloMF.css" />
         <title>Resolver solicitação</title>
+        @include("./user_routesNavigation")
     </head>
 
     <body>

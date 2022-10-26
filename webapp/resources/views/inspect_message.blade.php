@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-    <head><title></title></head>
+    <head><title>Amicão - Detalhes da mensagem</title>@include("./user_routesNavigation")</head>
     <body>
 
         Nome completo: <?= $data[0]->fullname ?>

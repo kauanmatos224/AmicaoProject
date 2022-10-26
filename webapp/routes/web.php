@@ -19,27 +19,6 @@ use App\Http\Controllers\StaffController;
 
 //WEBSITE ROUTES:---------------------------------------------------------------------
 
-
-//Dropbox test route
-Route::get('/dropbox', function(){
-
-    if(Storage::disk('dropbox')->makeDirectory('teste')){
-        dd('Created sucessfully');
-    }
-    else{
-        dd('Error during directory creation');
-    }
-});
-
-Route::get('/dropbox-verify', function(){
-    if(Storage::disk('dropbox')->exists('teste')){
-        dd('The folder / file exists');
-    }else{
-        dd('The folder / file doesnt exists');
-    }
-});
-
-
 Route::get('/', function(){
     return view('home');
 });
@@ -59,9 +38,6 @@ Route::get('/institucional/requisicoes/inspec/{id}', [PetsController::class, 'ge
 Route::post('/institucional/requisicoes/action', [PetsController::class, 'reqAction']);
 
 Route::post('/institucional/requisicoes/doAction', [PetsController::class, 'doAction']);
-
-
-
 
 
 Route::get('/institucional/pets/alterar/{id}', [PetsController::class, 'inspectPet']);
@@ -93,6 +69,9 @@ Route::post('/institucional/cadastrar/send', [UserAuthController::class, 'regist
 Route::get('/institucional/recuperar-senha', function(){
     return view('recuperar_senha');
 });
+
+
+Route::get('/security-test/sha', [UserAuthController::class, 'hashpwd']);
 
 Route::post('/institucional/recuperar-senha/send', [UserAuthController::class, 'reoveryPassword']);
 Route::get('/institucional/rec-password/reset/{token}', [UserAuthController::class, 'getView_set_restet_password']);
