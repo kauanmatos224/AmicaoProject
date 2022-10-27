@@ -71,8 +71,6 @@ Route::get('/institucional/recuperar-senha', function(){
 });
 
 
-Route::get('/security-test/sha', [UserAuthController::class, 'hashpwd']);
-
 Route::post('/institucional/recuperar-senha/send', [UserAuthController::class, 'reoveryPassword']);
 Route::get('/institucional/rec-password/reset/{token}', [UserAuthController::class, 'getView_set_restet_password']);
 Route::post('/institucional/rec-password/set-new', [UserAuthController::class, 'setNewPassword']);

@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
             array(
                 1,
                 'victorrayansouzaramos@gmail.com',
-                'amicao123',
+                'd00a72eea5068b5b0b2a6d001b8aff53955ac2ffdbe0f915d3856ff6275e05e7',
                 'inst',
                 'approved',
                 'verified',
@@ -74,7 +74,7 @@ class DatabaseSeeder extends Seeder
             array(
                 2,
                 'victorrayansouzaramos@yahoo.com.br',
-                'amicao123',
+                'd00a72eea5068b5b0b2a6d001b8aff53955ac2ffdbe0f915d3856ff6275e05e7',
                 'staff',
                 'approved',
                 'verified',
@@ -84,7 +84,7 @@ class DatabaseSeeder extends Seeder
             array(
                 3,
                 'staff_test_email@yahoo.com.br',
-                'amicao123',
+                'd00a72eea5068b5b0b2a6d001b8aff53955ac2ffdbe0f915d3856ff6275e05e7',
                 'staff',
                 'approved',
         ));
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
             array(
                 4,
                 'enriconathanromero@gmail.com',
-                'amicao123',
+                'd00a72eea5068b5b0b2a6d001b8aff53955ac2ffdbe0f915d3856ff6275e05e7',
                 'staff',
                 'approved',
         ));
@@ -202,7 +202,7 @@ class DatabaseSeeder extends Seeder
             array(
                 3,
                 'inst_test_not_approved@yahoo.com.br',
-                'amicao123',
+                'd00a72eea5068b5b0b2a6d001b8aff53955ac2ffdbe0f915d3856ff6275e05e7',
                 'inst',
                 'denied',
         ));
@@ -211,7 +211,7 @@ class DatabaseSeeder extends Seeder
             array(
                 3,
                 'inst_test_waiting@yahoo.com.br',
-                'amicao123',
+                'd00a72eea5068b5b0b2a6d001b8aff53955ac2ffdbe0f915d3856ff6275e05e7',
                 'inst',
                 'waiting',
         ));

@@ -33,7 +33,7 @@
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <span class="lEmail">E-mail:</span><br><input class="email" type=email name=txtEmail placeholder="E-mail"><br><br>
                 <br>
-                <a href="" class="btn btn-outline-warning" id="btnEnviar">Enviar</a>
+                <input type="submit" class="btn btn-outline-warning" id="btnEnviar" value="Enviar">
             </form>
         </div>
 

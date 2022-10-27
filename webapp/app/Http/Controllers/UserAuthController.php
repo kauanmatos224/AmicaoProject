@@ -19,12 +19,13 @@ class UserAuthController extends Controller
     public function doLogin(UserLoginRequest $request){
         $user_email = $request->post('txtEmail');
         $user_password = $request->post('txtPassword');
-
+        $secret = "30/07/2003";
+        $user_password_hash = hash('sha256', $user_password.$secret);
 
         (new UserAuthController)->execSessionDestroy();
         
         $checkCredentials = DB::select('select * from tb_auth_org where email=? and password=?',
-        array($user_email, $user_password));
+        array($user_email, $user_password_hash));
         
         if($checkCredentials){
 
@@ -43,7 +44,7 @@ class UserAuthController extends Controller
                 }
                 else if($checkCredentials[0]->status=='approved'){
                     
-                    (new UserAuthController)->createSession($user_email, $user_password);
+                    (new UserAuthController)->createSession($user_email, $user_password_hash);
                     
                     if(!empty(session('required_route'))){
                         $required_route = session('required_route');
@@ -236,6 +237,9 @@ class UserAuthController extends Controller
     
                     $select_org = DB::select('select id from tb_org where cnpj=?', array($cnpj));
                     $id_org = $select_org[0]->id;
+
+                    $secret = "30/07/2003";
+                    $password_hash = hash('sha256', $user_password.$secret);
     
                     DB::insert('insert into tb_auth_org(
                             id_org,
@@ -247,7 +251,7 @@ class UserAuthController extends Controller
                     
                         values(
                             ?, ?, ?, ?, ?
-                        )', array($id_org, $email, $password, "inst", "waiting")
+                        )', array($id_org, $email, $password_hash, "inst", "waiting")
                     );
     
                     if((new UserAuthController)->createMailConfirmation($id_org)){
@@ -327,13 +331,17 @@ class UserAuthController extends Controller
         $password = $request->post('txtPassword');
         $password_conf = $request->post('txtConfPassword');
         $token = $request->post('tmp_reset_token');
+        
+        $secret = "30/07/2003";
+        $password_hash = hash('sha256', $password.$secret);
+        
 
         if($password==$password_conf){
             if(!$token==null){
                 $related_id = DB::select('select id_org from tb_user_rec_pass where tmp_token=?', array($token));
               
                 if($related_id){
-                    DB::update('update tb_auth_org set password=? where id_org=? ', array($password, $related_id[0]->id_org));
+                    DB::update('update tb_auth_org set password=? where id_org=? ', array($password_hash, $related_id[0]->id_org));
                     DB::delete('delete from tb_user_rec_pass where tmp_token=?', array($token));
                     return view('info_inst')->with('info', 'changed_password');
                 }
@@ -476,11 +484,13 @@ class UserAuthController extends Controller
         $password = $request->post('txtPassword');
         $password_conf = $request->post('txtPasswordConfirmation');
         $id = session('user_id');
+        $secret = "30/07/2003";
         
         if((new UserAuthController)->checkSession()){
 
             if($password == $password_conf){
-                $update_password = DB::update('update tb_auth_org set password=? where id=?', array($password, $id));
+                $password_hash = hash('sha256', $password.$secret);
+                $update_password = DB::update('update tb_auth_org set password=? where id=?', array($password_hash, $id));
                 if($update_password){
                     session(['user_account'=>'changed_password']);
                     return redirect('/institucional/myaccount/');
@@ -585,5 +595,11 @@ class UserAuthController extends Controller
 
     }
 
+    public function hashpwd(){
+    
+        dd(hash('sha256', "amicao123"."30/07/2003"));
+    }
  
 }
+
+
