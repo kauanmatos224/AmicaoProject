@@ -26,6 +26,18 @@ class UserAuthController extends Controller
         
         $checkCredentials = DB::select('select * from tb_auth_org where email=? and password=?',
         array($user_email, $user_password_hash));
+
+        $accounts_data = DB::select('select id_org, deletion_date from tb_auth_org where status=?', array('deleted'));
+
+        if($accounts_data){
+            foreach($accounts_data as $data){
+                if($data->deletion_date < $timestamp){
+                    DB::delete('delete from tb_org where id=?', array($data->id_org));
+                    DB::delete('delete from tb_auth_org where id_org=?', array($data->id_org));
+                }
+                
+            }
+        }
         
         if($checkCredentials){
 
