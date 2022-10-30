@@ -151,7 +151,6 @@ Route::get('/application_retrieve/pets/inspect/dump/{id}', [PetsController::clas
 Route::get('/application_retrieve/pets/count/dump', [PetsController::class, 'count_pets_data_dump']);
 
 Route::get('/application_send/dump_requests', [PetsController::class, 'dumpPOST_body']);
-Route::get('/application_send/send_request', [PetsController::class, 'registerRequest']);
 Route::get('/application_retrieve/pets/count/', [PetsController::class, 'count_pets_data']);
 
 

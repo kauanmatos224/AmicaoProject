@@ -626,7 +626,7 @@ class PetsController extends Controller
 
     public function listPets_app(){
     
-        $pets = DB::select('select * from tb_pets');
+        $pets = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org');
 
         for($i=0;$i<count($pets);$i++){
             $img_path = $pets[$i]->img_path;
@@ -641,10 +641,13 @@ class PetsController extends Controller
 
     public function inspectPet_app(Request $request){
         $id=$request->route('id');
-        $pet = DB::select('select * from tb_pets where id=?', array($id));
-
+        $pet = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id));
         
-        return json_encode($pet);;
+        $img_path = $pet[0]->img_path;
+        $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
+        $pet[0]->img_path=$img_link;
+    
+        return json_encode($pet);
     }
 
 
@@ -652,7 +655,7 @@ class PetsController extends Controller
     //Dump returns - app requests
     public function listPets_app_dump(){
 
-        $pets = DB::select('select * from tb_pets');
+        $pets = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org');
 
         for($i=0;$i<count($pets);$i++){
             $img_path = $pets[$i]->img_path;
@@ -665,7 +668,12 @@ class PetsController extends Controller
 
     public function inspectPet_app_dump(Request $request){
         $id=$request->route('id');
-        $pet = DB::select('select * from tb_pets where id=?', array($id));
+        $pet = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id));
+        
+        $img_path = $pet[0]->img_path;
+        $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
+        $pet[0]->img_path=$img_link;
+    
 
         dd(json_encode($pet));
         
@@ -690,5 +698,28 @@ class PetsController extends Controller
     }
 
     
+    public function registerRequest(Request $request){
+        $id_pet = $request->post('id_pet');
+        $datetime = $request->post('datetime');
+        $nome = $request->post('nome');
+        $phone = $request->post('phone');
+        $email = $request->post('obs');
+        $status = $request->post('status');
+        $req_type = $request->post('req_type');
+        $obs = $request->post('obs');
+
+        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+            $id_pet,
+            $nome,
+            $phone,
+            $email,
+            $obs,
+            $status,
+            $req_type,
+            $datetime
+        ));
+    }
+
     
 }
+
