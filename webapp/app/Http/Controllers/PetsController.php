@@ -626,7 +626,7 @@ class PetsController extends Controller
 
     public function listPets_app(){
     
-        $pets = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org');
+        $pets = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org');
 
         for($i=0;$i<count($pets);$i++){
             $img_path = $pets[$i]->img_path;
@@ -641,7 +641,7 @@ class PetsController extends Controller
 
     public function inspectPet_app(Request $request){
         $id=$request->route('id');
-        $pet = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id));
+        $pet = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id));
         
         $img_path = $pet[0]->img_path;
         $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
@@ -655,7 +655,7 @@ class PetsController extends Controller
     //Dump returns - app requests
     public function listPets_app_dump(){
 
-        $pets = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org');
+        $pets = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org');
 
         for($i=0;$i<count($pets);$i++){
             $img_path = $pets[$i]->img_path;
@@ -668,7 +668,7 @@ class PetsController extends Controller
 
     public function inspectPet_app_dump(Request $request){
         $id=$request->route('id');
-        $pet = DB::select('select * from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id));
+        $pet = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id));
         
         $img_path = $pet[0]->img_path;
         $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
