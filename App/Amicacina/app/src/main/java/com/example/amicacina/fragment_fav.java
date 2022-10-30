@@ -67,6 +67,7 @@ public class fragment_fav extends Fragment {
 
         });
 
+        /*
         if (MainActivity.fav[0] == true) {
             gridModelArrayList.add(new GridModel(MainActivity.id[0], MainActivity.nome[0], MainActivity.raca[0],
                     MainActivity.nasc[0], MainActivity.idad[0], MainActivity.stat[0],
@@ -109,6 +110,9 @@ public class fragment_fav extends Fragment {
                     MainActivity.gene[6], MainActivity.port[6], MainActivity.comp[6], MainActivity.foto[6]));
         }
         // Inflate the layout for this fragment
+
+        */
+
         return view;
     }
 }

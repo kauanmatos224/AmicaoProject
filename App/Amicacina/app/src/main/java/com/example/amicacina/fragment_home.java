@@ -1,6 +1,8 @@
 package com.example.amicacina;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +13,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
@@ -23,6 +30,7 @@ public class fragment_home extends Fragment {
     }
 
 
+    @SuppressLint("Range")
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -37,91 +45,27 @@ public class fragment_home extends Fragment {
 
         //MainActivity.foto[6] = String.valueOf(R.drawable.pinscher);
 
-        MainActivity.id[0] = "0";
-        MainActivity.id[1] = "1";
-        MainActivity.id[2] = "2";
-        MainActivity.id[3] = "3";
-        MainActivity.id[4] = "4";
-        MainActivity.id[5] = "5";
-        MainActivity.id[6] = "6";
+        DatabaseController db = new DatabaseController(getContext());
+        Cursor cursor = db.retrieveData();
 
-        MainActivity.nome[0] = "THOR";
-        MainActivity.nome[1] = "NINA";
-        MainActivity.nome[2] = "MAX";
-        MainActivity.nome[3] = "FUSQUINHA";
-        MainActivity.nome[4] = "PIPOCA";
-        MainActivity.nome[5] = "LUNA";
-        MainActivity.nome[6] = "REX";
-
-        MainActivity.raca[0] = "SRD (Sem raça definida)";
-        MainActivity.raca[1] = "Shih Tzu";
-        MainActivity.raca[2] = "Golden retriever";
-        MainActivity.raca[3] = "Dachshund";
-        MainActivity.raca[4] = "Buldogue Frances";
-        MainActivity.raca[5] = "Lulu da Pomerania";
-        MainActivity.raca[6] = "Pinscher alemao";
-
-        MainActivity.nasc[0] = "12/02/2020";
-        MainActivity.nasc[1] = "12/02/2020";
-        MainActivity.nasc[2] = "12/02/2020";
-        MainActivity.nasc[3] = "12/02/2020";
-        MainActivity.nasc[4] = "12/02/2020";
-        MainActivity.nasc[5] = "12/02/2020";
-        MainActivity.nasc[6] = "12/02/2020";
-
-        MainActivity.idad[0] = "3 anos";
-        MainActivity.idad[1] = "6 meses";
-        MainActivity.idad[2] = "4 anos";
-        MainActivity.idad[3] = "1 ano";
-        MainActivity.idad[4] = "1 ano";
-        MainActivity.idad[5] = "2 anos";
-        MainActivity.idad[6] = "5 anos";
-
-        MainActivity.stat[0] = "Aguardando adoção";
-        MainActivity.stat[1] = "Aguardando adoção";
-        MainActivity.stat[2] = "Aguardando adoção";
-        MainActivity.stat[3] = "Aguardando adoção";
-        MainActivity.stat[4] = "Aguardando adoção";
-        MainActivity.stat[5] = "Aguardando adoção";
-        MainActivity.stat[6] = "Aguardando adoção";
-
-        MainActivity.gene[0] = "Macho";
-        MainActivity.gene[1] = "Fêmea";
-        MainActivity.gene[2] = "Macho";
-        MainActivity.gene[3] = "Macho";
-        MainActivity.gene[4] = "Macho";
-        MainActivity.gene[5] = "Fêmea";
-        MainActivity.gene[6] = "Macho";
-
-        MainActivity.port[0] = "Médio";
-        MainActivity.port[1] = "Pequeno";
-        MainActivity.port[2] = "Grande";
-        MainActivity.port[3] = "Pequeno";
-        MainActivity.port[4] = "Pequeno";
-        MainActivity.port[5] = "Pequeno";
-        MainActivity.port[6] = "Grande";
-
-        MainActivity.comp[0] = "Amigável e brincalhão, mas possui costume de latir quando está sozinho ";
-        MainActivity.comp[1] = "Amigável e brincalhão, mas não utiliza o sistema operacional baseado no kernel Linux, o qual possui sua versão 6.0 anunciada para lançamento nas primeiras semanas do mes de outrubro, e conta com, alem de diversas melhorias, a implementação da linguagem de programação Rust juntamente ao código pré-existente em C";
-        MainActivity.comp[2] = "Amigável e brincalhão";
-        MainActivity.comp[3] = "Amigável e brincalhão";
-        MainActivity.comp[4] = "Amigável e brincalhão";
-        MainActivity.comp[5] = "Amigável e brincalhão";
-        MainActivity.comp[6] = "Amigável e brincalhão";
-
-        MainActivity.foto[0] = getResources().getIdentifier("viralata", "drawable", "com.example.amicacina");
-        MainActivity.foto[1] = getResources().getIdentifier("shihtzu", "drawable", "com.example.amicacina");
-        MainActivity.foto[2] = getResources().getIdentifier("goldenretriever", "drawable", "com.example.amicacina");
-        MainActivity.foto[3] = getResources().getIdentifier("dachshund", "drawable", "com.example.amicacina");
-        MainActivity.foto[4] = getResources().getIdentifier("buldogue_frances", "drawable", "com.example.amicacina");
-        MainActivity.foto[5] = getResources().getIdentifier("luludapomerania", "drawable", "com.example.amicacina");
-        MainActivity.foto[6] = getResources().getIdentifier("pinscher", "drawable", "com.example.amicacina");
-
-
-        for(int i=0 ; i <= 6; i++){
-            gridModelArrayList.add(new GridModel(MainActivity.id[i], MainActivity.nome[i], MainActivity.raca[i],
+        for(int i=0 ; i < cursor.getCount(); i++){
+            gridModelArrayList.add(new GridModel(/*MainActivity.id[i], MainActivity.nome[i], MainActivity.raca[i],
                     MainActivity.nasc[i], MainActivity.idad[i], MainActivity.stat[i],
-                    MainActivity.gene[i], MainActivity.port[i], MainActivity.comp[i], MainActivity.foto[i]));
+                    MainActivity.gene[i], MainActivity.port[i], MainActivity.comp[i], MainActivity.foto[i]*/
+
+                    cursor.getString(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("nome")),
+                    cursor.getString(cursor.getColumnIndex("raca")),
+                    cursor.getString(cursor.getColumnIndex("nascimento")),
+                    cursor.getString(cursor.getColumnIndex("idade")),
+                    cursor.getString(cursor.getColumnIndex("status")),
+                    cursor.getString(cursor.getColumnIndex("genero")),
+                    cursor.getString(cursor.getColumnIndex("porte")),
+                    cursor.getString(cursor.getColumnIndex("comportamento")),
+                    cursor.getString(cursor.getColumnIndex("foto"))
+            ));
+
+            cursor.moveToNext();
 
         }
 
@@ -206,7 +150,7 @@ public class fragment_home extends Fragment {
                 // TODO Auto-generated method stub
                // Toast.makeText(getContext(), "Imagem: "+(position+1), Toast.LENGTH_SHORT).show();
 
-                MainActivity.pos = position;
+                MainActivity.pos = position + 1;
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), activity_details.class);
                 getActivity().startActivity(intent);

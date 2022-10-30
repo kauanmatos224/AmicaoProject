@@ -17,6 +17,11 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
 //http://amicao.herokuapp.com/application_retrieve/pets
 public class MainActivity extends AppCompatActivity {
 
@@ -44,13 +49,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fav[0] = false;
-        fav[1] = false;
-        fav[2] = false;
-        fav[3] = false;
-        fav[4] = false;
-        fav[5] = false;
-        fav[6] = false;
+        DatabaseController db = new DatabaseController(MainActivity.this);
+        String url = "https://amicao.herokuapp.com/application_retrieve/pets";
+        db.dropAndCreateTable();
+        Ion.with (MainActivity.this)
+                .load (url)
+                .asJsonArray()
+                .setCallback ( new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        for (int i = 0; i < result.size(); i++) {
+                            JsonObject res_json = result.get(i).getAsJsonObject();
+                            db.insertData(
+                                    res_json.get("id").getAsInt(),
+                                    res_json.get("nome").getAsString(),
+                                    res_json.get("img_path").getAsString(),
+                                    res_json.get("comportamento").getAsString(),
+                                    res_json.get("status").getAsString(),
+                                    res_json.get("raca").getAsString(),
+                                    res_json.get("porte").getAsString(),
+                                    res_json.get("endereco").getAsString(),
+                                    res_json.get("nascimento").getAsString(),
+                                    "false",
+                                    res_json.get("idade").getAsString(),
+                                    res_json.get("genero").getAsString()
+                            );
+                        }
+                    }
+                });
+
 
         // Define ActionBar object
         ActionBar actionBar;

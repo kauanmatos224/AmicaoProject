@@ -3,14 +3,19 @@ package com.example.amicacina;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class activity_details extends AppCompatActivity{
     /*String Nome, Raca, Nascimento, Idade, Status, Genero, Porte, Comportamento;
@@ -20,6 +25,7 @@ public class activity_details extends AppCompatActivity{
     TextView txtId, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
     Button btnFav, btnAdotar;
 
+    @SuppressLint("Range")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,16 +59,21 @@ public class activity_details extends AppCompatActivity{
 
         //btnFav = (Button)findViewById(R.id.btnFav);
 
-        imgFoto.setImageResource(MainActivity.foto[MainActivity.pos]);
-        txtNome.setText(MainActivity.nome[MainActivity.pos]);
-        txtRaca.setText(MainActivity.raca[MainActivity.pos]);
-        txtNascimento.setText(MainActivity.nasc[MainActivity.pos]);
-        txtIdade.setText(MainActivity.idad[MainActivity.pos]);
-        txtStatus.setText(MainActivity.stat[MainActivity.pos]);
-        txtGenero.setText(MainActivity.gene[MainActivity.pos]);
-        txtPorte.setText(MainActivity.port[MainActivity.pos]);
-        txtComportamento.setText(MainActivity.comp[MainActivity.pos]);
+        //Picasso.get().load(gridModel.getImgid()).into(petIV);
 
+        DatabaseController db = new DatabaseController(activity_details.this);
+        Cursor cursor = db.getDataRow(MainActivity.pos);
+
+        //imgFoto.setImageResource(MainActivity.foto[MainActivity.pos]);
+        Picasso.get().load(cursor.getString(cursor.getColumnIndex("foto"))).into(imgFoto);
+        txtNome.setText(cursor.getString(cursor.getColumnIndex("nome")));
+        txtRaca.setText(cursor.getString(cursor.getColumnIndex("raca")));
+        txtNascimento.setText(cursor.getString(cursor.getColumnIndex("nascimento")));
+        txtIdade.setText(cursor.getString(cursor.getColumnIndex("idade")));
+        txtStatus.setText(cursor.getString(cursor.getColumnIndex("status")));
+        txtGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));
+        txtPorte.setText(cursor.getString(cursor.getColumnIndex("porte")));
+        txtComportamento.setText(cursor.getString(cursor.getColumnIndex("comportamento")));
 
 
         findViewById(R.id.btnFav).setOnClickListener(new View.OnClickListener()
