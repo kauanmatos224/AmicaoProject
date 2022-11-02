@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
     public static String[] port = new String[7];
     public static String[] comp = new String[7];
     public static Boolean[] fav = new Boolean[7];
+    public static Fragment selectedFragment = null;
 
     public static int pos;
 
@@ -112,6 +113,18 @@ public class MainActivity extends AppCompatActivity {
 
         // to make the Navigation drawer icon always appear on the action bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+/*
+        selectedFragment = new fragment_search();
+        //begin transaction
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_layout
+                        ,selectedFragment).commit();
+
+        selectedFragment = new fragment_home();
+        //begin transaction
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_layout
+                        ,selectedFragment).commit();*/
     }
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
@@ -140,11 +153,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //listener nav bar
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener = new
+    public BottomNavigationView.OnNavigationItemSelectedListener navListener = new
             BottomNavigationView.OnNavigationItemSelectedListener() {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
+
                     switch (item.getItemId()){
                         case R.id.home:
                             selectedFragment = new fragment_home();
@@ -163,7 +176,6 @@ public class MainActivity extends AppCompatActivity {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.fragment_layout
                                     ,selectedFragment).commit();
-
                     return true;
                 }
             };
