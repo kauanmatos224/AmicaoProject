@@ -426,6 +426,7 @@ class UserAuthController extends Controller
         if($verify){
             
             if($verify[0]->expiration_at > $timestamp){
+                
                 DB::update('update tb_auth_org set email_status=?, email=? where id_org=?', 
                 array('verified', $verify[0]->new_email, $verify[0]->id_org));
 

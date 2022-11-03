@@ -20,12 +20,12 @@ class TbAuthOrg extends Migration
             $table->integer('id_org')->unsigned();
             $table->foreign('id_org')->references('id')->on('tb_org');
             
-            $table->string('email');
-            $table->string('password');
+            $table->string('email')->nullable();
+            $table->string('password')->nullable();
             $table->integer('logged_at')->nullable();
             $table->string('phone')->nullable();
-            $table->string('user_type');
-            $table->string('status');
+            $table->string('user_type')->nullable();
+            $table->string('status')->nullable();
             $table->string('email_status')->nullable();
             $table->integer('next_mail_sending')->default('0');
             $table->integer('deletion_date')->nullable();
