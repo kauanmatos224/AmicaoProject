@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
@@ -29,6 +30,9 @@ public class activity_info extends AppCompatActivity {
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
         timeButton = findViewById(R.id.timeButton);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
     }
 
 
@@ -45,9 +49,8 @@ public class activity_info extends AppCompatActivity {
             }
         };
 
-        // int style = AlertDialog.THEME_HOLO_DARK;
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, /*style,*/ onTimeSetListener, hour, minute, true);
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, onTimeSetListener, hour, minute, true);
 
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
@@ -85,7 +88,7 @@ public class activity_info extends AppCompatActivity {
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
         datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, day);
-        //datePickerDialog.getDatePicker().setMaxDate(System.currentTimeMillis());
+
 
     }
 
@@ -121,7 +124,6 @@ public class activity_info extends AppCompatActivity {
         if(month == 12)
             return "DEZ";
 
-        //default should never happen
         return "JAN";
     }
 

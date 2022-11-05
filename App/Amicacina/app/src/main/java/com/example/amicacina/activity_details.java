@@ -33,19 +33,6 @@ public class activity_details extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-
-        // Define ActionBar object
-        ActionBar actionBar;
-        actionBar = getSupportActionBar();
-
-        // Define ColorDrawable object and parse color
-        // using parseColor method
-        // with color hash code as its parameter
-        ColorDrawable colorDrawable
-                = new ColorDrawable(Color.parseColor("#e0854e"));
-
-        // Set BackgroundDrawable
-        actionBar.setBackgroundDrawable(colorDrawable);
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtRaca = (TextView) findViewById(R.id.txtRaca);

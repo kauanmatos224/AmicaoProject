@@ -40,57 +40,5 @@
     <!--this the navigation view which draws
     and shows the navigation drawer-->
     <!--include the menu created in the menu folder-->
-    <com.google.android.material.navigation.NavigationView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        app:itemTextColor="@color/white"
-        android:background="#e0854e"
-        app:menu="@menu/nav_menu" >
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="192dp"
-            android:layout_height="180dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/logo" />
-
-    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
-
-
-<!--<?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#1e2327"
-    tools:context=".MainActivity">
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationview"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:background="#1e2327"
-        app:itemIconSize="45dp"
-        app:itemIconTint="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/menu" />
-
-    <FrameLayout
-        android:id="@+id/fragment_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </FrameLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>-->
