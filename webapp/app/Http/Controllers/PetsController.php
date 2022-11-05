@@ -704,10 +704,35 @@ class PetsController extends Controller
         $nome = $request->post('nome');
         $phone = $request->post('phone');
         $email = $request->post('obs');
-        $status = $request->post('status');
+        $status = "not_seen";
         $req_type = $request->post('req_type');
         $obs = $request->post('obs');
 
+        $timestamp = null;
+        if(strtotime($datetime)){
+            $timestamp = strtotime($datetime);
+        }
+        else{
+            return json_encode("{\"error\":\"invalid_date\"}");
+        }
+
+        if(filter_var($email, FILTER_VALIDATE_EMAIL)==false) {
+            return json_encode("{\"error\":\"invalid_email\"}");
+        }
+
+        if(strlen(str($phone))<11 || !intval($phone)){
+            return json_encode("{\"error\":\"invalid_phone\"}");
+        }
+
+        if(!preg_match ("/^[a-zA-z]*$/", $nome)){
+            return json_encode("{\"error\":\"invalid_name\"}");
+        }
+        
+        if($req_type!="adocao" && $req_type!="visita" && $req_type!="apadrinhamento"){
+            return json_encode("{\"error\":\"invalid_request_type\"}");
+        }
+
+        
         DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
             $id_pet,
             $nome,
@@ -716,8 +741,10 @@ class PetsController extends Controller
             $obs,
             $status,
             $req_type,
-            $datetime
+            $timestamp
         ));
+
+        return json_encode("{\"sucess\":\"request_sent\"}");
     }
 
     
