@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             array(
                 '000000000000000000',
                 00000000,
-                'Rua teste, n 0',
+                'Rua teste 1, n 2 - Cidade 1, SP - Brazil',
                 '+55 (00) 00000-0000',
                 'Brazil',
                 'Nome Fantasia Teste 0'
@@ -31,7 +31,7 @@ class DatabaseSeeder extends Seeder
             array(
                 '1111111111111111111',
                 11111111,
-                'Rua teste, n 1',
+                'Rua teste 1, n 1 - Cidade 1, SP - Brazil',
                 '+55 (00) 11111-1111',
                 'Brazil',
                 'Nome Fantasia Teste 1'
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             array(
                 '222222222222222222',
                 222222222,
-                'Rua teste 2, n 2',
+                'Rua teste 2, n 2 - Cidade 2, SP - Brazil',
                 '+55 (00) 22222-2222',
                 'Brazil',
                 'Nome Fantasia Teste 2'
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             array(
                 '1111111111111111',
                 111111,
-                'Rua teste 3, n 3',
+                'Rua teste 3, n 3 - Cidade 3, SP - Brazil',
                 '+55 (00) 33333-3333',
                 'Brazil',
                 'Nome Fantasia Teste 3'

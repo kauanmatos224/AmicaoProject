@@ -17,12 +17,14 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 public class activity_details extends AppCompatActivity{
     /*String Nome, Raca, Nascimento, Idade, Status, Genero, Porte, Comportamento;
     int Foto;*/
     //int id;
     ImageView imgFoto;
-    TextView txtId, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
+    TextView txtId, txtCidade, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
     Button btnFav, btnAdotar;
 
     @SuppressLint("Range")
@@ -56,6 +58,7 @@ public class activity_details extends AppCompatActivity{
         txtGenero = (TextView) findViewById(R.id.txtGenero);
         txtPorte = (TextView) findViewById(R.id.txtPorte);
         txtComportamento= (TextView) findViewById(R.id.txtComportamento);
+        txtCidade = (TextView) findViewById(R.id.txtCidade);
 
         //btnFav = (Button)findViewById(R.id.btnFav);
 
@@ -74,6 +77,12 @@ public class activity_details extends AppCompatActivity{
         txtGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));
         txtPorte.setText(cursor.getString(cursor.getColumnIndex("porte")));
         txtComportamento.setText(cursor.getString(cursor.getColumnIndex("comportamento")));
+
+
+        String endereco_to_split = cursor.getString(cursor.getColumnIndex("endereco"));
+        String[] splitted_endereco = endereco_to_split.split("-", 2);
+        String cidade = splitted_endereco[1];
+        txtCidade.setText(cidade);
 
 
         findViewById(R.id.btnFav).setOnClickListener(new View.OnClickListener()

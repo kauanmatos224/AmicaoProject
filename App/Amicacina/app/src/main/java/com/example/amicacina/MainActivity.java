@@ -75,7 +75,10 @@ public class MainActivity extends AppCompatActivity {
                                     res_json.get("idade").getAsString(),
                                     res_json.get("genero").getAsString()
                             );
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.fragment_layout,new fragment_home()).commit();
                         }
+
                     }
                 });
 
