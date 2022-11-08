@@ -703,7 +703,7 @@ class PetsController extends Controller
         $datetime = $request->post('datetime');
         $nome = $request->post('nome');
         $phone = $request->post('phone');
-        $email = $request->post('obs');
+        $email = $request->post('email');
         $status = "not_seen";
         $req_type = $request->post('req_type');
         $obs = $request->post('obs');
@@ -744,9 +744,45 @@ class PetsController extends Controller
             $timestamp
         ));
 
+        $data = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id_pet));
+        (new PetsController)->sendMail_infoPet($email, "pets_info", $data, $req_type);
+
         return json_encode("{\"sucess\":\"request_sent\"}");
     }
 
-    
+    public function sendMail_infoPet($send_to, $subject, $data, $op_type){
+        
+        $msg = "";
+        
+        if($subject=='pets_info'){
+
+            $info = "<img src=\"".((new Dropbox_AccessFile)->getTemporaryLink($data[0]->img_path))."\">".
+                    "<p>Nome: ".$data[0]->nome."</p>".
+                    "<p>Raca: ".$data[0]->raca."</p>".
+                    "<p>Raca do Pai: ".(($data[0]->raca_pai!=null && $data[0]->raca_pai!="")? $data[0]->raca_pai."</p>" : "Não informado"."</p>").
+                    "<p>Raca da mãe: ".(($data[0]->raca_mae!=null && $data[0]->raca_mae!="")? $data[0]->raca_mae."</p>" : "Não informado"."</p>").
+                    "<p>Nascimento: ".(($data[0]->nascimento!=null && $data[0]->nascimento!="")? date('d/m/Y', strtotime($data[0]->nascimento))."</p>" : "Não informado"."</p>").
+                    "<p>Idade: ".(($data[0]->idade!=null && $data[0]->idade!="")? $data[0]->idade."</p>" : "Não informado"."</p>").
+                    "<p>Status: ".(($data[0]->status!=null && $data[0]->idade=="em_adocao")? "em adoção"."</p>" : $data[0]->status."</p>").
+                    "<p>Comportamento: ".(($data[0]->comportamento!=null && $data[0]->comportamento!="")? $data[0]->comportamento."</p>" : "Não informado"."</p>").
+                    "<p>Genero: ".(($data[0]->genero!=null && $data[0]->genero!="")? $data[0]->genero."</p>" : "Não informado"."</p>").
+                    "<p>Porte: ".(($data[0]->porte!=null && $data[0]->porte!="")? $data[0]->porte."</p>" : "Não informado"."</p>").
+                    "<p>Vacinas essenciais: ".(($data[0]->vacinas_essenciais!=null && $data[0]->vacinas_essenciais!="")? $data[0]->vacinas_essenciais."</p>" : "Não informado"."</p>").
+                    "<p>Saúde: ".(($data[0]->saude!=null && $data[0]->saude!="")? $data[0]->saude."</p>" : "Não informado"."</p>").
+                    "<p>Endereço: ".$data[0]->endereco."</p>";
+
+            $subject = "Sobre a $op_type do Pet";
+            $msg = "<h2>Segue as informações do pet:</h2>".$info;
+        }
+       
+
+        Mail::send('mail.default',
+            ['msg' => $msg],
+            function($message) use ($send_to, $subject) {
+                $message->to(array($send_to))
+                ->subject($subject);
+            }
+        );
+    }
 }
 

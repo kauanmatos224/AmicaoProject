@@ -60,7 +60,6 @@ public class DatabaseController {
 
     public Cursor getDataRow(int id){
 
-
         Cursor cursor;
         db = create_db.getReadableDatabase();
         String[] fields = {"id", "nome", "foto", "comportamento", "status", "raca", "porte", "endereco", "nascimento", "favoritado", "idade", "genero"};
@@ -74,7 +73,7 @@ public class DatabaseController {
     }
     public void dropAndCreateTable(){
         db = create_db.getWritableDatabase();
-        db.execSQL("drop table if exists tb_pets;");
+        db.execSQL("delete from tb_pets where 1=1;");
         db.execSQL(create_db.CREATE_TABLE);
     }
 }

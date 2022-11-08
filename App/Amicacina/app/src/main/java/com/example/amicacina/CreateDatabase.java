@@ -7,7 +7,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "db_amicao";
     private static final int DATABASE_VERSION = 1;
-    public final String CREATE_TABLE = "create table tb_pets (id integer primary key, nome text, status text, comportamento text, endereco text, genero text, favoritado text, foto text, raca text, idade text, porte text, nascimento text);";
+    public final String CREATE_TABLE = "create table if not exists tb_pets (id integer primary key, nome text, status text, comportamento text, endereco text, genero text, favoritado text, foto text, raca text, idade text, porte text, nascimento text);";
     public CreateDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
