@@ -65,8 +65,8 @@
 					<option value="medio" <?php if($pet[0]->porte=="medio"){ echo "selected";} ?>>Médio</option>
 					<option value="grande" <?php if($pet[0]->porte=="grande"){ echo "selected";} ?>>Grande</option>
 				</select><br><br>
-				<span class="lRaçaP">Raça do pai:</span><br><input class="racap" type=text name=txtRacaP value="<?= $pet[0]->id ?>"><br><br>
-				<span class="lRaçaM">Raça da mãe:</span><br><input class="racam" type=text name=txtRacaM value="<?= $pet[0]->id ?>"><br><br>
+				<span class="lRaçaP">Raça do pai:</span><br><input class="racap" type=text name=txtRacaP value="<?= $pet[0]->raca_pai ?>"><br><br>
+				<span class="lRaçaM">Raça da mãe:</span><br><input class="racam" type=text name=txtRacaM value="<?= $pet[0]->raca_mae ?>"><br><br>
 				<span>Vacinas(essenciais):</span><br>
 				<select class = "vacinas" name="txtVacinas">
 	  				<option value="sim" <?php if($pet[0]->vacinas_essenciais=="sim"){echo "selected";} ?>>Sim</option>

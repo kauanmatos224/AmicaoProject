@@ -6,6 +6,8 @@ class Dropbox_FileUpload{
 
     public function upload($filepath_origin, $filepath_dest){
 
+		$time = time();
+		$nounce = $time.strval(rand(0,10000));
         $access_token = (new Dropbox_OAuthAccessToken)->getToken();
 		$fp = fopen($filepath_origin, 'rb');
 		$size = filesize($filepath_origin);
