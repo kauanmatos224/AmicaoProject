@@ -101,7 +101,7 @@ class PetsController extends Controller
                                 $this->info = "";
                                 if($delete){
             
-                                    if(!$foto[0]->img_path == "/no-photo.png"){
+                                    if($foto[0]->img_path!="/no-photo.png"){
                                         if((new Dropbox_FileDeletion)->delete($foto[0]->img_path)){
                                             $this->info="deleted_pet";
                                         }
@@ -187,7 +187,7 @@ class PetsController extends Controller
                     else if($pet_data=='not_logged'){
                         return view('login');
                     }else{
-                        if($pet_data[0]->img_path!="no-photo.png"){
+                        if($pet_data[0]->img_path!="/no-photo.png" && $pet_data[0]->img_path!="no-photo.png"){
                             (new Dropbox_FileDeletion)->delete(($pet_data)[0]->img_path);
                         }
                         Storage::delete($filepath);
