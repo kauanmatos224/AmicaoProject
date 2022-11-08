@@ -735,16 +735,20 @@ class PetsController extends Controller
         }
 
         
-        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
-            $id_pet,
-            $nome,
-            $phone,
-            $email,
-            $obs,
-            $status,
-            $req_type,
-            $timestamp
-        ));
+        try{
+            DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+                $id_pet,
+                $nome,
+                $phone,
+                $email,
+                $obs,
+                $status,
+                $req_type,
+                $timestamp
+            ));
+        }catch(\Illuminate\Database\QueryException $ex){
+            return json_encode("[{\"error\":\"invalid_id\"}]");
+        }
 
         $data = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id_pet));
         (new PetsController)->sendMail_infoPet($email, "pets_info", $data, $req_type);
@@ -764,8 +768,8 @@ class PetsController extends Controller
                     <br>
                     Abaixo segue maiores detalhes do Pet pretentido:
                     <br>
-                    <ul>
-                    <img src=\"".((new Dropbox_AccessFile)->getTemporaryLink($data[0]->img_path))."\">".
+                    <ul>".
+                    "<li>Foto: ".(($data[0]->img_path=="/no-photo.png")? "a instituição não forneceu foto do pet" : "<img src=\"".((new Dropbox_AccessFile)->getTemporaryLink($data[0]->img_path))."\">")."</li>".
                     "<li>Nome: ".$data[0]->nome."</li>".
                     "<li>Raca: ".$data[0]->raca."</li>".
                     "<li>Raca do Pai: ".(($data[0]->raca_pai!=null && $data[0]->raca_pai!="")? $data[0]->raca_pai."</li>" : "Não informado"."</li>").
