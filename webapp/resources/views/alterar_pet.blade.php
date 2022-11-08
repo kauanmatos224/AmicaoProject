@@ -32,6 +32,13 @@
 		</header>
         <form id="frmCad" method="post" action="/institucional/pets/alterar/do" enctype="multipart/form-data" >
 			<div id = "div1">
+
+				<?php if(isset($errors)){
+						foreach($errors->all() as $error){
+							echo "<p>$error</p>";
+						}
+					} 
+				?>
            		<input type="hidden" name="_token" value="{{{ csrf_token() }}}">
 				<input type="hidden" name="txtCod" value="<?= $pet[0]->id ?>">
 				<span class="lFoto">Foto:</span><br><input type="file" id="inpFoto" name="inpFoto" accept="image/*" ><br><br>
