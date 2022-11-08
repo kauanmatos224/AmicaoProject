@@ -37,8 +37,11 @@
             <?php 
             $frm_req_change = false;
             $frm_req_approve = false;
-            $frm_req_refuse = false;
-            if($data->status=='not_seen' || $data->status=='refused'){
+            $frm_req_refuse = true;
+            if($data->status=='not_seen'){
+                $frm_req_change = $frm_req_approve = true;
+            }
+            else if($data->status=='refused'){
                 $frm_req_change = $frm_req_approve = true;
             }
             else if($data->status=='acceptted'){
