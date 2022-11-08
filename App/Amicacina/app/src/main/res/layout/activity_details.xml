@@ -78,8 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:text="Comportamento:"
+                android:text="Comportamento e saúde:"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
@@ -273,12 +272,11 @@
             android:id="@+id/btnAdotar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="0dp"
+            android:layout_marginTop="10dp"
+            android:text="adotar/apadrinhar"
             android:textColor="@color/white"
             android:textSize="15dp"
-            android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="adotar/apadrinhar"
             app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

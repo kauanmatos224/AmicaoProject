@@ -701,7 +701,7 @@ class PetsController extends Controller
 
     
     public function registerRequest(Request $request){
-        $id_pet = $request->post('id_pet');
+        $id_pet = intval($request->post('id_pet'));
         $datetime = $request->post('datetime');
         $nome = $request->post('nome');
         $phone = $request->post('phone');
@@ -715,23 +715,23 @@ class PetsController extends Controller
             $timestamp = strtotime($datetime);
         }
         else{
-            return json_encode("{\"error\":\"invalid_date\"}");
+            return json_encode("[{\"error\":\"invalid_date\"}]");
         }
 
         if(filter_var($email, FILTER_VALIDATE_EMAIL)==false) {
-            return json_encode("{\"error\":\"invalid_email\"}");
+            return json_encode("[{\"error\":\"invalid_email\"}]");
         }
 
         if(strlen(str($phone))<11 || !intval($phone)){
-            return json_encode("{\"error\":\"invalid_phone\"}");
+            return json_encode("[{\"error\":\"invalid_phone\"}]");
         }
 
         if(!preg_match ("/^[a-zA-z]*$/", $nome)){
-            return json_encode("{\"error\":\"invalid_name\"}");
+            return json_encode("[{\"error\":\"invalid_name\"}]");
         }
         
         if($req_type!="adocao" && $req_type!="visita" && $req_type!="apadrinhamento"){
-            return json_encode("{\"error\":\"invalid_request_type\"}");
+            return json_encode("[{\"error\":\"invalid_request_type\"}]");
         }
 
         
@@ -758,20 +758,28 @@ class PetsController extends Controller
         
         if($subject=='pets_info'){
 
-            $info = "<img src=\"".((new Dropbox_AccessFile)->getTemporaryLink($data[0]->img_path))."\">".
-                    "<p>Nome: ".$data[0]->nome."</p>".
-                    "<p>Raca: ".$data[0]->raca."</p>".
-                    "<p>Raca do Pai: ".(($data[0]->raca_pai!=null && $data[0]->raca_pai!="")? $data[0]->raca_pai."</p>" : "Não informado"."</p>").
-                    "<p>Raca da mãe: ".(($data[0]->raca_mae!=null && $data[0]->raca_mae!="")? $data[0]->raca_mae."</p>" : "Não informado"."</p>").
-                    "<p>Nascimento: ".(($data[0]->nascimento!=null && $data[0]->nascimento!="")? date('d/m/Y', strtotime($data[0]->nascimento))."</p>" : "Não informado"."</p>").
-                    "<p>Idade: ".(($data[0]->idade!=null && $data[0]->idade!="")? $data[0]->idade."</p>" : "Não informado"."</p>").
-                    "<p>Status: ".(($data[0]->status!=null && $data[0]->idade=="em_adocao")? "em adoção"."</p>" : $data[0]->status."</p>").
-                    "<p>Comportamento: ".(($data[0]->comportamento!=null && $data[0]->comportamento!="")? $data[0]->comportamento."</p>" : "Não informado"."</p>").
-                    "<p>Genero: ".(($data[0]->genero!=null && $data[0]->genero!="")? $data[0]->genero."</p>" : "Não informado"."</p>").
-                    "<p>Porte: ".(($data[0]->porte!=null && $data[0]->porte!="")? $data[0]->porte."</p>" : "Não informado"."</p>").
-                    "<p>Vacinas essenciais: ".(($data[0]->vacinas_essenciais!=null && $data[0]->vacinas_essenciais!="")? $data[0]->vacinas_essenciais."</p>" : "Não informado"."</p>").
-                    "<p>Saúde: ".(($data[0]->saude!=null && $data[0]->saude!="")? $data[0]->saude."</p>" : "Não informado"."</p>").
-                    "<p>Endereço: ".$data[0]->endereco."</p>";
+            $info = "
+                    Parabens seu agendamento pelo <strong>app</strong> foi realizado com sucesso, a instituição do animal irá avaliar 
+                    a possibilidade do agendamente e entrará em contato em breve. 
+                    <br>
+                    Abaixo segue maiores detalhes do Pet pretentido:
+                    <br>
+                    <ul>
+                    <img src=\"".((new Dropbox_AccessFile)->getTemporaryLink($data[0]->img_path))."\">".
+                    "<li>Nome: ".$data[0]->nome."</li>".
+                    "<li>Raca: ".$data[0]->raca."</li>".
+                    "<li>Raca do Pai: ".(($data[0]->raca_pai!=null && $data[0]->raca_pai!="")? $data[0]->raca_pai."</li>" : "Não informado"."</li>").
+                    "<li>Raca da mãe: ".(($data[0]->raca_mae!=null && $data[0]->raca_mae!="")? $data[0]->raca_mae."</li>" : "Não informado"."</li>").
+                    "<li>Nascimento: ".(($data[0]->nascimento!=null && $data[0]->nascimento!="")? date('d/m/Y', strtotime($data[0]->nascimento))."</li>" : "Não informado"."</li>").
+                    "<li>Idade: ".(($data[0]->idade!=null && $data[0]->idade!="")? $data[0]->idade."</li>" : "Não informado"."</li>").
+                    "<li>Status: ".(($data[0]->status!=null && $data[0]->idade=="em_adocao")? "em adoção"."</li>" : $data[0]->status."</li>").
+                    "<li>Comportamento: ".(($data[0]->comportamento!=null && $data[0]->comportamento!="")? $data[0]->comportamento."</li>" : "Não informado"."</li>").
+                    "<li>Genero: ".(($data[0]->genero!=null && $data[0]->genero!="")? $data[0]->genero."</li>" : "Não informado"."</li>").
+                    "<li>Porte: ".(($data[0]->porte!=null && $data[0]->porte!="")? $data[0]->porte."</li>" : "Não informado"."</li>").
+                    "<li>Vacinas essenciais: ".(($data[0]->vacinas_essenciais!=null && $data[0]->vacinas_essenciais!="")? $data[0]->vacinas_essenciais."</li>" : "Não informado"."</li>").
+                    "<li>Saúde: ".(($data[0]->saude!=null && $data[0]->saude!="")? $data[0]->saude."</li>" : "Não informado"."</li>").
+                    "<li>Endereço: ".$data[0]->endereco."</li>".
+                    "</ul>";
 
             $subject = "Sobre a $op_type do Pet";
             $msg = "<h2>Segue as informações do pet:</h2>".$info;

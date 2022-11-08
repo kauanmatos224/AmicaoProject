@@ -58,19 +58,6 @@ public class DatabaseController {
         return cursor;
     }
 
-    public Cursor getDataRow(int id){
-
-        Cursor cursor;
-        db = create_db.getReadableDatabase();
-        String[] fields = {"id", "nome", "foto", "comportamento", "status", "raca", "porte", "endereco", "nascimento", "favoritado", "idade", "genero"};
-        cursor = db.query("tb_pets", fields, "id=?", new String[]{String.valueOf(id)}, null, null, null, null);
-
-        if(cursor!=null){
-            cursor.moveToFirst();
-        }
-        db.close();
-        return cursor;
-    }
     public void dropAndCreateTable(){
         db = create_db.getWritableDatabase();
         db.execSQL("delete from tb_pets where 1=1;");

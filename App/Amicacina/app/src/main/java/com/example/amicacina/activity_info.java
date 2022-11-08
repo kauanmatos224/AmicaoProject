@@ -7,10 +7,21 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Switch;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -20,6 +31,8 @@ public class activity_info extends AppCompatActivity {
     private Button dateButton;
     Button timeButton;
     int hour, minute;
+    String datetime_str;
+    public static final String REQUEST_SENDING_URL = "https://amicao.herokuapp.com/api/application_send/send_request";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +77,7 @@ public class activity_info extends AppCompatActivity {
         int month = cal.get(Calendar.MONTH);
         month = month + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
+        datetime_str = makeDateString(day, month, year);
         return makeDateString(day, month, year);
     }
 
@@ -130,6 +144,72 @@ public class activity_info extends AppCompatActivity {
     public void openDatePicker(View view)
     {
         datePickerDialog.show();
+    }
+
+    public void onClickSend(View view){
+        RadioGroup radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
+        EditText nome = (EditText) findViewById(R.id.txtUnome);
+        EditText email = (EditText) findViewById(R.id.txtUemail);
+        EditText telefone = (EditText) findViewById(R.id.txtUtelefone);
+        RadioButton selectedReqType = (RadioButton) findViewById(radiogroup.getCheckedRadioButtonId());
+        String req_type="";
+        if(selectedReqType.equals("Adotar")){
+            req_type = "adocao";
+        }
+        else if(selectedReqType.equals("Apadrinhar")){
+            req_type = "apadrinhamento";
+        }
+        else if(selectedReqType.equals("Visitar")){
+            req_type = "visita";
+        }
+
+        Ion.with (activity_info.this)
+                .load(REQUEST_SENDING_URL)
+                .setBodyParameter("id_pet", String.valueOf(MainActivity.id_pet))
+                .setBodyParameter("nome", nome.getText().toString())
+                .setBodyParameter("email", email.getText().toString())
+                .setBodyParameter("phone", telefone.getText().toString())
+                .setBodyParameter("obs", "")
+                .setBodyParameter("datetime", datetime_str)
+                .setBodyParameter("req_type", req_type)
+                .asJsonArray()
+                .setCallback ( new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        JsonObject res_json = result.get(0).getAsJsonObject();
+                        try {
+                            String error = res_json.get("error").getAsString();
+                            String error_message = "";
+
+                            switch (error) {
+                                case "invalid_date":
+                                    error_message = "A data informada é inválida!";
+                                    break;
+                                case "invalid_email":
+                                    error_message = "O e-email informado é inválido!";
+                                    break;
+                                case "invalid_name":
+                                    error_message = "Um nome válido deve ser informado!";
+                                    break;
+                                case "invalid_phone":
+                                    error_message = "Um número de celular ou de telefone válido deve ser informado!";
+                                    break;
+                                case "invalid_request_type":
+                                    error_message = "Um dado foi perceptívelmente modificado, e possivelmente via alteração de código fonte. " +
+                                            "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
+                                            "à pena da LEI Nº 9.609 /1998 artigo 13";
+
+
+                            }
+                            Toast.makeText(activity_info.this, error_message, Toast.LENGTH_LONG);
+                        }catch (Exception excp){
+                            String sucess = res_json.get("sucess").getAsString();
+                            if(sucess.equals("request_sent")){
+                                Toast.makeText(activity_info.this, "Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)", Toast.LENGTH_LONG);
+                            }
+                        }
+                    }
+                });
     }
 
 }

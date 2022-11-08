@@ -66,7 +66,7 @@
 	  			<option value="sim">Sim</option>
 				<option value="nao">Não</option>
 			</select><br><br>
-			<span class="lSaude">Problemas de saúde (se houver):</span><br><textarea rows="5" id="saude" class="saude" type=text name=txtSaude></textarea><br><br>
+			<span class="lSaude">Comportamento e problemas de saúde (se houver):</span><br><textarea rows="5" id="saude" class="saude" type=text name=txtSaude></textarea><br><br>
 			<input type="submit" class="btn btn-warning" id="cadastrar" value="Cadastrar">
             </form>
         </div>

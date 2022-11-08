@@ -45,8 +45,11 @@ public class activity_details extends AppCompatActivity{
         txtCidade = (TextView) findViewById(R.id.txtCidade);
 
         DatabaseController db = new DatabaseController(activity_details.this);
-        Cursor cursor = db.getDataRow(MainActivity.pos);
-
+        Cursor cursor = db.retrieveData();
+        for(int i=0; i < MainActivity.pos; i++){
+            cursor.moveToNext();
+        }
+        MainActivity.id_pet = cursor.getInt(cursor.getColumnIndex("id"));
         Picasso.get().load(cursor.getString(cursor.getColumnIndex("foto"))).into(imgFoto);
         txtNome.setText(cursor.getString(cursor.getColumnIndex("nome")));
         txtRaca.setText(cursor.getString(cursor.getColumnIndex("raca")));
