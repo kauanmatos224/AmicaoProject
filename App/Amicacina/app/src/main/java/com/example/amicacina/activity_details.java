@@ -33,6 +33,9 @@ public class activity_details extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
+
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtRaca = (TextView) findViewById(R.id.txtRaca);
