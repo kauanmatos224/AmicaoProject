@@ -251,7 +251,7 @@ class UserAuthController extends Controller
                     $id_org = $select_org[0]->id;
 
                     $secret = "30/07/2003";
-                    $password_hash = hash('sha256', $user_password.$secret);
+                    $password_hash = hash('sha256', $password.$secret);
     
                     DB::insert('insert into tb_auth_org(
                             id_org,
