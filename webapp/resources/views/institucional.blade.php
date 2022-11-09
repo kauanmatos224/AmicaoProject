@@ -62,10 +62,14 @@
 				<div id="div3" class="ex3">
 					<a href="/staff/messages" class="btn btn-warning" id="msg">Mensagens</a>
 				</div>  
-
+				<br>
 				<div id="div3" class="ex3">
 					<a href="/staff/inst-analise" class="btn btn-warning" id="msg">Análise de Cadastros</a>
 				</div>  
+				<br>
+				<div id="div3" class="ex3">
+						<a href="/logout" class="btn btn-warning" id="logout">Logout</a>
+				</div>
 
 		<?php endif;
 			endif;

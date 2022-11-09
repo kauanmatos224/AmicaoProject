@@ -108,6 +108,14 @@ input[type=text]:focus{
     width: fit-content;
 }
 
+#pra{
+    color: whitesmoke;
+}
+
+#inpFoto{
+    color: whitesmoke;
+}
+
 #btnenviar{ cursor: pointer;}
 
 ::-webkit-input-placeholder {

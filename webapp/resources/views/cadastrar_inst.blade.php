@@ -28,6 +28,7 @@
 
         <div id="whole-page-without-menu">
         <div id="div1">
+
             <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <span class="lNomeF">Nome Fantasia:</span><br><input class="nomef" type=text name=txtFantasyName placeholder="Nome Fantasia"><br><br>

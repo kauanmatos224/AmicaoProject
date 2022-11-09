@@ -30,6 +30,7 @@
 #tabela {
 border-collapse: collapse;
 width: 100%;
+top:50px;
 }
 
 td, th {
