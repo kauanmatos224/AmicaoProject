@@ -102,8 +102,8 @@ class DatabaseSeeder extends Seeder
 
 
         //Seeds pets data.
-        DB::insert('insert into tb_pets(id_org, nome, raca_pai, raca_mae, raca, nascimento, idade, status, comportamento, genero, img_path, porte, vacinas_essenciais, saude)
-        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
+        DB::insert('insert into tb_pets(id_org, nome, raca_pai, raca_mae, raca, nascimento, idade, status, comportamento, genero, img_path, porte, vacinas_essenciais)
+        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
             1,
             'nome pet 1',
             'raca do pai 1',
@@ -116,13 +116,12 @@ class DatabaseSeeder extends Seeder
             'femea',
             '/no-photo.png',
             'pequeno',
-            'sim',
-            ''
+            'sim'
         ));
 
 
-        DB::insert('insert into tb_pets(id_org, nome, raca_pai, raca_mae, raca, nascimento, idade, status, comportamento, genero, img_path, porte, vacinas_essenciais, saude)
-        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
+        DB::insert('insert into tb_pets(id_org, nome, raca_pai, raca_mae, raca, nascimento, idade, status, comportamento, genero, img_path, porte, vacinas_essenciais)
+        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
             1,
             'nome pet 2',
             'raca do pai 2',
@@ -135,12 +134,11 @@ class DatabaseSeeder extends Seeder
             'macho',
             '/no-photo.png',
             'grande',
-            'não',
-            ''
+            'não'
         ));
 
-        DB::insert('insert into tb_pets(id_org, nome, raca_pai, raca_mae, raca, nascimento, idade, status, comportamento, genero, img_path, porte, vacinas_essenciais, saude)
-        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
+        DB::insert('insert into tb_pets(id_org, nome, raca_pai, raca_mae, raca, nascimento, idade, status, comportamento, genero, img_path, porte, vacinas_essenciais)
+        values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', array(
             1,
             'nome pet 3',
             'raca do pai 3',
@@ -153,8 +151,7 @@ class DatabaseSeeder extends Seeder
             'femea',
             '/no-photo.png',
             'grande',
-            'não',
-            ''
+            'não'
         ));
 
 

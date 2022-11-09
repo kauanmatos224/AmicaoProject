@@ -222,7 +222,7 @@ class PetsController extends Controller
                 raca = ?,
                 raca_pai = ?, 
                 raca_mae = ?,
-                saude = ?,
+                comportamento = ?,
                 vacinas_essenciais = ?,
                 porte = ?,
                 genero = ?,
@@ -288,7 +288,7 @@ class PetsController extends Controller
                 }
                     
                 $insert = DB::insert('insert into tb_pets(nome, idade, raca, raca_pai,
-                    raca_mae, saude, vacinas_essenciais, porte, genero, img_path, status, nascimento, id_org) values(
+                    raca_mae, comportamento, vacinas_essenciais, porte, genero, img_path, status, nascimento, id_org) values(
                         ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                     )', array($nome, $idade, $raca, $raca_pai, $raca_mae, $saude, $vacinas,
                             $porte, $genero, $img_path, $status, $nascimento, session('id_org')

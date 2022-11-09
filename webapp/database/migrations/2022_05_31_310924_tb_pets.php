@@ -31,7 +31,6 @@ class TbPets extends Migration
             $table->string('img_path')->nullable();
             $table->string('porte');
             $table->string('vacinas_essenciais');
-            $table->string('saude')->nullable();
             
         });
     }
