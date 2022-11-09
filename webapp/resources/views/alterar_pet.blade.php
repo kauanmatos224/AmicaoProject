@@ -72,7 +72,7 @@
 	  				<option value="sim" <?php if($pet[0]->vacinas_essenciais=="sim"){echo "selected";} ?>>Sim</option>
 					<option value="nao" <?php if($pet[0]->vacinas_essenciais=="nao"){echo "selected";} ?>>Não</option>
 				</select><br><br>
-				<span class="lSaude">Comportamento e problemas de saúde (se houver):</span><br><input id="saude" class="saude" type=text name=txtSaude value="<?= $pet[0]->comportamento?>"><br><br>
+				<span class="lSaude">Comportamento e problemas de saúde (se houver, max:250):</span><br><input id="saude" class="saude" type=text name=txtSaude value="<?= $pet[0]->comportamento?>"><br><br>
 				<span>Status:</span><br>
 				<select class = "status" name="txtStatus">
 	  				<option value="disponivel" <?php if($pet[0]->status=="disponivel"){ echo "selected";} ?>>Disponível</option>

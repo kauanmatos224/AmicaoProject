@@ -7,7 +7,7 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/style/estiloC.css" />
-		<title>Cadastro de pet - Amicão</title>
+		<title>Amicão - Cadastro de pet</title>
 		@include("./user_routesNavigation")
 	</head>
 
@@ -66,7 +66,7 @@
 	  			<option value="sim">Sim</option>
 				<option value="nao">Não</option>
 			</select><br><br>
-			<span class="lSaude">Comportamento e problemas de saúde (se houver):</span><br><textarea rows="5" id="saude" class="saude" type=text name=txtSaude></textarea><br><br>
+			<span class="lSaude">Comportamento e problemas de saúde (se houver, max:250):</span><br><textarea rows="5" id="saude" class="saude" type=text name=txtSaude></textarea><br><br>
 			<input type="submit" class="btn btn-warning" id="cadastrar" value="Cadastrar">
             </form>
         </div>

@@ -708,7 +708,6 @@ class PetsController extends Controller
         $email = $request->post('email');
         $status = "not_seen";
         $req_type = $request->post('req_type');
-        $obs = $request->post('obs');
 
         $timestamp = null;
         if(strtotime($datetime)){
@@ -736,12 +735,11 @@ class PetsController extends Controller
 
         
         try{
-            DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+            DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
                 $id_pet,
                 $nome,
                 $phone,
                 $email,
-                $obs,
                 $status,
                 $req_type,
                 $timestamp
@@ -777,11 +775,10 @@ class PetsController extends Controller
                     "<li>Nascimento: ".(($data[0]->nascimento!=null && $data[0]->nascimento!="")? date('d/m/Y', strtotime($data[0]->nascimento))."</li>" : "Não informado"."</li>").
                     "<li>Idade: ".(($data[0]->idade!=null && $data[0]->idade!="")? $data[0]->idade."</li>" : "Não informado"."</li>").
                     "<li>Status: ".(($data[0]->status!=null && $data[0]->idade=="em_adocao")? "em adoção"."</li>" : $data[0]->status."</li>").
-                    "<li>Comportamento: ".(($data[0]->comportamento!=null && $data[0]->comportamento!="")? $data[0]->comportamento."</li>" : "Não informado"."</li>").
+                    "<li>Comportamento e saúde: ".(($data[0]->comportamento!=null && $data[0]->comportamento!="")? $data[0]->comportamento."</li>" : "Não informado"."</li>").
                     "<li>Genero: ".(($data[0]->genero!=null && $data[0]->genero!="")? $data[0]->genero."</li>" : "Não informado"."</li>").
                     "<li>Porte: ".(($data[0]->porte!=null && $data[0]->porte!="")? $data[0]->porte."</li>" : "Não informado"."</li>").
                     "<li>Vacinas essenciais: ".(($data[0]->vacinas_essenciais!=null && $data[0]->vacinas_essenciais!="")? $data[0]->vacinas_essenciais."</li>" : "Não informado"."</li>").
-                    "<li>Saúde: ".(($data[0]->saude!=null && $data[0]->saude!="")? $data[0]->saude."</li>" : "Não informado"."</li>").
                     "<li>Endereço: ".$data[0]->endereco."</li>".
                     "</ul>";
 

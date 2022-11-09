@@ -1,0 +1,41 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'Oswald';
+    src: url('fonts/static/Oswald-Bold.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Oswald-Light';
+    src: url('fonts/static/Oswald-Light.ttf');
+    font-weight: normal;
+    font-style: italic;
+}
+
+#div1 {
+    position: absolute;
+    border-style: none;
+    height: 100%;
+    width: 50%;
+    padding: 50px;
+    padding-top: 120px;
+    font-size: Large;
+    left: 400px;
+    top: 100px;
+    text-align: center;
+}
+
+#tabela {
+border-collapse: collapse;
+width: 100%;
+}
+
+td, th {
+border: 1px solid #dddddd;
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}

@@ -157,34 +157,31 @@ class DatabaseSeeder extends Seeder
 
 
         //Seeds requests data.
-        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
             1,
             'Victor Rayan',
             '1111111111111',
             'victorrayansouzaramos@gmail.com',
-            'observação teste',
             'not_seen',
             'apadrinhamento',
             1664662367
         ));
 
-        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
             2,
             'Victor Rayan',
             '1111111111111',
             'victorrayansouzaramos@gmail.com',
-            'observação teste',
             'acceptted',
             'apadrinhamento',
             1664662367
         ));
 
-        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, obs, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?, ?)', array(
+        DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
             3,
             'Victor Rayan',
             '1111111111111',
             'victorrayansouzaramos@gmail.com',
-            'observação teste',
             'refused',
             'visita',
             1664662367,

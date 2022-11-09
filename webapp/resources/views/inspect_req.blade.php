@@ -31,7 +31,6 @@
 
             ?><br>
             <span class="lData">Data:</span> <?= date('d/m/Y H:i:s', $data->date) ?><br>
-            <span class="lObs">Observações:</span> <?= $data->obs ?><br>
             <span class="lId">ID (pet):</span> <?= $data->id_pet ?><br>
 
             <?php 
