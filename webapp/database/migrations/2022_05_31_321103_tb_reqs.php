@@ -25,7 +25,7 @@ class TbReqs extends Migration
             $table->string('nome');
             $table->string('phone');
             $table->string('email');
-            $table->string('obs');
+            $table->string('obs')->nullable();
             $table->string('status');
             $table->string('req_type');
             $table->integer('date');

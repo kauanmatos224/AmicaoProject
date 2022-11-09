@@ -715,23 +715,23 @@ class PetsController extends Controller
             $timestamp = strtotime($datetime);
         }
         else{
-            return json_encode("[{\"error\":\"invalid_date\"}]");
+            return json_encode(["error"=>"invalid_date"]);
         }
 
         if(filter_var($email, FILTER_VALIDATE_EMAIL)==false) {
-            return json_encode("[{\"error\":\"invalid_email\"}]");
+            return json_encode(["error"=>"invalid_email"]);
         }
 
         if(strlen(str($phone))<11 || !intval($phone)){
-            return json_encode("[{\"error\":\"invalid_phone\"}]");
+            return json_encode(["error"=>"invalid_phone"]);
         }
 
         if(!preg_match ("/^[a-zA-z]*$/", $nome)){
-            return json_encode("[{\"error\":\"invalid_name\"}]");
+            return json_encode(["error"=>"invalid_name"]);
         }
         
         if($req_type!="adocao" && $req_type!="visita" && $req_type!="apadrinhamento"){
-            return json_encode("[{\"error\":\"invalid_request_type\"}]");
+            return json_encode(["error"=>"invalid_request_type"]);
         }
 
         
@@ -747,13 +747,13 @@ class PetsController extends Controller
                 $timestamp
             ));
         }catch(\Illuminate\Database\QueryException $ex){
-            return json_encode("[{\"error\":\"invalid_id\"}]");
+            return json_encode(["error"=>"invalid_id"]);
         }
 
         $data = DB::select('select tb_pets.*, tb_org.endereco from tb_pets inner join tb_org on tb_org.id=tb_pets.id_org and tb_pets.id=?', array($id_pet));
         (new PetsController)->sendMail_infoPet($email, "pets_info", $data, $req_type);
 
-        return json_encode("{\"sucess\":\"request_sent\"}");
+        return json_encode(["success"=>"request_sent"]);
     }
 
     public function sendMail_infoPet($send_to, $subject, $data, $op_type){
