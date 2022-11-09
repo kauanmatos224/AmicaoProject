@@ -8,6 +8,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -147,19 +148,20 @@ public class activity_info extends AppCompatActivity {
     }
 
     public void onClickSend(View view){
+
         RadioGroup radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
         EditText nome = (EditText) findViewById(R.id.txtUnome);
         EditText email = (EditText) findViewById(R.id.txtUemail);
         EditText telefone = (EditText) findViewById(R.id.txtUtelefone);
         RadioButton selectedReqType = (RadioButton) findViewById(radiogroup.getCheckedRadioButtonId());
         String req_type="";
-        if(selectedReqType.equals("Adotar")){
+        if(selectedReqType.getText().equals("Adotar")){
             req_type = "adocao";
         }
-        else if(selectedReqType.equals("Apadrinhar")){
+        else if(selectedReqType.getText().equals("Apadrinhar")){
             req_type = "apadrinhamento";
         }
-        else if(selectedReqType.equals("Visitar")){
+        else if(selectedReqType.getText().equals("Visitar")){
             req_type = "visita";
         }
 
@@ -172,44 +174,48 @@ public class activity_info extends AppCompatActivity {
                 .setBodyParameter("obs", "")
                 .setBodyParameter("datetime", datetime_str)
                 .setBodyParameter("req_type", req_type)
-                .asJsonArray()
-                .setCallback ( new FutureCallback<JsonArray>() {
+                .asJsonObject()
+                .setCallback ( new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-                        JsonObject res_json = result.get(0).getAsJsonObject();
+                    public void onCompleted(Exception e, JsonObject result) {
                         try {
-                            String error = res_json.get("error").getAsString();
-                            String error_message = "";
+                            String error = result.get("error").getAsString();
 
                             switch (error) {
                                 case "invalid_date":
-                                    error_message = "A data informada é inválida!";
+                                    MainActivity.user_toast_message = "A data informada é inválida!";
                                     break;
                                 case "invalid_email":
-                                    error_message = "O e-email informado é inválido!";
+                                    MainActivity.user_toast_message = "O e-email informado é inválido!";
                                     break;
                                 case "invalid_name":
-                                    error_message = "Um nome válido deve ser informado!";
+                                    MainActivity.user_toast_message = "Um nome válido deve ser informado!";
                                     break;
                                 case "invalid_phone":
-                                    error_message = "Um número de celular ou de telefone válido deve ser informado!";
+                                    MainActivity.user_toast_message = "Um número de celular ou de telefone válido deve ser informado!";
                                     break;
                                 case "invalid_request_type":
-                                    error_message = "Um dado foi perceptívelmente modificado, e possivelmente via alteração de código fonte. " +
+                                    MainActivity.user_toast_message = "Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
                                             "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
                                             "à pena da LEI Nº 9.609 /1998 artigo 13";
-
-
+                                    break;
+                                case "invalid_id":
+                                    MainActivity.user_toast_message = "Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
+                                            "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
+                                            "à pena da LEI Nº 9.609 /1998 artigo 13";
+                                    break;
                             }
-                            Toast.makeText(activity_info.this, error_message, Toast.LENGTH_LONG);
+
                         }catch (Exception excp){
-                            String sucess = res_json.get("sucess").getAsString();
+                            String sucess = result.get("success").getAsString();
                             if(sucess.equals("request_sent")){
-                                Toast.makeText(activity_info.this, "Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)", Toast.LENGTH_LONG);
+                                MainActivity.user_toast_message = "Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)";
                             }
                         }
                     }
                 });
+        Log.d("message", MainActivity.user_toast_message);
+        Toast.makeText(activity_info.this, MainActivity.user_toast_message, Toast.LENGTH_LONG);
     }
 
 }

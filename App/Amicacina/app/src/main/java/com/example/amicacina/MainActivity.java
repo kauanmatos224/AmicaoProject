@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     public static Fragment selectedFragment = null;
     public static int id_pet;
     public static int pos;
+    public static String user_toast_message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                             );
                             getSupportFragmentManager().beginTransaction()
                                     .replace(R.id.fragment_layout,new fragment_home()).commit();
-                            Ion.getDefault(MainActivity.this).cancelAll();
+                            Ion.getDefault(MainActivity.this).cancelAll(MainActivity.this);
                         }
 
                     }
