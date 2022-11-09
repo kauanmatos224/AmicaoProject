@@ -245,6 +245,16 @@
             app:layout_constraintEnd_toStartOf="@+id/alignment2"
             app:layout_constraintTop_toBottomOf="@+id/timeButton" />
 
+        <TextView
+            android:id="@+id/txtViewMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginTop="4dp"
+            android:text="message"
+            app:layout_constraintStart_toEndOf="@+id/radiogroup"
+            app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

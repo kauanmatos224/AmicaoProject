@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
@@ -23,6 +24,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -34,6 +37,7 @@ public class activity_info extends AppCompatActivity {
     int hour, minute;
     String datetime_str;
     public static final String REQUEST_SENDING_URL = "https://amicao.herokuapp.com/api/application_send/send_request";
+    TextView txtMessage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +169,8 @@ public class activity_info extends AppCompatActivity {
             req_type = "visita";
         }
 
+
+        txtMessage = (TextView)findViewById(R.id.txtViewMessage);
         Ion.with (activity_info.this)
                 .load(REQUEST_SENDING_URL)
                 .setBodyParameter("id_pet", String.valueOf(MainActivity.id_pet))
@@ -183,39 +189,38 @@ public class activity_info extends AppCompatActivity {
 
                             switch (error) {
                                 case "invalid_date":
-                                    MainActivity.user_toast_message = "A data informada é inválida!";
+                                    txtMessage.setText("A data informada é inválida!");
                                     break;
                                 case "invalid_email":
-                                    MainActivity.user_toast_message = "O e-email informado é inválido!";
+                                    txtMessage.setText("O e-email informado é inválido!");
                                     break;
                                 case "invalid_name":
-                                    MainActivity.user_toast_message = "Um nome válido deve ser informado!";
+                                    txtMessage.setText("Um nome válido deve ser informado!");
                                     break;
                                 case "invalid_phone":
-                                    MainActivity.user_toast_message = "Um número de celular ou de telefone válido deve ser informado!";
+                                    txtMessage.setText("Um número de celular ou de telefone válido deve ser informado!");
                                     break;
                                 case "invalid_request_type":
-                                    MainActivity.user_toast_message = "Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
+                                    txtMessage.setText("Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
                                             "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
-                                            "à pena da LEI Nº 9.609 /1998 artigo 13";
+                                            "à pena da LEI Nº 9.609 /1998 artigo 13");
                                     break;
                                 case "invalid_id":
-                                    MainActivity.user_toast_message = "Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
+                                    txtMessage.setText("Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
                                             "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
-                                            "à pena da LEI Nº 9.609 /1998 artigo 13";
+                                            "à pena da LEI Nº 9.609 /1998 artigo 13");
                                     break;
                             }
 
                         }catch (Exception excp){
                             String sucess = result.get("success").getAsString();
                             if(sucess.equals("request_sent")){
-                                MainActivity.user_toast_message = "Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)";
+                                txtMessage.setText("Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)");
                             }
                         }
                     }
                 });
-        Log.d("message", MainActivity.user_toast_message);
-        Toast.makeText(activity_info.this, MainActivity.user_toast_message, Toast.LENGTH_LONG);
+
     }
 
 }
