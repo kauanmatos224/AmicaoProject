@@ -37,8 +37,11 @@ public class fragment_home extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        // Instanciando o gridview com o elemento gráfico
         gridviewHome = (GridView) view.findViewById(R.id.GridViewHome);
 
+        // Criação de uma lista de arrays, utilizando como modelo a classe GridModel, onde foi
+        // determinada as variáveis necessárias e suas devidas posições
         ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
 
 
@@ -64,15 +67,18 @@ public class fragment_home extends Fragment {
 
         }
 
+        // Método do adaptador, responsável por pegar os dados com sua estrutura definida no GridModel
+        // e usando o adaptador do GridAdapter para preencher os dados na gridview
         GridAdapter adapter = new GridAdapter(getContext(), gridModelArrayList);
         gridviewHome.setAdapter(adapter);
 
+        // Método para definir uma ação ao clicar em um item do gridview
         gridviewHome.setOnItemClickListener(new GridView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                // TODO Auto-generated method stub
 
-
+                // Ao clicar em um item, ele pega a posição dele no adaptador e guarda em uma variável
+                // em seguida ele muda para a activity_details
                 MainActivity.pos = position;
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), activity_details.class);

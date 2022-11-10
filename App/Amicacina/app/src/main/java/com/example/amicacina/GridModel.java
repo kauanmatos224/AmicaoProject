@@ -2,11 +2,11 @@ package com.example.amicacina;
 
 public class GridModel {
 
-    // string pet_name for storing pet_name
-    // and imgid for storing image id.
+    // Criando variáveis para armazenar os dados do pet
     private String pet_id, pet_name, pet_raca, pet_nasc, pet_idad, pet_stat, pet_gene, pet_port, pet_comp, imgid;
 
-
+    // Instanciando as variáveis na ordem que deve ser preenchida, serve como um modelo onde todos os dados são incluidos
+    // na exata ordem, como em um vetor
     public GridModel(String pet_id, String pet_name, String pet_raca, String pet_nasc, String pet_idad, String pet_stat,
                      String pet_gene, String pet_port, String pet_comp, String imgid) {
         this.pet_id = pet_id;
@@ -21,6 +21,7 @@ public class GridModel {
         this.imgid = imgid;
     }
 
+    // Métodos getters e setters, utilizado para proteger os dados
     public String getpet_id() {
         return pet_id;
     }

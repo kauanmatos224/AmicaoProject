@@ -25,7 +25,7 @@ public class activity_details extends AppCompatActivity{
 
     ImageView imgFoto;
     TextView txtId, txtCidade, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
-    Button btnFav, btnAdotar;
+
 
     @SuppressLint("Range")
     @Override
@@ -33,9 +33,11 @@ public class activity_details extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
+        // Esconde a barra superior para fins estéticos
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        // Instanciamento dos elementos responsáveis por receber os dados
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
         txtNome = (TextView) findViewById(R.id.txtNome);
         txtRaca = (TextView) findViewById(R.id.txtRaca);
@@ -78,7 +80,7 @@ public class activity_details extends AppCompatActivity{
         String cidade = splitted_endereco[1];
         txtCidade.setText(cidade);
 
-
+        // Método usado para definir um animal como favoritado ou não
         findViewById(R.id.btnFav).setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
@@ -87,6 +89,7 @@ public class activity_details extends AppCompatActivity{
             }
         });
 
+        // Método para realizar a troca para a tela activity_info
         findViewById(R.id.btnAdotar).setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v)
