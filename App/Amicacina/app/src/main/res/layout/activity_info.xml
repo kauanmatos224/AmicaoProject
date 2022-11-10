@@ -147,7 +147,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/radiogroup" />
+        app:layout_constraintTop_toBottomOf="@id/txtViewMessage" />
 
     <Button
         android:id="@+id/timeButton"
@@ -249,11 +249,15 @@
             android:id="@+id/txtViewMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="3dp"
-            android:layout_marginTop="4dp"
-            android:text="message"
-            app:layout_constraintStart_toEndOf="@+id/radiogroup"
-            app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+            android:layout_marginTop="10dp"
+            android:singleLine="false"
+            android:textAlignment="center"
+            android:text=""
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@+id/radiogroup"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
