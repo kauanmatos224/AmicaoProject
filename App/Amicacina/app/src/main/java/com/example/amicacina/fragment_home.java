@@ -38,20 +38,15 @@ public class fragment_home extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
         gridviewHome = (GridView) view.findViewById(R.id.GridViewHome);
-        //gridviewHome = findViewById(R.id.GridViewHome);
 
         ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
 
-
-        //MainActivity.foto[6] = String.valueOf(R.drawable.pinscher);
 
         DatabaseController db = new DatabaseController(getContext());
         Cursor cursor = db.retrieveData();
 
         for(int i=0 ; i < cursor.getCount(); i++){
-            gridModelArrayList.add(new GridModel(/*MainActivity.id[i], MainActivity.nome[i], MainActivity.raca[i],
-                    MainActivity.nasc[i], MainActivity.idad[i], MainActivity.stat[i],
-                    MainActivity.gene[i], MainActivity.port[i], MainActivity.comp[i], MainActivity.foto[i]*/
+            gridModelArrayList.add(new GridModel(
 
                     cursor.getString(cursor.getColumnIndex("id")),
                     cursor.getString(cursor.getColumnIndex("nome")),
@@ -76,7 +71,7 @@ public class fragment_home extends Fragment {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 // TODO Auto-generated method stub
-               // Toast.makeText(getContext(), "Imagem: "+(position+1), Toast.LENGTH_SHORT).show();
+
 
                 MainActivity.pos = position;
                 Intent intent = new Intent();
