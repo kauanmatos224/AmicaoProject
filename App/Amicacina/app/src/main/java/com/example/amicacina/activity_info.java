@@ -35,7 +35,7 @@ public class activity_info extends AppCompatActivity {
     private Button dateButton;
     Button timeButton;
     int hour, minute;
-    String datetime_str;
+    String datetime_str, today_date;
     public static final String REQUEST_SENDING_URL = "https://amicao.herokuapp.com/api/application_send/send_request";
     TextView txtMessage;
 
@@ -82,7 +82,8 @@ public class activity_info extends AppCompatActivity {
         int month = cal.get(Calendar.MONTH);
         month = month + 1;
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        datetime_str = makeDateString(day, month, year);
+
+        today_date = makeDateString(day, month, year);
         return makeDateString(day, month, year);
     }
 
@@ -159,6 +160,7 @@ public class activity_info extends AppCompatActivity {
         EditText telefone = (EditText) findViewById(R.id.txtUtelefone);
         RadioButton selectedReqType = (RadioButton) findViewById(radiogroup.getCheckedRadioButtonId());
         String req_type="";
+        txtMessage = (TextView)findViewById(R.id.txtViewMessage);
         if(selectedReqType.getText().equals("Adotar")){
             req_type = "adocao";
         }
@@ -168,58 +170,70 @@ public class activity_info extends AppCompatActivity {
         else if(selectedReqType.getText().equals("Visitar")){
             req_type = "visita";
         }
+        else{
+            txtMessage.setText("Uma ação deve ser selecionada!");
+        }
 
+        if(timeButton.getText()!=null && timeButton.getText()!=""){
+            datetime_str = today_date + "" + timeButton.getText();
+            Log.d("date", datetime_str);
+            Ion.with (activity_info.this)
+                    .load(REQUEST_SENDING_URL)
+                    .setBodyParameter("id_pet", String.valueOf(MainActivity.id_pet))
+                    .setBodyParameter("nome", nome.getText().toString())
+                    .setBodyParameter("email", email.getText().toString())
+                    .setBodyParameter("phone", telefone.getText().toString())
+                    .setBodyParameter("obs", "")
+                    .setBodyParameter("datetime", datetime_str)
+                    .setBodyParameter("req_type", req_type)
+                    .asJsonObject()
+                    .setCallback ( new FutureCallback<JsonObject>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonObject result) {
+                            try {
+                                String error = result.get("error").getAsString();
 
-        txtMessage = (TextView)findViewById(R.id.txtViewMessage);
-        Ion.with (activity_info.this)
-                .load(REQUEST_SENDING_URL)
-                .setBodyParameter("id_pet", String.valueOf(MainActivity.id_pet))
-                .setBodyParameter("nome", nome.getText().toString())
-                .setBodyParameter("email", email.getText().toString())
-                .setBodyParameter("phone", telefone.getText().toString())
-                .setBodyParameter("obs", "")
-                .setBodyParameter("datetime", datetime_str)
-                .setBodyParameter("req_type", req_type)
-                .asJsonObject()
-                .setCallback ( new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        try {
-                            String error = result.get("error").getAsString();
+                                switch (error) {
+                                    case "invalid_date":
+                                        txtMessage.setText("A data informada é inválida!");
+                                        break;
+                                    case "invalid_email":
+                                        txtMessage.setText("O e-email informado é inválido!");
+                                        break;
+                                    case "invalid_name":
+                                        txtMessage.setText("Um nome válido deve ser informado!");
+                                        break;
+                                    case "invalid_phone":
+                                        txtMessage.setText("Um número de celular ou de telefone válido deve ser informado!");
+                                        break;
+                                    case "invalid_request_type":
+                                        txtMessage.setText("Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
+                                                "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
+                                                "à pena da LEI Nº 9.609 /1998 artigo 13");
+                                        break;
+                                    case "invalid_id":
+                                        txtMessage.setText("Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
+                                                "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
+                                                "à pena da LEI Nº 9.609 /1998 artigo 13");
+                                        break;
+                                }
+                                Log.d("error", error);
+                                Log.d("id", String.valueOf(MainActivity.id_pet));
 
-                            switch (error) {
-                                case "invalid_date":
-                                    txtMessage.setText("A data informada é inválida!");
-                                    break;
-                                case "invalid_email":
-                                    txtMessage.setText("O e-email informado é inválido!");
-                                    break;
-                                case "invalid_name":
-                                    txtMessage.setText("Um nome válido deve ser informado!");
-                                    break;
-                                case "invalid_phone":
-                                    txtMessage.setText("Um número de celular ou de telefone válido deve ser informado!");
-                                    break;
-                                case "invalid_request_type":
-                                    txtMessage.setText("Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
-                                            "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
-                                            "à pena da LEI Nº 9.609 /1998 artigo 13");
-                                    break;
-                                case "invalid_id":
-                                    txtMessage.setText("Um dado foi perceptívelmente modificado, e possivelmente via código fonte. " +
-                                            "Pois alterar o código fonte de Aplicativos e Softwares sem a permissão legal do proprietário, infringe os direitos legais sujeito " +
-                                            "à pena da LEI Nº 9.609 /1998 artigo 13");
-                                    break;
-                            }
-
-                        }catch (Exception excp){
-                            String sucess = result.get("success").getAsString();
-                            if(sucess.equals("request_sent")){
-                                txtMessage.setText("Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)");
+                            }catch (Exception excp){
+                                String sucess = result.get("success").getAsString();
+                                if(sucess.equals("request_sent")){
+                                    txtMessage.setText("Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)");
+                                }
                             }
                         }
-                    }
-                });
+                    });
+
+        }
+        else{
+            txtMessage.setText("Um horário deve ser selecionado!");
+        }
+
 
     }
 

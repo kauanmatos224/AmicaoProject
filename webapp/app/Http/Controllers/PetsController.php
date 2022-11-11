@@ -725,7 +725,7 @@ class PetsController extends Controller
             return json_encode(["error"=>"invalid_phone"]);
         }
 
-        if(!preg_match ("/^[a-zA-z]*$/", $nome)){
+        if(!preg_match ("/^[A-Za-z][A-Za-z\s]+$/", $nome) || $nome==null || $nome==""){
             return json_encode(["error"=>"invalid_name"]);
         }
         
