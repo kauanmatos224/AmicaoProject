@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     public static int id_pet;
     public static int pos;
     public static String user_toast_message;
+    public static Boolean updated_pets;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         DatabaseController db = new DatabaseController(MainActivity.this);
 
-        db.dropAndCreateTable();
         Ion.with (MainActivity.this)
                 .load (GET_DATA_URL)
                 .asJsonArray()
@@ -78,7 +78,9 @@ public class MainActivity extends AppCompatActivity {
                                 nascimentox=res_json.get("nascimento").getAsString();
 
                             }
-                            db.insertData(
+
+
+                            db.syncData(
                                     res_json.get("id").getAsInt(),
                                     res_json.get("nome").getAsString(),
                                     res_json.get("img_path").getAsString(),

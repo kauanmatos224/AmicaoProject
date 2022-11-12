@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -24,8 +25,8 @@ import java.util.Objects;
 public class activity_details extends AppCompatActivity{
 
     ImageView imgFoto;
-    TextView txtId, txtCidade, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
-
+    TextView txtCidade, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
+    String fav_action;
 
     @SuppressLint("Range")
     @Override
@@ -69,6 +70,15 @@ public class activity_details extends AppCompatActivity{
             txtStatus.setText(status);
         }
 
+        Button btnFav = (Button)findViewById(R.id.btnFav);
+        String favoritado = cursor.getString(cursor.getColumnIndex("favoritado"));
+        if(favoritado.equals("true")){
+            btnFav.setText("Desfavoritar");
+            fav_action="desfavoritar";
+        }else{
+            btnFav.setText("Favoritar");
+            fav_action="favoritar";
+        }
 
         txtGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));
         txtPorte.setText(cursor.getString(cursor.getColumnIndex("porte")));
@@ -85,7 +95,17 @@ public class activity_details extends AppCompatActivity{
         {
             public void onClick(View v)
             {
-                MainActivity.fav[MainActivity.pos] = true;
+                if(fav_action=="favoritar"){
+                    Toast.makeText(activity_details.this, "Pet adicionado aos favoritos!", Toast.LENGTH_SHORT).show();
+                    db.favPet(cursor.getInt(cursor.getColumnIndex("id")), "true");
+                    btnFav.setText("Desfavoritar");
+                    fav_action = "desfavoritar";
+                }else if(fav_action=="desfavoritar"){
+                    Toast.makeText(activity_details.this, "Pet removido dos favoritos!", Toast.LENGTH_SHORT).show();
+                    db.favPet(cursor.getInt(cursor.getColumnIndex("id")), "false");
+                    btnFav.setText("Favoritar");
+                    fav_action = "favoritar";
+                }
             }
         });
 
