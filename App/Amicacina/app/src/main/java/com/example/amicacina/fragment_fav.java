@@ -1,6 +1,8 @@
 package com.example.amicacina;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -24,6 +26,7 @@ public class fragment_fav extends Fragment {
     }
 
 
+    @SuppressLint("Range")
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +37,24 @@ public class fragment_fav extends Fragment {
         ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
 
         GridAdapter adapter = new GridAdapter(getContext(), gridModelArrayList);
+        DatabaseController db = new DatabaseController(getContext());
+        Cursor cursor = db.retrieveFavPets();
+
+        for(int i=0; i<cursor.getCount(); i++) {
+            gridModelArrayList.add(new GridModel(
+                    cursor.getString(cursor.getColumnIndex("id")),
+                    cursor.getString(cursor.getColumnIndex("nome")),
+                    cursor.getString(cursor.getColumnIndex("raca")),
+                    cursor.getString(cursor.getColumnIndex("nascimento")),
+                    cursor.getString(cursor.getColumnIndex("idade")),
+                    cursor.getString(cursor.getColumnIndex("status")),
+                    cursor.getString(cursor.getColumnIndex("genero")),
+                    cursor.getString(cursor.getColumnIndex("porte")),
+                    cursor.getString(cursor.getColumnIndex("comportamento")),
+                    cursor.getString(cursor.getColumnIndex("foto"))
+            ));
+            cursor.moveToNext();
+        }
         gridviewFav.setAdapter(adapter);
 
         gridviewFav.setOnItemClickListener(new GridView.OnItemClickListener(){

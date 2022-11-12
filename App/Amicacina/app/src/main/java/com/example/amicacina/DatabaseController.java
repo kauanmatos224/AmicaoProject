@@ -96,9 +96,11 @@ public class DatabaseController {
                 "set favoritado=? " +
                 "where id=?", new Object[] {value, id});
     }
-    /*public void refreshDatabase(){
-        db = create_db.getWritableDatabase();
-        db.execSQL("delete from tb_pets where 1=1;");
-        db.execSQL(create_db.CREATE_TABLE);
-    }*/
+
+    public Cursor retrieveFavPets(){
+        db = create_db.getReadableDatabase();
+        Cursor cursor = db.rawQuery("select * from tb_pets where favoritado=\"true\"", null);
+        cursor.moveToNext();
+        return cursor;
+    }
 }
