@@ -7,7 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -43,7 +46,9 @@ public class MainActivity extends AppCompatActivity {
     public static int id_pet;
     public static int pos;
     public static String user_toast_message;
-    public static Boolean updated_pets;
+    public static String pets_update;
+    public static Boolean from_fav;
+    public static Boolean null_data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();
 
+        null_data=false;
         DatabaseController db = new DatabaseController(MainActivity.this);
 
         Ion.with (MainActivity.this)
@@ -61,47 +67,54 @@ public class MainActivity extends AppCompatActivity {
                 .setCallback ( new FutureCallback<JsonArray>() {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
-                        for (int i = 0; i < result.size(); i++) {
-                            JsonObject res_json = result.get(i).getAsJsonObject();
-                            Log.d("data", res_json.get("id").getAsString());
-                            String comportamentox, nascimentox;
 
-                            if(res_json.get("comportamento")==JsonNull.INSTANCE){
-                                comportamentox="";
+                        if(result.isJsonNull()){
+                            MainActivity.null_data=true;
+                        }else {
+                            MainActivity.null_data=false;
+                            for (int i = 0; i < result.size(); i++) {
+                                JsonObject res_json = result.get(i).getAsJsonObject();
+                                Log.d("data", res_json.get("id").getAsString());
+                                String comportamentox, nascimentox;
+
+                                if (res_json.get("comportamento") == JsonNull.INSTANCE) {
+                                    comportamentox = "";
+                                } else {
+                                    comportamentox = res_json.get("comportamento").getAsString();
+                                }
+                                if (res_json.get("nascimento") == JsonNull.INSTANCE) {
+                                    nascimentox = "";
+                                } else {
+                                    nascimentox = res_json.get("nascimento").getAsString();
+
+                                }
+
+                                db.syncData(
+                                        res_json.get("id").getAsInt(),
+                                        res_json.get("nome").getAsString(),
+                                        res_json.get("img_path").getAsString(),
+                                        comportamentox,
+                                        res_json.get("status").getAsString(),
+                                        res_json.get("raca").getAsString(),
+                                        res_json.get("porte").getAsString(),
+                                        res_json.get("endereco").getAsString(),
+                                        nascimentox,
+                                        "false",
+                                        res_json.get("idade").getAsString(),
+                                        res_json.get("genero").getAsString()
+                                );
+                                getSupportFragmentManager().beginTransaction()
+                                        .replace(R.id.fragment_layout, new fragment_home()).commit();
+                                Ion.getDefault(MainActivity.this).cancelAll(MainActivity.this);
                             }
-                            else{
-                                comportamentox=res_json.get("comportamento").getAsString();
-                            }
-                            if(res_json.get("nascimento")==JsonNull.INSTANCE){
-                                nascimentox="";
-                            }else{
-                                nascimentox=res_json.get("nascimento").getAsString();
-
-                            }
-
-
-                            db.syncData(
-                                    res_json.get("id").getAsInt(),
-                                    res_json.get("nome").getAsString(),
-                                    res_json.get("img_path").getAsString(),
-                                    comportamentox,
-                                    res_json.get("status").getAsString(),
-                                    res_json.get("raca").getAsString(),
-                                    res_json.get("porte").getAsString(),
-                                    res_json.get("endereco").getAsString(),
-                                    nascimentox,
-                                    "false",
-                                    res_json.get("idade").getAsString(),
-                                    res_json.get("genero").getAsString()
-                            );
-                            getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.fragment_layout,new fragment_home()).commit();
-                            Ion.getDefault(MainActivity.this).cancelAll(MainActivity.this);
                         }
 
                     }
                 });
 
+        if(MainActivity.null_data==false){
+            db.checkLocalDataIntegrity();
+        }
         //bottom nav
         BottomNavigationView btnNav = findViewById(R.id.bottomNavigationview);
         btnNav.setOnNavigationItemSelectedListener(navListener);
