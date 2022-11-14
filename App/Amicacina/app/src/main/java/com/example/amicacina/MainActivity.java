@@ -45,8 +45,6 @@ public class MainActivity extends AppCompatActivity {
     public static Fragment selectedFragment = null;
     public static int id_pet;
     public static int pos;
-    public static String user_toast_message;
-    public static String pets_update;
     public static Boolean from_fav;
     public static Boolean null_data;
 
@@ -59,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         actionBar.hide();
 
         null_data=false;
+        from_fav=false;
         DatabaseController db = new DatabaseController(MainActivity.this);
 
         Ion.with (MainActivity.this)

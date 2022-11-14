@@ -88,13 +88,6 @@ public class fragment_home extends Fragment {
 
         });
 
-        if(MainActivity.pets_update=="updated"){
-            Toast.makeText(getContext(), "Alungs pets tiveram suas informações atualizadas pelas suas instituições", Toast.LENGTH_LONG).show();
-        }else if(MainActivity.pets_update=="deleted"){
-            Toast.makeText(getContext(), "Alguns pets foram removidos de suas instituições", Toast.LENGTH_LONG).show();
-        }else if(MainActivity.pets_update=="updated_deleted"){
-            Toast.makeText(getContext(), "Alguns pets foram removidos de suas instituições e outros tiveram suas informações atualizadas", Toast.LENGTH_LONG).show();
-        }
         // Inflate the layout for this fragment
         return view;
     }

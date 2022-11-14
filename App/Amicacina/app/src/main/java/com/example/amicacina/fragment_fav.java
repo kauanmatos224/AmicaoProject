@@ -67,6 +67,7 @@ public class fragment_fav extends Fragment {
                 // Toast.makeText(getContext(), "Imagem: "+(position+1), Toast.LENGTH_SHORT).show();
 
                 MainActivity.pos = position;
+                MainActivity.from_fav=true;
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), activity_details.class);
                 getActivity().startActivity(intent);

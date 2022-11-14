@@ -60,7 +60,7 @@ public class DatabaseController {
         cursor = db.rawQuery("select * from tb_pets where id="+id +";", null);
         if(cursor.moveToFirst()){
 
-            Cursor checkChanges = db.rawQuery("select * from tb_pets where id=? and nome <> ? or foto <> ? or comportamento <> ? or status <> ? or raca <> ? or porte <> ? or endereco <>  ? or nascimento <> ? or idade <> ? or genero <> ?",
+            Cursor checkChanges = db.rawQuery("select * from tb_pets where id=? and (nome <> ? or foto <> ? or comportamento <> ? or status <> ? or raca <> ? or porte <> ? or endereco <>  ? or nascimento <> ? or idade <> ? or genero <> ?)",
                     new String[]{String.valueOf(id), nome, foto, comportamento, status, raca, porte, endereco, nascimento, idade, genero});
 
             if(checkChanges.moveToFirst()) {
@@ -77,7 +77,6 @@ public class DatabaseController {
                         "genero=? " +
                         "where id=? ", new Object[]{nome, foto, comportamento, status, raca, porte, endereco, nascimento, idade, genero, id}
                 );
-                MainActivity.pets_update="updated";
             }
         }
         else{
@@ -112,13 +111,6 @@ public class DatabaseController {
                 }
                 else{
                     db.execSQL("delete from tb_pets where id=?",new String[]{String.valueOf(id_pet)} );
-
-                    if(MainActivity.pets_update=="updated"){
-                        MainActivity.pets_update="updated_deleted";
-                    }
-                    else{
-                        MainActivity.pets_update="deleted";
-                    }
                 }
                 pets_data.moveToNext();
             }

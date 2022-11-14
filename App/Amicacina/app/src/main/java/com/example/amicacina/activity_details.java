@@ -27,6 +27,7 @@ public class activity_details extends AppCompatActivity{
     ImageView imgFoto;
     TextView txtCidade, txtNome, txtRaca, txtNascimento, txtIdade, txtStatus, txtGenero, txtPorte, txtComportamento;
     String fav_action;
+    Cursor cursor;
 
     @SuppressLint("Range")
     @Override
@@ -51,9 +52,17 @@ public class activity_details extends AppCompatActivity{
         txtCidade = (TextView) findViewById(R.id.txtCidade);
 
         DatabaseController db = new DatabaseController(activity_details.this);
-        Cursor cursor = db.retrieveData();
-        for(int i=0; i < MainActivity.pos; i++){
-            cursor.moveToNext();
+
+        if(MainActivity.from_fav){
+            cursor = db.retrieveFavPets();
+            for(int i=0; i < MainActivity.pos; i++){
+                cursor.moveToNext();
+            }
+        }else {
+            cursor = db.retrieveData();
+            for (int i = 0; i < MainActivity.pos; i++) {
+                cursor.moveToNext();
+            }
         }
         MainActivity.id_pet = cursor.getInt(cursor.getColumnIndex("id"));
         Picasso.get().load(cursor.getString(cursor.getColumnIndex("foto"))).into(imgFoto);
