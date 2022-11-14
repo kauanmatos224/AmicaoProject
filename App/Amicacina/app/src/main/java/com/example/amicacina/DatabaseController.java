@@ -54,13 +54,12 @@ public class DatabaseController {
     }
 
     public void syncData(int id, String nome, String foto, String comportamento, String status, String raca, String porte, String endereco, String nascimento, String favoritado, String idade, String genero){
-        Log.d("id", String.valueOf(id));
         db = create_db.getWritableDatabase();
         Cursor cursor;
         cursor = db.rawQuery("select * from tb_pets where id="+id +";", null);
         if(cursor.moveToFirst()){
 
-            Cursor checkChanges = db.rawQuery("select * from tb_pets where id=? and (nome <> ? or foto <> ? or comportamento <> ? or status <> ? or raca <> ? or porte <> ? or endereco <>  ? or nascimento <> ? or idade <> ? or genero <> ?)",
+            Cursor checkChanges = db.rawQuery("select * from tb_pets where id=? and nome <> ? or foto <> ? or comportamento <> ? or status <> ? or raca <> ? or porte <> ? or endereco <>  ? or nascimento <> ? or idade <> ? or genero <> ?",
                     new String[]{String.valueOf(id), nome, foto, comportamento, status, raca, porte, endereco, nascimento, idade, genero});
 
             if(checkChanges.moveToFirst()) {
@@ -105,7 +104,7 @@ public class DatabaseController {
         if(pets_data.moveToFirst()){
             for(int i=0; i< pets_data.getCount(); i++){
                 @SuppressLint("Range") String id_pet = pets_data.getString(pets_data.getColumnIndex("id"));
-                Cursor checkDeletionNecessity = db.rawQuery("select id from tb_sync where id=?;", null);
+                Cursor checkDeletionNecessity = db.rawQuery("select id from tb_sync where id=?;", new String[]{id_pet});
                 if(checkDeletionNecessity.moveToFirst()){
                     continue;
                 }
@@ -115,8 +114,11 @@ public class DatabaseController {
                 pets_data.moveToNext();
             }
         }
-        db.execSQL("delete from tb_sync where 1=1");
+    }
 
+    public void refreshSyncData(){
+        db = create_db.getWritableDatabase();
+        db.execSQL("delete from tb_sync where 1=1");
     }
 
 }

@@ -13,6 +13,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     public static Boolean from_fav;
     public static Boolean null_data;
     public static Boolean null_fav;
+    public static Boolean internet_connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,56 +65,71 @@ public class MainActivity extends AppCompatActivity {
         null_fav=false;
         DatabaseController db = new DatabaseController(MainActivity.this);
 
-        Ion.with (MainActivity.this)
-                .load (GET_DATA_URL)
-                .asJsonArray()
-                .setCallback ( new FutureCallback<JsonArray>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
 
-                        if(result.isJsonNull()){
-                            MainActivity.null_data=true;
-                        }else {
-                            MainActivity.null_data=false;
-                            for (int i = 0; i < result.size(); i++) {
-                                JsonObject res_json = result.get(i).getAsJsonObject();
-                                Log.d("data", res_json.get("id").getAsString());
-                                String comportamentox, nascimentox;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            internet_connection = true;
+        }
+        else
+            internet_connection = false;
 
-                                if (res_json.get("comportamento") == JsonNull.INSTANCE) {
-                                    comportamentox = "";
-                                } else {
-                                    comportamentox = res_json.get("comportamento").getAsString();
+        if(internet_connection) {
+            Ion.with(MainActivity.this)
+                    .load(GET_DATA_URL)
+                    .asJsonArray()
+                    .setCallback(new FutureCallback<JsonArray>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonArray result) {
+
+                            if (result.isJsonNull()) {
+                                MainActivity.null_data = true;
+                            } else {
+                                MainActivity.null_data = false;
+                                //db.refreshSyncData();
+                                for (int i = 0; i < result.size(); i++) {
+                                    JsonObject res_json = result.get(i).getAsJsonObject();
+                                    Log.d("data", res_json.get("id").getAsString());
+                                    String comportamentox, nascimentox;
+
+                                    if (res_json.get("comportamento") == JsonNull.INSTANCE) {
+                                        comportamentox = "";
+                                    } else {
+                                        comportamentox = res_json.get("comportamento").getAsString();
+                                    }
+                                    if (res_json.get("nascimento") == JsonNull.INSTANCE) {
+                                        nascimentox = "";
+                                    } else {
+                                        nascimentox = res_json.get("nascimento").getAsString();
+
+                                    }
+
+                                    db.syncData(
+                                            res_json.get("id").getAsInt(),
+                                            res_json.get("nome").getAsString(),
+                                            res_json.get("img_path").getAsString(),
+                                            comportamentox,
+                                            res_json.get("status").getAsString(),
+                                            res_json.get("raca").getAsString(),
+                                            res_json.get("porte").getAsString(),
+                                            res_json.get("endereco").getAsString(),
+                                            nascimentox,
+                                            "false",
+                                            res_json.get("idade").getAsString(),
+                                            res_json.get("genero").getAsString()
+                                    );
+                                    getSupportFragmentManager().beginTransaction()
+                                            .replace(R.id.fragment_layout, new fragment_home()).commit();
+                                    Ion.getDefault(MainActivity.this).cancelAll(MainActivity.this);
                                 }
-                                if (res_json.get("nascimento") == JsonNull.INSTANCE) {
-                                    nascimentox = "";
-                                } else {
-                                    nascimentox = res_json.get("nascimento").getAsString();
-
-                                }
-
-                                db.syncData(
-                                        res_json.get("id").getAsInt(),
-                                        res_json.get("nome").getAsString(),
-                                        res_json.get("img_path").getAsString(),
-                                        comportamentox,
-                                        res_json.get("status").getAsString(),
-                                        res_json.get("raca").getAsString(),
-                                        res_json.get("porte").getAsString(),
-                                        res_json.get("endereco").getAsString(),
-                                        nascimentox,
-                                        "false",
-                                        res_json.get("idade").getAsString(),
-                                        res_json.get("genero").getAsString()
-                                );
-                                getSupportFragmentManager().beginTransaction()
-                                        .replace(R.id.fragment_layout, new fragment_home()).commit();
-                                Ion.getDefault(MainActivity.this).cancelAll(MainActivity.this);
                             }
-                        }
 
-                    }
-                });
+                        }
+                    });
+        }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_layout, new fragment_home()).commit();
 
         if(MainActivity.null_data==false){
             db.checkLocalDataIntegrity();
@@ -153,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
             };
+
+
 
 
 
