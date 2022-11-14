@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,14 +20,14 @@ import java.util.List;
 public class fragment_fav extends Fragment {
 
     GridView gridviewFav;
-
+    TextView txtFav;
 
     public fragment_fav() {
         // Required empty public constructor
     }
 
 
-    @SuppressLint("Range")
+    @SuppressLint({"Range", "MissingInflatedId"})
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,6 +35,7 @@ public class fragment_fav extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fav, container, false);
 
         gridviewFav = (GridView) view.findViewById(R.id.GridViewFav);
+        txtFav = (TextView) view.findViewById(R.id.txtFavo);
         ArrayList<GridModel> gridModelArrayList = new ArrayList<GridModel>();
 
         GridAdapter adapter = new GridAdapter(getContext(), gridModelArrayList);
@@ -53,6 +55,7 @@ public class fragment_fav extends Fragment {
                     cursor.getString(cursor.getColumnIndex("comportamento")),
                     cursor.getString(cursor.getColumnIndex("foto"))
             ));
+
             cursor.moveToNext();
         }
         gridviewFav.setAdapter(adapter);
