@@ -10,6 +10,8 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -37,7 +39,8 @@ public class activity_details extends AppCompatActivity{
 
         // Esconde a barra superior para fins estéticos
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setTitle("");
 
         // Instanciamento dos elementos responsáveis por receber os dados
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
@@ -119,6 +122,8 @@ public class activity_details extends AppCompatActivity{
             }
         });
 
+
+
         // Método para realizar a troca para a tela activity_info
         findViewById(R.id.btnAdotar).setOnClickListener(new View.OnClickListener()
         {
@@ -127,5 +132,18 @@ public class activity_details extends AppCompatActivity{
                 startActivity(new Intent(activity_details.this, activity_info.class));
             }
         });
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
     }
 }
