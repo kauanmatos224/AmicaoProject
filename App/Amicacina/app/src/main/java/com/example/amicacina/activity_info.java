@@ -177,6 +177,8 @@ public class activity_info extends AppCompatActivity {
         if(timeButton.getText()!=null && timeButton.getText()!=""){
             datetime_str = today_date + "" + timeButton.getText();
             Log.d("date", datetime_str);
+
+            if(MainActivity.internet_connection){
             Ion.with (activity_info.this)
                     .load(REQUEST_SENDING_URL)
                     .setBodyParameter("id_pet", String.valueOf(MainActivity.id_pet))
@@ -228,6 +230,9 @@ public class activity_info extends AppCompatActivity {
                             }
                         }
                     });
+            }else{
+                Toast.makeText(activity_info.this, "Seu dispositivo não tem acesso à internet!", Toast.LENGTH_LONG).show();
+            }
 
         }
         else{

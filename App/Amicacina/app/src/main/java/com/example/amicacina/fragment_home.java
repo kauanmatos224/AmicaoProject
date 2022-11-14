@@ -96,6 +96,11 @@ public class fragment_home extends Fragment {
         }else{
             txtHome.setVisibility(View.INVISIBLE);
         }
+
+        if(MainActivity.internet_connection==false){
+            Toast.makeText(getActivity(), "Seu dispositivo não tem acesso à internet!", Toast.LENGTH_LONG).show();
+        }
+
         // Inflate the layout for this fragment
         return view;
     }
