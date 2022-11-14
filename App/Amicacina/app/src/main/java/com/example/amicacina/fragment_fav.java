@@ -42,6 +42,12 @@ public class fragment_fav extends Fragment {
         DatabaseController db = new DatabaseController(getContext());
         Cursor cursor = db.retrieveFavPets();
 
+        if(cursor.getCount()==0){
+            MainActivity.null_fav=true;
+        }
+        else{
+            MainActivity.null_fav=false;
+        }
         for(int i=0; i<cursor.getCount(); i++) {
             gridModelArrayList.add(new GridModel(
                     cursor.getString(cursor.getColumnIndex("id")),
@@ -74,6 +80,14 @@ public class fragment_fav extends Fragment {
             }
 
         });
+
+        TextView txtFav = (TextView) view.findViewById(R.id.txtFavo);
+        if(MainActivity.null_fav){
+            txtFav.setVisibility(View.VISIBLE);
+        }
+        else{
+            txtFav.setVisibility(View.INVISIBLE);
+        }
 
         return view;
     }

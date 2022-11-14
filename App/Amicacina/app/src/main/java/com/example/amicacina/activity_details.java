@@ -64,6 +64,7 @@ public class activity_details extends AppCompatActivity{
                 cursor.moveToNext();
             }
         }
+
         MainActivity.id_pet = cursor.getInt(cursor.getColumnIndex("id"));
         Picasso.get().load(cursor.getString(cursor.getColumnIndex("foto"))).into(imgFoto);
         txtNome.setText(cursor.getString(cursor.getColumnIndex("nome")));

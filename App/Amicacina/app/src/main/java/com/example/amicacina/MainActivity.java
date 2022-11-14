@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     public static int pos;
     public static Boolean from_fav;
     public static Boolean null_data;
+    public static Boolean null_fav;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         null_data=false;
         from_fav=false;
+        null_fav=false;
         DatabaseController db = new DatabaseController(MainActivity.this);
 
         Ion.with (MainActivity.this)

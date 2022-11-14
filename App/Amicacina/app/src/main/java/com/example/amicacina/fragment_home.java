@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
@@ -88,6 +89,12 @@ public class fragment_home extends Fragment {
 
         });
 
+        TextView txtHome = (TextView)view.findViewById(R.id.txtHome);
+        if(MainActivity.null_data){
+            txtHome.setVisibility(View.VISIBLE);
+        }else{
+            txtHome.setVisibility(View.INVISIBLE);
+        }
         // Inflate the layout for this fragment
         return view;
     }
