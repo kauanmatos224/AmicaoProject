@@ -77,6 +77,7 @@ public class fragment_fav extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), activity_details.class);
                 getActivity().startActivity(intent);
+                getActivity().finish();
             }
 
         });

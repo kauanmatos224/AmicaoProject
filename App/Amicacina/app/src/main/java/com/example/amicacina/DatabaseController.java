@@ -121,4 +121,37 @@ public class DatabaseController {
         db.execSQL("delete from tb_sync where 1=1");
     }
 
+    public boolean isRefreshTime(){
+        db = create_db.getWritableDatabase();
+        Cursor cursor = db.rawQuery("select refresh_time from tb_settings", null);
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        int timestamp = Integer.parseInt(ts);
+        if(!cursor.moveToFirst()){
+            db.execSQL("insert into tb_settings(id, refresh_time)values(1, ?)", new String[]{String.valueOf(timestamp+10*60)});
+            db.close();
+            return true;
+        }
+        Cursor cursor_ = db.rawQuery("select refresh_time from tb_settings", null);
+        cursor_.moveToFirst();
+        @SuppressLint("Range") int refresh_time_ = cursor_.getInt(cursor.getColumnIndex("refresh_time"));
+
+        if(Integer.parseInt(ts) > refresh_time_){
+            db.close();
+            return true;
+        }
+        db.close();
+        return false;
+
+    }
+
+    public void updateRefreshTime(){
+        Long tsLong = System.currentTimeMillis()/1000;
+        String ts = tsLong.toString();
+        int timestamp = Integer.parseInt(ts);
+        db = create_db.getWritableDatabase();
+        db.execSQL("update tb_settings set refresh_time=? where id=1", new String[]{String.valueOf(timestamp+10*60)});
+        db.close();
+    }
+
 }

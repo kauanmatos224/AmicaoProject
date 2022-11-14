@@ -138,7 +138,10 @@ public class activity_details extends AppCompatActivity{
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
+                Intent intent = new Intent(activity_details.this, MainActivity.class);
+                startActivity(intent);
                 finish();
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

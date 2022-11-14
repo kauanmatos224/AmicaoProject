@@ -85,6 +85,7 @@ public class fragment_home extends Fragment {
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), activity_details.class);
                 getActivity().startActivity(intent);
+                getActivity().finish();
 
             }
 
