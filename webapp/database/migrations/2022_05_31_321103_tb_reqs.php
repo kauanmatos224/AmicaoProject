@@ -27,7 +27,7 @@ class TbReqs extends Migration
             $table->string('email');
             $table->string('status');
             $table->string('req_type');
-            $table->integer('date');
+            $table->integer('date')->nullable();
         });
     }
 

@@ -20,66 +20,37 @@
                             
                             
                             if($data->status=='not_seen'){
-                                echo 'não avaliada';
+                                echo 'não atendida';
                             }
-                            else if($data->status=='refused'){
-                                echo 'negada';
+                            else if($data->status=='answered'){
+                                echo 'respondida';
                             }
-                            else if($data->status=='acceptted'){
-                                echo 'aceita';
-                            }
-
-            ?><br>
-            <span class="lData">Data:</span> <?= date('d/m/Y H:i:s', $data->date) ?><br>
+                            
+            ?>
+            <br>
             <span class="lId">ID (pet):</span> <?= $data->id_pet ?><br>
 
-            <?php 
-            $frm_req_change = false;
-            $frm_req_approve = false;
-            $frm_req_refuse = true;
-            if($data->status=='not_seen'){
-                $frm_req_change = $frm_req_approve = true;
-            }
-            else if($data->status=='refused'){
-                $frm_req_change = $frm_req_approve = true;
-            }
-            else if($data->status=='acceptted'){
-                $frm_req_change = true;
-                $frm_req_refuse = true;
-            }
-            ?>
         
-            <?php if($frm_req_change==true):?>
             <form id="frm_req_change" method="post" action="/institucional/requisicoes/action">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <input type="hidden" name="_id" value="<?= $data->id ?>">
-                <input type="hidden" name="op_type" value="change">
                 <br>
-                <input type="submit" class="btn btn-warning" value="Alterar">
+                <input type="submit" class="btn btn-warning" value="<?php
+                    if($data->status=='not_seen'){
+                        echo "Responder";
+                    }
+                    else{
+                        echo "Enviar outra resposta";
+                    }
+                
+                ?>">
             </form>
-            <?php endif ?>
 
-            <?php if($frm_req_approve==true):?>
-            <form id="frm_req_approve" method="post" action="/institucional/requisicoes/action">
+            <form id="frm_delete" method="post" action="/institucional/requisicoes/action/delete">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                <input type="hidden" name="_id" value="<?= $data->id ?>">
-                <input type="hidden" name="op_type" value="approve">
-                <br>
-                <input type="submit" class="btn btn-warning" value="Aprovar">
+                <input type="hidden" name="_id" value="<?=$data->id?>">
+                <input type="submit" value="Excluir">
             </form>
-            <?php endif ?>
-
-            <?php if($frm_req_refuse==true):?>
-            <form id="frm_req_refuse" method="post" action="/institucional/requisicoes/action">
-                <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                <input type="hidden" name="_id" value="<?= $data->id ?>">
-                <input type="hidden" name="op_type" value="repprove">
-                <br>
-                <input type="submit" class="btn btn-warning" value="Reprovar">
-            </form>
-            <?php endif ?>
-
-
 
         </div>
     </body>

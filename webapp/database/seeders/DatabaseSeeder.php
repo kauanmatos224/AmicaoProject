@@ -160,7 +160,7 @@ class DatabaseSeeder extends Seeder
         DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
             1,
             'Victor Rayan',
-            '1111111111111',
+            '11991226950',
             'victorrayansouzaramos@gmail.com',
             'not_seen',
             'apadrinhamento',
@@ -170,9 +170,9 @@ class DatabaseSeeder extends Seeder
         DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
             2,
             'Victor Rayan',
-            '1111111111111',
+            '11991226950',
             'victorrayansouzaramos@gmail.com',
-            'acceptted',
+            'answered',
             'apadrinhamento',
             1664662367
         ));
@@ -180,9 +180,9 @@ class DatabaseSeeder extends Seeder
         DB::insert('insert into tb_reqs(id_pet, nome, phone, email, status, req_type, date) values(?, ?, ?, ?, ?, ?, ?)', array(
             3,
             'Victor Rayan',
-            '1111111111111',
+            '11991226950',
             'victorrayansouzaramos@gmail.com',
-            'refused',
+            'not_seen',
             'visita',
             1664662367,
 

@@ -33,17 +33,12 @@
                         case 'no_requests':
                             echo '<p>Ainda não há requisições de usuários.</p>';
                             break;
-                        case 'changed':
-                            echo '<p>Requisição alterada com sucesso.</p>';
-                            break;
-                        case 'denied':
-                            echo '<p>Requisição reprovada com sucesso.</p>';
-                            break;
-                        case 'approved':
-                            echo '<p>A requisição foi aprovada com sucesso.</p>';
+                        case 'answered':
+                            echo '<p>A requisição foi respondida com sucesso.</p>';
                             break;
                         case 'deleted':
-                            echo '<p>Requisição reprovada e deletada com sucesso.</p>';
+                            echo '<p>A requisição foi deletada com sucesso.</p>';
+                            break;
                     }
                     session(['request_info' => '']);
                 }
@@ -58,7 +53,7 @@
                         <th>Telefone</th>
                         <th>E-mail</th>
                         <th>Status da Requisição</th>
-                        <th>Data do Agendamento</th>
+                        <th>Data da Requisição</th>
                         <th>Inspeção</th>
                         <th>ID (pet)</th>
                     </tr>
@@ -80,16 +75,13 @@
                         <td><?= $data->email ?></td>
                         <td><?php                            
                             if($data->status=='not_seen'){
-                                echo 'não avaliada';
+                                echo 'não atendida';
                             }
-                            else if($data->status=='refused'){
-                                echo 'negada';
-                            }
-                            else if($data->status=='acceptted'){
-                                echo 'aceita';
+                            else if($data->status=='answered'){
+                                echo 'respondida';
                             }
                             ?>
-                        <td><?= date('d/m/Y H:i:s', $data->date) ?></td>
+                        <td><?=date('d/m/Y H:i:s', $data->date);?></td>
                         <td><a href="/institucional/requisicoes/inspec/<?= $data->id ?>">ver mais</a>
                         <td id="peto"><?= $data->id_pet ?> </td>
 
