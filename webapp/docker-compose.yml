@@ -30,3 +30,15 @@ services:
       - ./:/var/www
     depends_on: 
       - web
+
+  teste-pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "victorrayansouzaramos@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "pgadmin123"
+    ports:
+      - "16543:80"
+    depends_on:
+      - db
+    #networks:
+    #  - ${DB_HOST}
