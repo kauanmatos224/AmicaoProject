@@ -9,7 +9,7 @@
         CNPJ: <?= $data_org->cnpj ?>
         Endereço: <?= $data_org->endereco ?>
         Complemento: <?= $data_org->complemento ?>
-        Código POstal: <?= $data_org->cep ?>
+        Código Postal: <?= $data_org->cep ?>
         Páis: <?= $data_org->country ?>
         Telefone: <?= $data_org->phone ?>
         E-mail: <?= $data_auth_org->email ?>
