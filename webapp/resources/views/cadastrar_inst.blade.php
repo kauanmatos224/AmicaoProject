@@ -26,10 +26,11 @@
 			</nav>
 		</header>
 
+        <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
         <div id="whole-page-without-menu">
         <div id="div1">
 
-            <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
+            
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <span class="lNomeF">Nome Fantasia:</span><br><input class="nomef" type=text name=txtFantasyName placeholder="Nome Fantasia"><br><br>
                 <span class="lCnpj">CNPJ:</span><br><input class="cnpj" type=text name=txtCnpj placeholder="CNPJ"><br><br>
@@ -44,9 +45,8 @@
                 <span class="lSenha">Senha:</span><br><input class="senha" type=password name=txtPassword placeholder="Senha"><br><br>
                 <span class="lConSenha">Confirmar senha:</span><br><input class="csenha" type=password name=txtConfPassword placeholder="Confirmar senha"><br><br>
                 <input type="submit" id="btnSend" value="Requisitar Cadastro">
-                <!--<a href="" class="btn btn-outline-warning" id="cadastrar">Cadastrar</a> -->
-            </form>
         </div>
         </div>  
+        </form>
     </body>
 </html>

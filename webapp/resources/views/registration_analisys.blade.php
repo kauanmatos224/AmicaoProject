@@ -18,7 +18,6 @@
                         case 'deleted_register':
                             echo '<p>Cadastro movido para processo de deleção com sucesso.
                             A exclusão do cadastro será efetuada por completo automaticamente após 1 mês</p>';
-                            //session(['info_register_analisys'=>'deleted_register']);
                             break;
                         case 'approved_register':
                             echo '<p>O cadastro foi aprovado com sucesso</p>';

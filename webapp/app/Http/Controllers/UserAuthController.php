@@ -21,6 +21,7 @@ class UserAuthController extends Controller
         $user_password = $request->post('txtPassword');
         $secret = "30/07/2003";
         $user_password_hash = hash('sha256', $user_password.$secret);
+        $timestamp = Carbon::now()->timestamp;
 
         (new UserAuthController)->execSessionDestroy();
         
@@ -393,12 +394,13 @@ class UserAuthController extends Controller
             $token = hash('sha256', $server_secret.$inst[0]->email.$inst[0]->id.$random.$timestamp."email_confirmation");
             $expiration = $timestamp+604800;
             $allowed_time = $timestamp+14400;
+            $email = $inst[0]->email;
 
             
-            $update = DB::update('update tb_email_verify set tmp_token=?, expiration_at=? where id_org=?', array($token, $timestamp+604800, $id_org));
+            $update = DB::update('update tb_email_verify set tmp_token=?, expiration_at=?, new_email=? where id_org=?', array($token, $timestamp+604800, $email, $id_org));
             if(!$update){
-                DB::insert('insert into tb_email_verify (id_org, tmp_token, expiration_at) values(?, ?, ?)',
-                array($id_org, $token, $timestamp+604800));
+                DB::insert('insert into tb_email_verify (id_org, tmp_token, expiration_at, new_email) values(?, ?, ?, ?)',
+                array($id_org, $token, $timestamp+604800, $email));
             }
 
 
