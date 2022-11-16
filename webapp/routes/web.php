@@ -6,6 +6,7 @@ use App\Http\Controllers\ContatoController;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\DownloadApp;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -119,6 +120,8 @@ Route::post('/staff/inst-analise/deny/do', [StaffController::class, 'denyInst'])
 
 
 Route::get('/system/clear-database/complete-account-deletion/{key}', [AutomatedTasks::class, 'completeAccountDeletion']);
+
+Route::get('/download/app', [DownloadApp::class, 'getView_download']);
 
 
 
