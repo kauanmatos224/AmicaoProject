@@ -12,6 +12,20 @@
         @include("./user_routesNavigation")
     </head>
     <body id="grid"> 
+        <header id = cab>
+                <nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
+                    <div class="container-fluid">
+                        <a class="navbar-brand" href="/home">
+                            <img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
+                        </a>
+                        <a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
+                        <a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
+                        <a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
+                        <button class="btn btn-warning" id="downloadnav" onclick="download()" ><i class="fa fa-download"></i>    Baixar</button>
+                    </div>
+                </nav>
+            </header>
+
         <div id="div1">
             <span class="lNome">Nome:</span> <?= $data->nome ?><br>
             <span class="lTel">Telefone:</span> <?= $data->phone ?><br>
@@ -29,13 +43,12 @@
             ?>
             <br>
             <span class="lId">ID (pet):</span> <?= $data->id_pet ?><br>
-
         
             <form id="frm_req_change" method="post" action="/institucional/requisicoes/action">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <input type="hidden" name="_id" value="<?= $data->id ?>">
                 <br>
-                <input type="submit" class="btn btn-warning" value="<?php
+                <input type="submit" id="btnsubmit" class="btn btn-warning" value="<?php
                     if($data->status=='not_seen'){
                         echo "Responder";
                     }
@@ -44,6 +57,7 @@
                     }
                 
                 ?>">
+                <br><br>
             </form>
 
             <form id="frm_delete" method="post" action="/institucional/requisicoes/action/delete">
