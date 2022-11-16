@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+//Realiza as importações de bibliotecas necessárias para a execução de métodos da classe.
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.database.Cursor;

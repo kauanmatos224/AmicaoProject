@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+//Realiza as importações de bibliotecas necessárias para a execução de métodos da classe.
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;

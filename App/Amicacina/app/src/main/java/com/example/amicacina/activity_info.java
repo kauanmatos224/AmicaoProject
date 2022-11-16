@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+//Realiza as importações de bibliotecas necessárias para a execução de métodos da classe.
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -68,7 +69,6 @@ public class activity_info extends AppCompatActivity {
         trata e notifica o usuário sobre o status / reposta da operação.
      */
     public void onClickSend(View view) {
-
         RadioGroup radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
         EditText nome = (EditText) findViewById(R.id.txtUnome);
         EditText email = (EditText) findViewById(R.id.txtUemail);
@@ -85,8 +85,6 @@ public class activity_info extends AppCompatActivity {
         } else {
             txtMessage.setText("Uma ação deve ser selecionada!");
         }
-
-
         if (MainActivity.internet_connection) {
             Ion.with(activity_info.this)
                     .load(REQUEST_SENDING_URL)
@@ -102,7 +100,6 @@ public class activity_info extends AppCompatActivity {
                         public void onCompleted(Exception e, JsonObject result) {
                             try {
                                 String error = result.get("error").getAsString();
-
                                 switch (error) {
                                     case "invalid_date":
                                         txtMessage.setText("A data informada é inválida!");
@@ -127,9 +124,6 @@ public class activity_info extends AppCompatActivity {
                                                 "à pena da LEI Nº 9.609 /1998 artigo 13");
                                         break;
                                 }
-                                Log.d("error", error);
-                                Log.d("id", String.valueOf(MainActivity.id_pet));
-
                             } catch (Exception excp) {
                                 String sucess = result.get("success").getAsString();
                                 if (sucess.equals("request_sent")) {
@@ -142,7 +136,6 @@ public class activity_info extends AppCompatActivity {
             Toast.makeText(activity_info.this, "Seu dispositivo não tem acesso à internet!", Toast.LENGTH_LONG).show();
         }
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -152,7 +145,6 @@ public class activity_info extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }

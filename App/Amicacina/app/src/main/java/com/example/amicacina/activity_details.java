@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+//Realiza as importações de bibliotecas necessárias para a execução de métodos da classe.
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -160,7 +161,6 @@ public class activity_details extends AppCompatActivity{
                 Intent intent = new Intent(activity_details.this, MainActivity.class);
                 startActivity(intent);
                 finish();
-
                 return true;
         }
         return super.onOptionsItemSelected(item);

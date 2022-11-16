@@ -1,5 +1,6 @@
 package com.example.amicacina;
 
+//Realiza as importações de bibliotecas necessárias para a execução de métodos da classe.
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class GridAdapter extends ArrayAdapter<GridModel> {
         super(context, 0, gridModelArrayList);
     }
 
+    //Método que retorna que preenche os elementos / widget com os dados do adapter.
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
@@ -56,19 +58,10 @@ public class GridAdapter extends ArrayAdapter<GridModel> {
         geneTV.setText(gridModel.getPet_gene());
         portTV.setText(gridModel.getPet_port());
         compTV.setText(gridModel.getPet_comp());
-        // Usa a biblioteca Picasso para pegar a imagem no banco de dados
+
+        // Usa a biblioteca Picasso para recuperar a imagem da web através da url do pet no banco de dados.
         Picasso.get().load(gridModel.getImgid()).into(petIV);
 
-        /*
-        nome = nameTV.getText().toString();
-        raca = racaTV.getText().toString();
-        nasc = nascTV.getText().toString();
-        idad = idadTV.getText().toString();
-        stat = statTV.getText().toString();
-        gene = geneTV.getText().toString();
-        port = portTV.getText().toString();
-        comp = compTV.getText().toString();
-*/
         return listitemView;
     }
 }
