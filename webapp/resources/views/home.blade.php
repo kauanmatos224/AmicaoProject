@@ -10,6 +10,11 @@
 		<link rel="stylesheet" href="/style/estilohome.css"/>
 		<title>Amicão - Home</title>
 		@include("./user_routesNavigation")
+		<script>
+			if(window.location.pathname!="/home"){
+				parent.self.location='/home';
+			}
+		</script>
 	</head>
 	<body id = "grid">
 		<header id = cab>

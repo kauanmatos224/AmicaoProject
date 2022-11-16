@@ -35,8 +35,6 @@
 				}
 			}
 
-
-
 		?>
 
         <div id="div1" class="ex1">
@@ -47,8 +45,7 @@
                 	<br><br>
                 	<span class="lemail">Email para contato:</span><br><input class="email" type=email name=txtemail placeholder="email@domínio.com" value="<?= $send_account_activation_request==true? $email : null?>">
                 	<br><br>
-                	<span class="lmsg">Digite sua mensagem:</span><br><textarea rows="5" class="msg" type=text name=txtmsg placeholder="Mensagem..."><?= $send_account_activation_request==true? $message : ''?>
-					</textarea>
+                	<span class="lmsg">Digite sua mensagem:</span><br><textarea rows="5" class="msg" type=text name=txtmsg placeholder="Mensagem..."><?= $send_account_activation_request==true? $message : ''?></textarea>
                 	<br><br>
             	    <input class="btn btn-warning" id="btnenviar" type="submit" value="Enviar">
 				</form>

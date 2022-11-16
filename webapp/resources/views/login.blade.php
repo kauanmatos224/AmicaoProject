@@ -24,6 +24,11 @@
 				</div>
 			</nav>
 		</header>
+		<script>
+			if(window.location.pathname!="/login"){
+				parent.self.location='/login';
+			}
+		</script>
 
         <div id="div1" class="ex1">
             <div id="divctt">

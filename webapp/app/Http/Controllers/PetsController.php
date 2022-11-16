@@ -32,7 +32,6 @@ class PetsController extends Controller
                     $img_link = (new Dropbox_AccessFile)->getTemporaryLink($img_path);
                     $pets[$i]->img_path=$img_link;
                 }
-                //dd($this->info);
 
                 $csrf_tk = (new PetsController)->csrf_gen_deletPetPage_gen();
                 if($this->info!=null && $this->info!=""){
@@ -453,9 +452,17 @@ class PetsController extends Controller
 
     public function answerReq(Request $request){
         $id = $request->post("_id");
-        $data = DB::select("select * from tb_pets where id=?", array($id));
-        if($data){
-            return view('answer_req')->with('id', $id);
+
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='inst'){
+                $data = DB::select("select * from tb_pets where id=?", array($id));
+                if($data){
+                    return view('answer_req')->with('id', $id);
+                }
+            }
+        }
+        else{
+            return view('login');
         }
         return view('error_404');
     }
@@ -465,29 +472,35 @@ class PetsController extends Controller
         $id = $request->post('_id');
         $message = $request->post('txtMessage');
     
-        if($message==""){
-            return view('answer_req')->with('error', 'null_msg')->with('id', $id);
-        }else if($message==null){
-            return view('answer_req')->with('error', 'null_msg')->with('id', $id);
-        }
+        if((new UserAuthController)->checkSession()){
+            if(session('user_type')=='inst'){
+                if($message==""){
+                    return view('answer_req')->with('error', 'null_msg')->with('id', $id);
+                }else if($message==null){
+                    return view('answer_req')->with('error', 'null_msg')->with('id', $id);
+                }
 
-        $update = DB::update('update tb_reqs set status=? where id=?', array('answered', $id));
-        if($update){
-            $req_data = DB::select('select email, req_type, date from tb_reqs where id=?', array($id));
-            $requisicao="";
-            if($req_data[0]->req_type=='adocao'){
-                $requisicao = "adoção";
+                $update = DB::update('update tb_reqs set status=? where id=?', array('answered', $id));
+                if($update){
+                    $req_data = DB::select('select email, req_type, date from tb_reqs where id=?', array($id));
+                    $requisicao="";
+                    if($req_data[0]->req_type=='adocao'){
+                        $requisicao = "adoção";
+                    }
+                    else if($req_data[0]->req_type=="apadrinhamento"){
+                        $requisicao = "apadrinhamento";
+                    }
+                    else{
+                        $requisicao = "visita";
+                    }
+                    (new PetsController)->sendMail($req_data[0]->email, "Resposta da sua requisição de $requisicao ", $message, $req_data[0]->date);
+                    session(["request_info"=>"answered"]);
+                    return redirect('/institucional/requisicoes');
+                    
+                }
             }
-            else if($req_data[0]->req_type=="apadrinhamento"){
-                $requisicao = "apadrinhamento";
-            }
-            else{
-                $requisicao = "visita";
-            }
-            (new PetsController)->sendMail($req_data[0]->email, "Resposta da sua requisição de $requisicao ", $message, $req_data[0]->date);
-            session(["request_info"=>"answered"]);
-            return redirect('/institucional/requisicoes');
-            
+        }else{
+            return view('login');
         }
 
         return view('error_404');
