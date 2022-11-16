@@ -10,8 +10,8 @@
         android:title=""
         android:icon="@drawable/selector_fav"/>
     <item
-        android:id="@+id/search"
+        android:id="@+id/aboutus"
         android:title=""
-        android:icon="@drawable/selector_search"/>
+        android:icon="@drawable/ic_baseline_info_24"/>
 
 </menu>

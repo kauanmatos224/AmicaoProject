@@ -167,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
                             selectedFragment = new fragment_fav();
                             break;
 
-                        case R.id.search:
-                            selectedFragment = new fragment_search();
+                        case R.id.aboutus:
+                            selectedFragment = new fragment_aboutus();
                             break;
                     }
 
