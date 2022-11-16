@@ -43,11 +43,11 @@ public class activity_details extends AppCompatActivity{
         actionBar.setTitle("");
 
         // Define ColorDrawable object and parse color
-// using parseColor method
-// with color hash code as its parameter
+        // using parseColor method
+        // with color hash code as its parameter
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#e08f60"));
 
-// Set BackgroundDrawable
+        // Set BackgroundDrawable
         actionBar.setBackgroundDrawable(colorDrawable);
 
         // Instanciamento dos elementos responsáveis por receber os dados
@@ -62,8 +62,10 @@ public class activity_details extends AppCompatActivity{
         txtComportamento= (TextView) findViewById(R.id.txtComportamento);
         txtCidade = (TextView) findViewById(R.id.txtCidade);
 
+        /*Instancia a classe de banco de dados e verifica a activity de origem para recuperar os dados do pet
+          clicado corretamente.
+         */
         DatabaseController db = new DatabaseController(activity_details.this);
-
         if(MainActivity.from_fav){
             cursor = db.retrieveFavPets();
             for(int i=0; i < MainActivity.pos; i++){
@@ -76,14 +78,25 @@ public class activity_details extends AppCompatActivity{
             }
         }
 
+
+        /*
+        Preenche dinâmicamente os valores dos wdigets da activity com os dados do pet através dos valores
+        do cursor obtido.
+         */
         MainActivity.id_pet = cursor.getInt(cursor.getColumnIndex("id"));
         Picasso.get().load(cursor.getString(cursor.getColumnIndex("foto"))).into(imgFoto);
         txtNome.setText(cursor.getString(cursor.getColumnIndex("nome")));
         txtRaca.setText(cursor.getString(cursor.getColumnIndex("raca")));
         txtNascimento.setText(cursor.getString(cursor.getColumnIndex("nascimento")));
         txtIdade.setText(cursor.getString(cursor.getColumnIndex("idade")));
-
         String status = cursor.getString(cursor.getColumnIndex("status"));
+        txtGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));
+        txtPorte.setText(cursor.getString(cursor.getColumnIndex("porte")));
+        txtComportamento.setText(cursor.getString(cursor.getColumnIndex("comportamento")));
+        String endereco_to_split = cursor.getString(cursor.getColumnIndex("endereco"));
+        String[] splitted_endereco = endereco_to_split.split("-", 2);
+        String cidade = splitted_endereco[1];
+        txtCidade.setText(cidade);
         if(Objects.equals(status, "em_adocao")){
             txtStatus.setText("em adoção");
         }
@@ -91,6 +104,8 @@ public class activity_details extends AppCompatActivity{
             txtStatus.setText(status);
         }
 
+
+        //Verifica o estado do pet (se favoritado ou não) e então modifica a função do botão de favoritar/desfavoritar.
         Button btnFav = (Button)findViewById(R.id.btnFav);
         String favoritado = cursor.getString(cursor.getColumnIndex("favoritado"));
         if(favoritado.equals("true")){
@@ -101,15 +116,7 @@ public class activity_details extends AppCompatActivity{
             fav_action="favoritar";
         }
 
-        txtGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));
-        txtPorte.setText(cursor.getString(cursor.getColumnIndex("porte")));
-        txtComportamento.setText(cursor.getString(cursor.getColumnIndex("comportamento")));
 
-
-        String endereco_to_split = cursor.getString(cursor.getColumnIndex("endereco"));
-        String[] splitted_endereco = endereco_to_split.split("-", 2);
-        String cidade = splitted_endereco[1];
-        txtCidade.setText(cidade);
 
         // Método usado para definir um animal como favoritado ou não
         findViewById(R.id.btnFav).setOnClickListener(new View.OnClickListener()
@@ -142,6 +149,10 @@ public class activity_details extends AppCompatActivity{
         });
     }
 
+    /*
+        É atribuido uma função ao clicar no botão de voltar no canto superior esquerdo da página, invocando a
+        MainActivity.
+    */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

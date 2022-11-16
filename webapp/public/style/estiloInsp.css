@@ -45,6 +45,12 @@
     left: 93%;
 }
 
+
+.btmexcluir{
+    left: 50%;
+}
+
+
 @media only screen and (max-width: 700px){
     #nav {
         width: 100%;

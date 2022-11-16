@@ -35,9 +35,13 @@ import java.util.Calendar;
 import java.util.Locale;
 
 public class activity_info extends AppCompatActivity {
+    //Define a URL em que o corpo POST da requisição de agendamento será enviada.
     public static final String REQUEST_SENDING_URL = "https://amicao.herokuapp.com/api/application_send/send_request";
     TextView txtMessage;
 
+    /*
+    O método abaixo inicializa a activity e oculta texto desnecessário da AppBar.
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,40 +51,44 @@ public class activity_info extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
 
-// Define ColorDrawable object and parse color
-// using parseColor method
-// with color hash code as its parameter
-ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#e08f60"));
+        // Define ColorDrawable object and parse color
+        // using parseColor method
+        // with color hash code as its parameter
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#e08f60"));
 
-// Set BackgroundDrawable
-actionBar.setBackgroundDrawable(colorDrawable);
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
     }
 
-    public void onClickSend(View view){
+    /*
+        O método abaixo é invocado quando o usuário clica no botão para enviar a requisição de agendamento.
+        Pois o método primeiramente verifica a conectividade com a internet e notifica o usuário da impossibilidade da
+        operação em caso de falta de conectividade.
+        Caso a conectividade seja verdadeira, então o método realiza o envio das informações que são validadas no servidor, recebe
+        trata e notifica o usuário sobre o status / reposta da operação.
+     */
+    public void onClickSend(View view) {
 
         RadioGroup radiogroup = (RadioGroup) findViewById(R.id.radiogroup);
         EditText nome = (EditText) findViewById(R.id.txtUnome);
         EditText email = (EditText) findViewById(R.id.txtUemail);
         EditText telefone = (EditText) findViewById(R.id.txtUtelefone);
         RadioButton selectedReqType = (RadioButton) findViewById(radiogroup.getCheckedRadioButtonId());
-        String req_type="";
-        txtMessage = (TextView)findViewById(R.id.txtViewMessage);
-        if(selectedReqType.getText().equals("Adotar")){
+        String req_type = "";
+        txtMessage = (TextView) findViewById(R.id.txtViewMessage);
+        if (selectedReqType.getText().equals("Adotar")) {
             req_type = "adocao";
-        }
-        else if(selectedReqType.getText().equals("Apadrinhar")){
+        } else if (selectedReqType.getText().equals("Apadrinhar")) {
             req_type = "apadrinhamento";
-        }
-        else if(selectedReqType.getText().equals("Visitar")){
+        } else if (selectedReqType.getText().equals("Visitar")) {
             req_type = "visita";
-        }
-        else{
+        } else {
             txtMessage.setText("Uma ação deve ser selecionada!");
         }
 
 
-            if(MainActivity.internet_connection){
-            Ion.with (activity_info.this)
+        if (MainActivity.internet_connection) {
+            Ion.with(activity_info.this)
                     .load(REQUEST_SENDING_URL)
                     .setBodyParameter("id_pet", String.valueOf(MainActivity.id_pet))
                     .setBodyParameter("nome", nome.getText().toString())
@@ -89,7 +97,7 @@ actionBar.setBackgroundDrawable(colorDrawable);
                     .setBodyParameter("obs", "")
                     .setBodyParameter("req_type", req_type)
                     .asJsonObject()
-                    .setCallback ( new FutureCallback<JsonObject>() {
+                    .setCallback(new FutureCallback<JsonObject>() {
                         @Override
                         public void onCompleted(Exception e, JsonObject result) {
                             try {
@@ -122,18 +130,19 @@ actionBar.setBackgroundDrawable(colorDrawable);
                                 Log.d("error", error);
                                 Log.d("id", String.valueOf(MainActivity.id_pet));
 
-                            }catch (Exception excp){
+                            } catch (Exception excp) {
                                 String sucess = result.get("success").getAsString();
-                                if(sucess.equals("request_sent")){
+                                if (sucess.equals("request_sent")) {
                                     txtMessage.setText("Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)");
                                 }
                             }
                         }
                     });
-            }else{
-                Toast.makeText(activity_info.this, "Seu dispositivo não tem acesso à internet!", Toast.LENGTH_LONG).show();
-            }
+        } else {
+            Toast.makeText(activity_info.this, "Seu dispositivo não tem acesso à internet!", Toast.LENGTH_LONG).show();
+        }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -143,6 +152,7 @@ actionBar.setBackgroundDrawable(colorDrawable);
         }
         return super.onOptionsItemSelected(item);
     }
+
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }

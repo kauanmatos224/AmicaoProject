@@ -1,6 +1,6 @@
 <!doctype html>
 <html>
-    <head>
+    <head> 
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" 
@@ -11,7 +11,7 @@
         <title>Amicão - Detalhes da requisição</title>
         @include("./user_routesNavigation")
     </head>
-    <body id="grid">
+    <body id="grid"> 
         <div id="div1">
             <span class="lNome">Nome:</span> <?= $data->nome ?><br>
             <span class="lTel">Telefone:</span> <?= $data->phone ?><br>
@@ -49,7 +49,7 @@
             <form id="frm_delete" method="post" action="/institucional/requisicoes/action/delete">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <input type="hidden" name="_id" value="<?=$data->id?>">
-                <input type="submit" value="Excluir">
+                <input type="submit" id="btmexcluir" value="Excluir" class="btn btn-secondary">
             </form>
 
         </div>
