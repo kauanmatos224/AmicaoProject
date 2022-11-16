@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -44,6 +46,14 @@ public class activity_info extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
+
+// Define ColorDrawable object and parse color
+// using parseColor method
+// with color hash code as its parameter
+ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#e08f60"));
+
+// Set BackgroundDrawable
+actionBar.setBackgroundDrawable(colorDrawable);
     }
 
     public void onClickSend(View view){

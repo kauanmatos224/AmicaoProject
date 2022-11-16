@@ -42,6 +42,14 @@ public class activity_details extends AppCompatActivity{
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
 
+        // Define ColorDrawable object and parse color
+// using parseColor method
+// with color hash code as its parameter
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#e08f60"));
+
+// Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
+
         // Instanciamento dos elementos responsáveis por receber os dados
         imgFoto = (ImageView) findViewById(R.id.imgFoto);
         txtNome = (TextView) findViewById(R.id.txtNome);
