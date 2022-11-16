@@ -15,8 +15,6 @@ class StaffController extends Controller
         if((new UserAuthController)->checkSession()){
             if(session('user_type')=='staff'){
                 $data = (new StaffController)->getRegistrationData();
-                //dd($data[1][1][0]->status);
-                //dd($data[1]);
                 if($data!=null){
                     if(!empty(session('info_register_analisys'))){
                         return view('registration_analisys')->with('data', $data)->with('info', session('info_register_analisys'));

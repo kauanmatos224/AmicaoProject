@@ -24,6 +24,7 @@
                             echo '<p>O cadastro foi aprovado com sucesso</p>';
                             break;
                     }
+                    session(['info_register_analisys'=>null]);
                 }
             ?>
 

@@ -33,7 +33,7 @@
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
                 <span class="lNomeF">Nome Fantasia:</span><br><input class="nomef" type=text name=txtFantasyName placeholder="Nome Fantasia"><br><br>
                 <span class="lCnpj">CNPJ:</span><br><input class="cnpj" type=text name=txtCnpj placeholder="CNPJ"><br><br>
-                <span class="lEndereco">Endereço:</span><br><input class="endereco" type=text name=txtAddress placeholder="Rua / Avenida, N°, Cidade - Estado"><br><br>
+                <span class="lEndereco">Endereço: (Rua, N° - Cidade, Estado - Páis)</span><br><input class="endereco" type=text name=txtAddress placeholder="Rua / Avenida, N°, Cidade - Estado"><br><br>
                 <span class="lComplemento">Complemento (se houver):</span><br><input class="complemento" type=text name=txtComplement placeholder="Complemento (se houver)"><br><br>
                 <span class="lCep">CEP:</span><br><input class="cep" type=text name=txtCep placeholder="CEP"><br><br>
                 <span class="lpais">País:</span><br><input class="pais" type=text name=txtCountry placeholder="País"><br><br>
