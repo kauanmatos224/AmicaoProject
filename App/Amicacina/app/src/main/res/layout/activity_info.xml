@@ -149,60 +149,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/txtViewMessage" />
 
-    <Button
-        android:id="@+id/timeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@color/white"
-        android:onClick="popTimePicker"
-        android:textColor="@color/black"
-        app:backgroundTint="@null"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/datePickerButton" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:text="Horário:"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toStartOf="@id/alignment2"
-        app:layout_constraintTop_toBottomOf="@id/datePickerButton" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Data:"
-        android:layout_marginStart="15dp"
-        android:layout_marginEnd="10dp"
-
-        android:textColor="@color/white"
-        android:layout_marginTop="20dp"
-        app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
-        app:layout_constraintEnd_toStartOf="@id/alignment2"
-        tools:layout_editor_absoluteY="246dp" />
-
-    <Button
-        android:id="@+id/datePickerButton"
-        style="?android:spinnerStyle"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:onClick="openDatePicker"
-        android:text="01 Jan 1990"
-        android:textColor="@color/black"
-        app:backgroundTint="@null"
-        app:layout_constraintTop_toBottomOf="@id/txtUtelefone"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        tools:layout_editor_absoluteY="246dp" />
-
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -210,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:id="@+id/radiogroup"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/timeButton">
+        app:layout_constraintTop_toBottomOf="@id/txtUtelefone">
 
         <RadioButton
             android:id="@+id/radioButton"
@@ -243,13 +189,13 @@
             android:textColor="@color/white"
             android:text="Ação:"
             app:layout_constraintEnd_toStartOf="@+id/alignment2"
-            app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+            app:layout_constraintTop_toBottomOf="@+id/txtUtelefone" />
 
         <TextView
             android:id="@+id/txtViewMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             android:singleLine="false"
             android:textAlignment="center"
             android:text=""
