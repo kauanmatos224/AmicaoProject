@@ -25,7 +25,7 @@
                         echo '<p>Mensagem respondida com sucesso.</p>';
                         break;
                     case 'deleted_message':
-                        echo '<p>Mensagem respondida com sucesso.</p>';
+                        echo '<p>Mensagem excluida com sucesso.</p>';
                         break;
                 }
             ?>
