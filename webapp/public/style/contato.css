@@ -20,6 +20,10 @@ body{
     background-repeat: repeat;
 }
 
+p{
+    color:white;
+}
+
 #grid {
   font-family: Arial, Helvetica, sans-serif;
 }
