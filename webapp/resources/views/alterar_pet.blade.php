@@ -12,6 +12,11 @@
 				document.getElementById('txtNascimento').value="<?= $pet[0]->nascimento ?>"
 			}
 		</script>
+		<script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
 		<title>Amicão - Alterar pet</title>
 		@include("./user_routesNavigation")
 		
@@ -26,7 +31,7 @@
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button href="https://www.youtube.com/watch?v=rxCs1fGxloI" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<button onclick="donwload()" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>

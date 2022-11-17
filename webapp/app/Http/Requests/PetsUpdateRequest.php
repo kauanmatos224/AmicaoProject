@@ -1,5 +1,6 @@
 <?php
 
+//Classe que realiza a validação do formulário de atualização de informações do pet
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;

@@ -1,6 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+//Controller responsável por executar todas as operações relacionadas aos pets.
+
+
+namespace App\Http\Controllers; //Define o escopo de acessibilidade dessa classe
+
+//Importa classes necessárias para execução dos métodos posteriores.
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -16,10 +21,14 @@ use App\Http\Controllers\UserAuthController;
 use DateTime;
 use Mail;
 
+
+//Inicializa a classe e extende a classe Controller.
 class PetsController extends Controller
 {
-
+    //Variavél publica de log de operações.
     public $info="";
+
+    //Método que busca todos os pets da base de dados e exibe na view pets.
     public function listPets(){
         
         if((new UserAuthController)->checkSession()){
@@ -52,6 +61,8 @@ class PetsController extends Controller
         
     }
 
+
+    //Método que busca por um pet específico no banco de dados e exibe na view de alteração do pet.
     public function inspectPet(Request $request){
         
         $id=$request->route('id');
@@ -70,6 +81,8 @@ class PetsController extends Controller
         
     }
 
+
+    //Método que realiza a deleção de pet da base de dados.
     public function deletePet(Request $request){
 
         if((new UserAuthController)->checkSession()){
@@ -125,13 +138,6 @@ class PetsController extends Controller
                         else{
                             return view('error_404');
                         }
-
-                    
-
-
-                
-                
-                
 
             }
             

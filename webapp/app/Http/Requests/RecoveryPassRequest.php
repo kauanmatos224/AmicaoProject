@@ -1,4 +1,5 @@
 <?php
+//Classe que realiza a validação do e-mail no formulário de recuperação de senha.
 
 namespace App\Http\Requests;
 

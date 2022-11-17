@@ -10,6 +10,11 @@
         <link rel="stylesheet" href="/style/estiloInsp.css"/>
         <title>Amicão - Detalhes da requisição</title>
         @include("./user_routesNavigation")
+        <script>
+			if(window.location.pathname!="/home" && window.location.pathname!="/"){
+				parent.self.location='/home';
+			}
+		</script>
     </head>
     <body id="grid"> 
         <header id = cab>
@@ -21,7 +26,7 @@
                         <a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
                         <a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
                         <a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
-                        <button class="btn btn-warning" id="downloadnav" onclick="download()" ><i class="fa fa-download"></i>    Baixar</button>
+                        <button onclick="download()" class="btn btn-warning" id="downloadnav" onclick="download()" ><i class="fa fa-download"></i>    Baixar</button>
                     </div>
                 </nav>
             </header>

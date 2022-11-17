@@ -11,6 +11,11 @@
         <title>Amicão - Detalhes da requisição</title>
         @include("./user_routesNavigation")
         <title>Amicão - Responder requisição</title>
+        <script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
     </head>
     <body>
     <header id = cab>

@@ -1,5 +1,7 @@
 <?php
 
+//Controller responsável por executar operações relacionadas ao fluxo de Download do app
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;

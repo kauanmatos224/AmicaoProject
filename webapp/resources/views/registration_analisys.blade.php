@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="/style/estiloAn.css"/>
         <title>Amicão - Análise de cadastros</title>
         @include("./user_routesNavigation")
+        
     </head>
     <body>
         <div id="div1">
