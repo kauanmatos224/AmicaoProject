@@ -17,6 +17,12 @@ class ContatoController extends Controller
 {
 
     //Função responsável por salvar a mensagem do usuário do formulário de contato no banco de dados.
+    /*
+
+        **Todo método que performa operações no banco de dados passa pelo método de autenticação
+        o qual verifica se o usuário está logado e se contém privilégios para executar as operações.
+     
+    */
     public function sendMessage(ContatoRequest $request){    
         $fullname = $request->post('txtnome');
         $email = $request->post('txtemail');

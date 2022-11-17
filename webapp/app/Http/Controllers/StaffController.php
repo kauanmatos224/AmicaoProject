@@ -1,15 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
-use Carbon\Carbon;
+//Classe responsável pelas operações de Usuário do tipo funcionário (Administrador da plataforma)
 
+namespace App\Http\Controllers; //Declara o escopo de acesso à classe.
+
+//Importa classes utéis na execução dos métodos seguintes.
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\DB;
 use Mail;
 
+
+//Inicializa a classe extendendo Controller.
 class StaffController extends Controller
 {
+
+    //Método responsável por obter os cadastros de usuários do tipo instituição da base de dados.
+    /*
+    **Todo método que performa operações no banco de dados passa pelo método de autenticação
+    o qual verifica se o usuário está logado e se contém privilégios para executar as operações.
+     */
     public function getView_RegistrationAnalisys(){
 
         if((new UserAuthController)->checkSession()){

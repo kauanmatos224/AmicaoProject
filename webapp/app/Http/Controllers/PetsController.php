@@ -29,6 +29,13 @@ class PetsController extends Controller
     public $info="";
 
     //Método que busca todos os pets da base de dados e exibe na view pets.
+
+    /*
+
+        **Todo método que performa operações no banco de dados passa pelo método de autenticação
+        o qual verifica se o usuário está logado e se contém privilégios para executar as operações.
+     
+    */
     public function listPets(){
         
         if((new UserAuthController)->checkSession()){

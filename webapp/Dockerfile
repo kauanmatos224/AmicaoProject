@@ -1,3 +1,4 @@
+#Arquivo de configuração da imagem docker e de pré configurações dos containeres.
 FROM php:8.1.0-fpm-alpine3.14
 
 RUN touch ./setup.sql

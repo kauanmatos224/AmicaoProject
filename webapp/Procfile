@@ -1,1 +1,2 @@
+#Arquivo de configuração do servidor web de hospedaem Heroku.
 web: vendor/bin/heroku-php-apache2 public/

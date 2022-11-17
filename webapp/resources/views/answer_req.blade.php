@@ -1,5 +1,10 @@
 <!doctype html>
 <html>
+    <!-- 
+        View de resposta de uma requisição de usuário.
+        
+        **Segurança: como todo form em padrão Laravel, há utilização de token CSRF
+    -->
     <head>
     <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,7 +30,7 @@
                             <img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
                         </a>
                         <a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
-                        <a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
+                        <a href="/empresa" class="btn btn-outline-warning" id="empresa">Sobre nós</a>
                         <a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
                         <button class="btn btn-warning" id="downloadnav" onclick="download()" ><i class="fa fa-download"></i>    Baixar</button>
                     </div>
