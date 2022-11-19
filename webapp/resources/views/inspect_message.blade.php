@@ -7,7 +7,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="/style/estiloDet.css"/>
         <title>Amicão - Detalhes da mensagem</title>
-        @include("./user_routesNavigation")</head>
+        @include("./user_routesNavigation")
+    </head>
     <body>
         <div id="div1">
             Nome completo: <?= $data[0]->fullname ?><br>

@@ -12,6 +12,12 @@
 		
 		<title>Amicão - Aviso</title>
 		@include("./user_routesNavigation")
+
+		<script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
 	</head>
 	<body onload="setDate()">
 		<header id = cab>
@@ -23,7 +29,7 @@
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button href="https://www.youtube.com/watch?v=rxCs1fGxloI" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<button onclick="download()" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>

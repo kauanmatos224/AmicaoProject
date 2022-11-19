@@ -10,6 +10,12 @@
         <link rel="stylesheet" href="/style/answer_req.css"/>
         <title>Amicão - Detalhes da requisição</title>
         @include("./user_routesNavigation")
+
+        <script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
         <title>Amicão - Responder requisição</title>
     </head>
     <body>

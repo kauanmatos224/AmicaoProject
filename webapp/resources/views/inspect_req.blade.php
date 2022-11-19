@@ -10,6 +10,11 @@
         <link rel="stylesheet" href="/style/estiloInsp.css"/>
         <title>Amicão - Detalhes da requisição</title>
         @include("./user_routesNavigation")
+        <script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
     </head>
     <body id="grid"> 
         <header id = cab>

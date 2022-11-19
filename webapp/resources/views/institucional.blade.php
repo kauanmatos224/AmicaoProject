@@ -11,6 +11,11 @@
         <link rel="stylesheet" href="/style/estiloInstitucional.css"/>
         <title>Amicao - Institucional</title>
 		@include("./user_routesNavigation")
+		<script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
     </head>
 
 	<?php 
@@ -30,7 +35,7 @@
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button class="btn btn-warning" id="downloadnav" href="" ><i class="fa fa-download"></i>    Baixar</button>
+					<button class="btn btn-warning" id="downloadnav" onclick="download()" ><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>

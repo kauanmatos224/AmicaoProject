@@ -9,6 +9,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/style/estilologin.css"/>
 		<title>Amicão - Login</title>
+		<script>
+			function download(){
+				window.location.href="/download/app";
+			}
+		</script>
 	</head>
 	<body id = "grid">
 		<header id = cab>
@@ -20,7 +25,7 @@
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<button onclick="download()" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>
