@@ -135,6 +135,10 @@ Route::get('/login',  function(){
     return view('login');
 });
 
+Route::get('/login/do_auth', function(){
+    return view('login');
+});
+
 Route::post('/login/do_auth', [UserAuthController::class, 'doLogin']);
 
 Route::get('/logout', [UserAuthController::class, 'doLogout']);

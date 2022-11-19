@@ -45,11 +45,9 @@ class UserAuthController extends Controller
             if($checkCredentials[0]->email_status=="verified"){
 
                 if($checkCredentials[0]->status=='waiting'){
-                    //return redirect()->route('info-cadastro', ['info'=>'waiting']);
                     return view('info_inst')->with('info', 'waiting');
                 }
                 else if($checkCredentials[0]->status=='denied'){
-                    //return redirect()->route('info-cadastro', ['info'=>'denied']);
                     return view('info_inst')->with('info', 'denied');
                 }
                 else if($checkCredentials[0]->status=='deleted'){
@@ -84,7 +82,8 @@ class UserAuthController extends Controller
             
         }
         else{
-            return view('login')->with('login_status', 'invalid_credentials');
+            session(['login_status' => 'invalid']);
+            return view('login');
         }
     }
 

@@ -9,11 +9,6 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" href="/style/estilologin.css"/>
 		<title>Amicão - Login</title>
-		<script>
-			function download(){
-				window.location.href="/download/app";
-			}
-		</script>
 	</head>
 	<body id = "grid">
 		<header id = cab>
@@ -25,16 +20,10 @@
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
 					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button onclick="download()" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>
-		<script>
-			if(window.location.pathname!="/login"){
-				parent.self.location='/login';
-			}
-		</script>
-
         <div id="div1" class="ex1">
             <div id="divctt">
                 <form id="frmLogin" method="post" action="/login/do_auth">
@@ -42,6 +31,12 @@
                     <span class="lemail">Email:</span><br><input class="email" type="text" name=txtEmail placeholder="email@domínio.com">
                     <br><br>
                     <span class="lmsg">Senha:</span><br><input class="senha" type="password" name=txtPassword placeholder="senha">
+					<?php
+						if(session('login_status')){
+							echo "<p id=\"login_warn\">Login invalido!</p>";
+							session(['login_status'=>null]);
+						}
+					?>
                     <br><br>
                     <a href="/institucional/recuperar-senha" class="btn btn-secondary" id="btnRecSenha">Recuperar Senha</a>
                     <a href="/institucional/cadastrar" class="btn btn-secondary" id="btnCadastrar">Realizar Cadastro</a>

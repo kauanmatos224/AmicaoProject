@@ -1,5 +1,10 @@
 @charset "utf-8";
 
+#login_warn{
+    margin-top: 2.5%;
+    color:rgb(255, 72, 0);
+}
+
 @font-face {
     font-family: 'Oswald';
     src: url('fonts/static/Oswald-Bold.ttf');
