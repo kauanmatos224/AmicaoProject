@@ -9,11 +9,6 @@
         <link rel="stylesheet" href="/style/estiloPass" />
         <title>Amicão - Recuperar Senha</title>
         @include("./user_routesNavigation")
-        <script>
-			function download(){
-				window.location.href="/download/app";
-			}
-		</script>
     </head>
     <body id="grid">
         <header id = cab>
@@ -23,9 +18,9 @@
                         <img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill">  
                     </a>
                     <a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
-                    <a href="/empresa" class="btn btn-outline-warning" id="empresa">Sobre nós</a>
+                    <a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
                     <a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
-                    <button onclick="download()" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+                    <button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
                 </div>
             </nav>
         </header>

@@ -10,7 +10,6 @@
 		<link rel="stylesheet" href="/style/download_app.css"/>
 		@include("./user_routesNavigation")
         <title>Amicão - Obrigado por baixar nosso app</title>
-        
     </head>
     <script>
         function hideAllTextPostDownload(){
@@ -31,7 +30,7 @@
         <p id="info-sec">Por questões de segurançara, para verificar a integridade do arquivo baixado antes de instala-lo,
             realize o Checksum do app, que consistem em verificar se o conteudo do arquivo que você baixou é o mesmo que o nosso através de comparação de hash.
         </p>
-        <p id="hash">Hash do app: SHA-256 f8f31273e4bed8cf2268209a5fcf3f2861dc54ea28ce6d3f17c16e47a3ae925b</p>
+        <p id="hash">Hash do app: </p>
     </div>
     <div id="div1">
         <div id="divbtn">

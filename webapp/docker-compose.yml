@@ -1,6 +1,3 @@
-##Arquivo de configuração dos Containeres Docker.
-
-##Configuração do container da Aplicação Web.
 version: '3'
 services: 
   web:
@@ -11,7 +8,6 @@ services:
     depends_on: 
       - db
 
-#Configuração do container do banco de dados PostgreSQL
   db:
     image: postgres:12.0-alpine
     container_name: ${DB_HOST}
@@ -25,7 +21,6 @@ services:
     volumes: 
     - "./.docker/dbdata:/var/lib/postgresql/data"
 
-#Configuração do container de servidor Web Nginx 
   nginx:
     build: ./.docker/nginx
     restart: always
@@ -36,7 +31,6 @@ services:
     depends_on: 
       - web
 
-#Configuração do SGBD PostgreSQL PGAdmin
   teste-pgadmin-compose:
     image: dpage/pgadmin4
     environment:

@@ -1,5 +1,4 @@
 <?php
-//Classe que realiza a validação dos valores de entrada do formulário de login (email e senha) 
 
 namespace App\Http\Requests;
 

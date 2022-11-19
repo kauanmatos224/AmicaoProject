@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="/style/estiloFaq.css"/>
         <title>Amicão - Mensagens|FAQ</title>
         @include("./user_routesNavigation")
-        
     </head>
 
     <body>

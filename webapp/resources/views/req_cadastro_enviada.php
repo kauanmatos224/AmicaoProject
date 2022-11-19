@@ -11,11 +11,6 @@
 		<link rel="stylesheet" href="/style/estilomsg.css"/>
 		<title>Amicão - Cadastro</title>
 		@include("./user_routesNavigation")
-		<script>
-			if(window.location.pathname!="/home" && window.location.pathname!="/"){
-				parent.self.location='/home';
-			}
-		</script>
 	</head>
 	<body id = "grid">
 		<header id = cab>
@@ -25,9 +20,9 @@
 						<img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
 				  	</a>
 				  	<a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
-					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Sobre nós</a>
+					<a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
 					<a href="/login" class="btn btn-outline-secondary" id="adm">Administração</a>
-					<button onclick="download()" class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
+					<button class="btn btn-warning" id="downloadnav"><i class="fa fa-download"></i>    Baixar</button>
 				</div>
 			</nav>
 		</header>

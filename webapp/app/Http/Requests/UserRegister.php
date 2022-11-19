@@ -1,7 +1,5 @@
 <?php
 
-//Classe que realiza (contém as regras e tratamentos) validação de valores 
-//recebidos do formulário de cadastro de instituição  
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -31,11 +29,11 @@ class UserRegister extends FormRequest
             'txtPhone' => 'required|max:20',
             'txtAddress' => 'required|max:100',
             'txtCountry' => 'required|max:20',
-            'txtEmail' => 'email|required|max:100',
-            'txtCep' => 'required|numeric|max:9',
+            'txtEmail' => 'email|required',
+            'txtCep' => 'required|numeric',
             'txtPassword' => 'required|min:8',
             'txtConfPassword' => 'required|min:8',
-            'txtComplement' => 'nullable|max:100',
+            'txtComplement' => 'nullable',
         ];
     }
 }

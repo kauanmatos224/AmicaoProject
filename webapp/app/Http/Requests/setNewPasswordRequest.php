@@ -1,6 +1,5 @@
 <?php
 
-//Classe que realiza validação dos formulário de redefinição de senha.
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
