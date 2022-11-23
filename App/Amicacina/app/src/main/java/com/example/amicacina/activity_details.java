@@ -88,7 +88,17 @@ public class activity_details extends AppCompatActivity{
         Picasso.get().load(cursor.getString(cursor.getColumnIndex("foto"))).into(imgFoto);
         txtNome.setText(cursor.getString(cursor.getColumnIndex("nome")));
         txtRaca.setText(cursor.getString(cursor.getColumnIndex("raca")));
-        txtNascimento.setText(cursor.getString(cursor.getColumnIndex("nascimento")));
+        String nascimento = cursor.getString(cursor.getColumnIndex("nascimento"));
+        String[] splited_nasc = new String[10];
+
+        if(nascimento!=null && nascimento!=""){
+            splited_nasc = nascimento.split(" ", 2);
+        }else{
+            txtNascimento.setText("não informado");
+
+        }
+
+        txtNascimento.setText(splited_nasc[0]);
         txtIdade.setText(cursor.getString(cursor.getColumnIndex("idade")));
         String status = cursor.getString(cursor.getColumnIndex("status"));
         txtGenero.setText(cursor.getString(cursor.getColumnIndex("genero")));

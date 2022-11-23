@@ -48,6 +48,9 @@ public class activity_info extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
+        Button btnEnviar = (Button)findViewById(R.id.btnEnviar);
+        btnEnviar.setEnabled(true);
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setTitle("");
@@ -128,6 +131,9 @@ public class activity_info extends AppCompatActivity {
                                 String sucess = result.get("success").getAsString();
                                 if (sucess.equals("request_sent")) {
                                     txtMessage.setText("Agendamento realizado com sucesso, fique atento por mais informações em seu e-mail :)");
+                                    Button btnEnviar = (Button)findViewById(R.id.btnEnviar);
+                                    btnEnviar.setEnabled(false);
+
                                 }
                             }
                         }
