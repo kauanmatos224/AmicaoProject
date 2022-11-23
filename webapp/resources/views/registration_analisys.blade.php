@@ -46,7 +46,7 @@
                 <p>A plataforma ainda não tem Pré-cadastros de instituições para análise.</p>   
             <?php else:?>
                 <br><br><br><br><br><br>
-                <table class="table table-dark table-hover table-responsive" style="min-width:100%; margin-left:0%; ">
+                <table class="table table-dark table-hover table-responsive" style="max-width:100%; margin-left:0%;left:0%; ">
                         <tr>
                             <th>Nome fantasia</th>
                             <th>CNPJ</th>
@@ -58,7 +58,9 @@
                             <th>Telefone</th>
                             <th>...</th>
                         </tr>
+                    <?php $count=0; ?>
                     <?php foreach($data as $inst):?>
+                        <?php if($count==0 || $count>2): ?>
                             <tr>
                             <td><?= $inst->nome_fantasia ?></td>
                             <td><?= $inst->cnpj ?></td>
@@ -87,6 +89,8 @@
                             <td><?= $inst->phone ?></td>
                             <td><a href="/staff/inst-analise/more/<?= $inst->id?>">ver mais</a></td>
                             </tr>
+                            <?php $count++; ?>
+                        <?php endif ?>
                     <?php endforeach ?>
                 </table>
             <?php endif ?>
