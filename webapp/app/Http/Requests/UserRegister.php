@@ -30,7 +30,7 @@ class UserRegister extends FormRequest
             'txtAddress' => 'required|max:100',
             'txtCountry' => 'required|max:20',
             'txtEmail' => 'email|required',
-            'txtCep' => 'required|numeric',
+            'txtCep' => 'required|numeric|max:9',
             'txtPassword' => 'required|min:8|max:100',
             'txtConfPassword' => 'required|min:8|max:100',
             'txtComplement' => 'nullable',
@@ -59,7 +59,8 @@ class UserRegister extends FormRequest
             'txtPassword.min' => 'A senha deve ter no mínimo 8 caracteres.',
             'txtPassword.max' => 'A senha não pode exceder 100 caracteres.',
             'txtConfPassword.min' => '',
-            'txtConfPassword.max' => ''
+            'txtConfPassword.max' => '',
+            'txtCep.max' => 'O código Postal não pode ultrapassar 9 dígitos.'
 
         ];
     }

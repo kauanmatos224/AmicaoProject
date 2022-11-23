@@ -59,7 +59,6 @@
                             <th>...</th>
                         </tr>
                     <?php foreach($data as $inst):?>
-                       
                             <tr>
                             <td><?= $inst->nome_fantasia ?></td>
                             <td><?= $inst->cnpj ?></td>

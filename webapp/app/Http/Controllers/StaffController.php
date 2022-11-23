@@ -42,7 +42,7 @@ class StaffController extends Controller
 
     public function getRegistrationData(){
         
-        $data = DB::select('select * from tb_org inner join tb_auth_org on tb_auth_org.id_org =
+        $data = DB::select('select tb_org.*, tb_auth_org.status from tb_org inner join tb_auth_org on tb_auth_org.id_org =
         tb_org.id and tb_auth_org.user_type=?', array('inst'));
 
         if($data){
@@ -62,9 +62,12 @@ class StaffController extends Controller
 
                 $data = (new StaffController)->getInstData($id);
                 if($data!=null){
-                    return view('inspect_inst')
+                    /*return view('inspect_inst')
                         ->with('data_org', $data[0][0])
-                        ->with('data_auth_org', $data[1][$id]);
+                        ->with('data_auth_org', $data[1][$id]);*/
+
+                        return view('inspect_inst')
+                        ->with('data', $data[0]);
                 }
                 else{
                     return view('error_404');
@@ -79,18 +82,14 @@ class StaffController extends Controller
     }
 
     public function getInstData($id){
-        $data_org = DB::select('select * from tb_org where id=?', array($id));
-        $data_auth = DB::select('select status, email, deletion_date from tb_auth_org where id_org=?', array($id));
-        $data_auth_org = array();
-
-        for($i=0; $i<count($data_org); $i++){
-            $data_auth_org[$data_org[$i]->id] = $data_auth[$i];
+        $data = DB::select('select tb_org.*, tb_auth_org.status, tb_auth_org.email, tb_auth_org.deletion_date from tb_org inner join tb_auth_org on tb_org.id=? and tb_auth_org.id_org=?', array($id, $id));
+        
+        if($data){
+            return $data;
         }
-
-        if($data_org && $data_auth_org){
-            return $data = array($data_org, $data_auth_org);
+        else{
+            return null;
         }
-        return null;
     }
 
 
@@ -100,9 +99,7 @@ class StaffController extends Controller
         $justify = $request->post('txtJustify');
         $timestamp = Carbon::now()->timestamp;
         $deletion_date = $timestamp + 2592000; //a month to complete exclusion
-        /*if($id==null || empty($id)){
-            return view('error_404');
-        }*/
+    
 
         if((new UserAuthController)->checkSession()){
             if(session('user_type')=='staff'){
