@@ -55,7 +55,9 @@
         <div id="div1" style="background-color:transparent">
             
             <?php if(isset($data)):?>
-                <table id="tabela" class="table table-dark table-hover table-responsive" style="min-width:200%; margin-left:-50%;">
+                <table id="tabela" class="table table-dark table-hover table-responsive" style="min-width:150%; margin-left:0%;">
+                <br>
+                <br>
                 <tr>
                         <th>Requisicoes</th>
                         <th>Nome</th>
