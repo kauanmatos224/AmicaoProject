@@ -60,7 +60,10 @@
                         </tr>
                     <?php $count=0; ?>
                     <?php foreach($data as $inst):?>
-                        <?php if($count==0 || $count>2): ?>
+                            <?php if($count>0 && $inst->id==1): continue;?>
+                            <?php else: ?>
+                                
+                                <?php if($inst->id==1){$count++;} ?>
                             <tr>
                             <td><?= $inst->nome_fantasia ?></td>
                             <td><?= $inst->cnpj ?></td>
@@ -89,7 +92,7 @@
                             <td><?= $inst->phone ?></td>
                             <td><a href="/staff/inst-analise/more/<?= $inst->id?>">ver mais</a></td>
                             </tr>
-                            <?php $count++; ?>
+                            
                         <?php endif ?>
                     <?php endforeach ?>
                 </table>
