@@ -64,17 +64,20 @@
 
 		<?php if(isset($user_type)):
 			if($user_type=="staff"):?>
-				<div id="div3" class="ex3">
-					<a href="/staff/messages" class="btn btn-warning" id="msg">Mensagens</a>
+				<div id="div3" class="ex1">
+					<a href="/staff/messages" class="btn btn-warning" id="msg" style="color: #fff;background-color: #6c757d;border-color: #6c757d;">Mensagens</a>
 				</div>  
 				<br>
-				<div id="div3" class="ex3">
-					<a href="/staff/inst-analise" class="btn btn-warning" id="msg">Análise de Cadastros</a>
+				<div id="div3" class="ex2">
+					<a href="/staff/inst-analise" class="btn btn-warning" id="msg" style="color: #fff;background-color: #6c757d;border-color: #6c757d;">Análise de Cadastros</a>
 				</div>  
 				<br>
-				<div id="div3" class="ex3">
-						<a href="/logout" class="btn btn-warning" id="logout">Logout</a>
+				<div id="div3" class="ex4">
+						<a href="/logout" class="btn btn-warning" id="logout" style="color: #fff;background-color: #6c757d;border-color: #6c757d;">Logout</a>
 				</div>
+				<div id="div5" class="ex5">
+						<a href="/institucional/myaccount" class="btn btn-secondary" id="conta">Conta</a>
+					</div>
 
 		<?php endif;
 			endif;
