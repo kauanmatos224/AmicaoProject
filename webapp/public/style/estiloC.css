@@ -82,33 +82,41 @@
     position: absolute;
     border-style: none;
     height: 100%;
+    padding: 10%;
     width: 50%;
+    left:7%;
     text-align: justify;
-    border-radius: 5%;
     padding: 50px;
-    padding-top: 120px;
+    padding-top: 10vh;
     font-size: medium;
-    color: whitesmoke;
-    background-color: transparent;
+    color: white;
+    background-color: black;
+    top:5%;    
+    
 }
 
 #div2 {
     position: absolute;
-    left: 50%;
+    left: 43%;
     width: 50%;
     height: 100%;
+    padding: 10%;
     border-style: none;
-    padding-top: 120px;
+    padding-top: 10vh;
     font-size: medium;
     color: whitesmoke;
-    background-color: transparent;
+    background-color: black;
+    top:5%;
+    
+}
+#whole-page-without-menu{
+    background-color: black;
+    height: 100%;
 }
 
 #btnSend {
-    color: black;
+
     border-radius: 5%;
-    border-color: black;
-    background-color: orange;
     
 }
 

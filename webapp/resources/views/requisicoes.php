@@ -16,7 +16,7 @@
 			}
 		</script>
     <head>
-    <body>
+    <body id="grid">
         <header id = cab>
             <nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
                 <div class="container-fluid">
@@ -31,27 +31,31 @@
             </nav>
         </header>
 
-        <div id="div1">
-            <?php 
+        <div style="position:relative; left:10vw; top:15vh; color:black;">
+        <?php 
                 if(!empty(session('request_info'))){
                     switch(session('request_info')){
                         case 'no_requests':
-                            echo '<p>Ainda não há requisições de usuários.</p>';
+                            echo '<p id="op_warn">Ainda não há requisições de usuários.</p>';
                             break;
                         case 'answered':
-                            echo '<p>A requisição foi respondida com sucesso.</p>';
+                            echo '<p id="op_warn">A requisição foi respondida com sucesso.</p>';
                             break;
                         case 'deleted':
-                            echo '<p>A requisição foi deletada com sucesso.</p>';
+                            echo '<p id="op_warn">A requisição foi deletada com sucesso.</p>';
                             break;
                     }
                     session(['request_info' => '']);
                 }
 
-            ?>
+        ?>
+        </div>
 
+
+        <div id="div1" style="background-color:transparent">
+            
             <?php if(isset($data)):?>
-                <table id="tabela">
+                <table id="tabela" class="table table-dark table-hover table-responsive" style="min-width:200%; margin-left:-50%;">
                 <tr>
                         <th>Requisicoes</th>
                         <th>Nome</th>

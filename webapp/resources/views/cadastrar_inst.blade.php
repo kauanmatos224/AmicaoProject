@@ -6,7 +6,7 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" href="/style/estiloC.css" />
+		<link rel="stylesheet" type="text/css" href="/style/estiloCadInst.css" />
 		<title>Amicão - Cadastro instituição</title>
         @include("./user_routesNavigation")
 
@@ -31,28 +31,50 @@
 				</div>
 			</nav>
 		</header>
+		<?php $height="100%"; $height_int=100; if(isset($errors)){ 
 
+			foreach($errors->all() as $error){
+				$height_int+=5;
+			}
+			if($height_int>20){
+				$height = strval($height_int)."%";
+			}
+
+		}?>
+		<div id="whole-page-without-menu">
         <form id="frmCadInst" method="post" action="/institucional/cadastrar/send">
-        <div id="whole-page-without-menu">
-        <div id="div1">
-
-            
+        	
+			<div id="div1" style="height:<?=$height?>;">
+				<div id="input_set1">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                <span class="lNomeF">Nome Fantasia:</span><br><input class="nomef" type=text name=txtFantasyName placeholder="Nome Fantasia"><br><br>
-                <span class="lCnpj">CNPJ:</span><br><input class="cnpj" type=text name=txtCnpj placeholder="CNPJ"><br><br>
-                <span class="lEndereco">Endereço: (Rua, N° - Cidade, Estado - Páis)</span><br><input class="endereco" type=text name=txtAddress placeholder="Rua / Avenida, N°, Cidade - Estado"><br><br>
-                <span class="lComplemento">Complemento (se houver):</span><br><input class="complemento" type=text name=txtComplement placeholder="Complemento (se houver)"><br><br>
-                <span class="lCep">CEP:</span><br><input class="cep" type=text name=txtCep placeholder="CEP"><br><br>
-                <span class="lpais">País:</span><br><input class="pais" type=text name=txtCountry placeholder="País"><br><br>
-        </div>
-            <div id="div2">
-                <span class="lTel">Telefone:</span><br><input class="tel" type=text name=txtPhone placeholder="Telefone"><br><br>
-                <span class="lEmail">E-mail:</span><br><input class="email" type=text name=txtEmail placeholder="E-mail"><br><br>
-                <span class="lSenha">Senha:</span><br><input class="senha" type=password name=txtPassword placeholder="Senha"><br><br>
+                <span class="lNomeF">Nome Fantasia:</span><br><input class="nomef" type=text name=txtFantasyName placeholder="Nome Fantasia" value="{{{ old('txtFantasyName')}}}"><br><br>
+                <span class="lCnpj">CNPJ:</span><br><input class="cnpj" type=text name=txtCnpj placeholder="CNPJ" value="{{{ old('txtCnpj')}}}"><br><br>
+                <span class="lEndereco">Endereço: (Rua, N° - Cidade, Estado - Páis)</span><br><input class="endereco" type=text name=txtAddress placeholder="Rua / Avenida, N°, Cidade - Estado" value="{{{ old('txtAddress')}}}"><br><br>
+                <span class="lComplemento">Complemento (se houver):</span><br><input class="complemento" type=text name=txtComplement placeholder="Complemento (se houver)" value="{{{ old('txtComplement')}}}"><br><br>
+                <span class="lCep">Código Postal:</span><br><input class="cep" type=text name=txtCep placeholder="CEP" value="{{{ old('txtCep')}}}"><br><br>
+                <span class="lpais">País:</span><br><input class="pais" type=text name=txtCountry placeholder="País" value="{{{ old('txtCountry')}}}"><br><br>
+				</div>
+        		</div>
+
+            	<div id="div2" style="height:<?=$height?>;">
+				<div id="input_set2">
+                <span class="lTel">Telefone:</span><br><input class="tel" type=text name=txtPhone placeholder="Telefone" value="{{{ old('txtPhone')}}}"><br><br>
+                <span class="lEmail">E-mail:</span><br><input class="email" type=text name=txtEmail placeholder="E-mail" value="{{{ old('txtEmail')}}}"><br><br>
+                <span class="lSenha">Senha (min. 8 caracteres):</span><br><input class="senha" type=password name=txtPassword placeholder="Senha"><br><br>
                 <span class="lConSenha">Confirmar senha:</span><br><input class="csenha" type=password name=txtConfPassword placeholder="Confirmar senha"><br><br>
-                <input type="submit" id="btnSend" value="Requisitar Cadastro">
-        </div>
-        </div>  
+                <input type="submit" id="btnSend" class="btn btn-outline-warning" value="Requisitar Cadastro">
+				<?php if(isset($errors)){
+						echo "<ul id=\"errors\">";
+						foreach($errors->all() as $error){
+							echo "<li>$error</li>";
+						}
+						echo "</ul>";
+					} 
+					?>
+				</div>
+        		</div>
+        	
         </form>
+		</div>  
     </body>
 </html>

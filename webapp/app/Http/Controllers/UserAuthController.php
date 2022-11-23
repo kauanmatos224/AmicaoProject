@@ -64,8 +64,11 @@ class UserAuthController extends Controller
                             return redirect()->action([StaffController::class, "$required_route"]);
                         }
                         else{
-                            
-                            return redirect()->action([PetsController::class, "$required_route"]);
+                            if($required_route!="getView_RegistrationAnalisys"){
+                                return redirect()->action([PetsController::class, "$required_route"]);
+                            }else{
+                                return redirect('/institucional');
+                            }
                         }
                         
                     }
@@ -503,11 +506,16 @@ class UserAuthController extends Controller
         if((new UserAuthController)->checkSession()){
 
             if($password == $password_conf){
-                $password_hash = hash('sha256', $password.$secret);
-                $update_password = DB::update('update tb_auth_org set password=? where id=?', array($password_hash, $id));
-                if($update_password){
-                    session(['user_account'=>'changed_password']);
-                    return redirect('/institucional/myaccount/');
+                if(strlen($password)>8){
+                    $password_hash = hash('sha256', $password.$secret);
+                    $update_password = DB::update('update tb_auth_org set password=? where id=?', array($password_hash, $id));
+                    if($update_password){
+                        session(['user_account'=>'changed_password']);
+                        return redirect('/institucional/myaccount/');
+                    }
+                }else{
+                    session(['user_account'=>'wrong_password_len']);
+                    return redirect('/institucional/myaccount/');        
                 }
             }
             else{

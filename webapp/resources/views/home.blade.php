@@ -43,7 +43,7 @@
 		tudo pra não somente o seu bem mas também do nosso Amicão.<br>
 		O que está esperando? Junte-se a nós: 
 			</p>
-                <button style="width:100%" id="btnDownload" class="btn btn-warning" href=""><i class="fa fa-download"></i>    Baixar</button>
+                <button style="width:100%" id="btnDownload" class="btn btn-warning" onclick="download()"><i class="fa fa-download"></i>    Baixar</button>
         </div>
 		<div id="div2" class="ex2">
 			<img src="style/img/amicao_app.png" class="celular"> 

@@ -55,7 +55,9 @@
             	    <input class="btn btn-warning" id="btnenviar" type="submit" value="Enviar">
 				</form>
 
-				<p>* Após o envio desta mensagem, em breve você receberá uma mensagem no e-mail da conta, pedindo sua confirmação para completar a ativação da conta.</p>
+				<? if($send_account_activation_request==true): ?>
+					<p>* Após o envio desta mensagem, em breve você receberá uma mensagem no e-mail da conta, pedindo sua confirmação para completar a ativação da conta.</p>
+				<? endif ?>
             </div>
         </div>
 	</body>

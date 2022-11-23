@@ -31,7 +31,7 @@
         <p id="info-sec">Por questões de segurançara, para verificar a integridade do arquivo baixado antes de instala-lo,
             realize o Checksum do app, que consistem em verificar se o conteudo do arquivo que você baixou é o mesmo que o nosso através de comparação de hash.
         </p>
-        <p id="hash">Hash do app: </p>
+        <p id="hash" style="text-align:left">Hash do app: 4aa8448e788da1f8d410e2e74c9c25b6e2ceec48ac5531f91ff05aa2ae70aaf2</p>
     </div>
     <div id="div1">
         <div id="divbtn">

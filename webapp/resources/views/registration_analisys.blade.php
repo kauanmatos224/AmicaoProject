@@ -11,7 +11,21 @@
         @include("./user_routesNavigation")
         
     </head>
-    <body>
+    <body id="grid">
+        <header id = cab>
+            <nav id="nav" class="navbar fixed-top navbar-expand-sm bg-dark navbar-dark">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/home">
+                        <img src="/style/img/amicao_logo.png" style="width:40px;" class="square-pill"> 	
+                    </a>
+                    <a href="/contato" class="btn btn-outline-warning" id="contato">Contato</a>
+                    <a href="/empresa" class="btn btn-outline-warning" id="empresa">Empresa</a>
+                    <a href="/institucional" class="btn btn-outline-secondary" id="adm">Administração</a>
+                    <button onclick="download()" class="btn btn-warning" id="downloadnav" ><i class="fa fa-download"></i>    Baixar</button>
+                </div>
+            </nav>
+        </header>
+
         <div id="div1">
             <?php
                 if(isset($info)){
@@ -31,8 +45,8 @@
             <?php if(!isset($data) || $data==null): ?>
                 <p>A plataforma ainda não tem Pré-cadastros de instituições para análise.</p>   
             <?php else:?>
-                <table>
-                    <?php foreach($data as $inst):?>
+                <br><br><br><br><br><br>
+                <table class="table table-dark table-hover table-responsive" style="min-width:100%; margin-left:0%; ">
                         <tr>
                             <th>Nome fantasia</th>
                             <th>CNPJ</th>
@@ -44,6 +58,9 @@
                             <th>Telefone</th>
                             <th>...</th>
                         </tr>
+                    <?php foreach($data as $inst):?>
+                       
+                            <tr>
                             <td><?= $inst->nome_fantasia ?></td>
                             <td><?= $inst->cnpj ?></td>
                             <td> 
@@ -70,7 +87,7 @@
                             <td><?= $inst->country ?></td>
                             <td><?= $inst->phone ?></td>
                             <td><a href="/staff/inst-analise/more/<?= $inst->id?>">ver mais</a></td>
-                        </tr>
+                            </tr>
                     <?php endforeach ?>
                 </table>
             <?php endif ?>

@@ -109,11 +109,10 @@ body {
     height: 100%;
     width: 60%;
     text-align: center;
-    border-radius: 5%;
     padding: 50px;
     padding-top: 120px;
     font-size: large;
-    background-color: transparent;
+    background-color: black;
     color: whitesmoke;
 }
 
@@ -125,7 +124,7 @@ body {
     border-style: none;
     padding-top: 120px;
     font-size: large;
-    background-color: transparent;
+    background-color: black;
     text-align: center;
     color: whitesmoke;
 }

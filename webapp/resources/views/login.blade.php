@@ -41,7 +41,7 @@
                     <a href="/institucional/recuperar-senha" class="btn btn-secondary" id="btnRecSenha">Recuperar Senha</a>
                     <a href="/institucional/cadastrar" class="btn btn-secondary" id="btnCadastrar">Realizar Cadastro</a>
 					<br><br>
-                    <input class="btn btn-warning" id="btnenviar" type="submit" value="Entrar" href="">
+                    <input class="btn btn-warning" id="btnenviar" type="submit" value="Entrar">
                 </form>
             </div>
         </div>

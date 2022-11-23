@@ -32,27 +32,26 @@
             </nav>
         </header>
 
-        <div id="div1">
+        <div id="div1" style="background-color:black">
             <br><br><br>
             <h2>Digite seu e-mail para receber um link de recuperação.</h2><br>
             <form name="frmRecPassword" method="post" action="/institucional/recuperar-senha/send">
                 <input type="hidden" name="_token" value="{{{csrf_token()}}}">
-                <span class="lEmail">E-mail:</span><br><input class="email" type=email name=txtEmail placeholder="E-mail"><br><br>
+                <br><input class="email" type=email name=txtEmail placeholder="E-mail"><br><br>
+                <?php 
+                    if(isset($error)){
+                        if($error="not_matched_mail"){
+                                echo <<<END
+                                    <span style="color:rgb(255, 72, 0);">O e-mail informado não possui nenhum vínculo com a plataforma</span><br>
+                                END;
+                        }
+                    }
+                ?>
                 <br>
                 <input type="submit" class="btn btn-outline-warning" id="btnEnviar" value="Enviar">
             </form>
         </div>
 
-        <?php 
-            if(isset($error)){
-                if($error="not_matched_mail"){
-                    echo <<<END
-                        <div class="alert altert-danger">
-                            <span>O e-mail informado não possui nenhum vínculo com a plataforma</span>
-                        </div>
-                    END;
-                }
-            }
-        ?>
+        
     </body>
 </html>
